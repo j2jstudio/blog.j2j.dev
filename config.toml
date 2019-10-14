@@ -1,0 +1,4 @@
+baseURL = "http://BLOG.J2J.DEV/"
+languageCode = "en-us"
+title = "J2J.dev Studio"
+theme = "ananke"
