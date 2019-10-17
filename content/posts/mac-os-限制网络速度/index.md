@@ -1,7 +1,18 @@
-# Mac OS 限制网络速度
+---
+title: "Mac OS 限制网络速度"
+date: 2019-10-16T18:50:35+08:00
+isCJKLanguage: true
+draft: false
+tags:
+  - macos
+  - 今天的搜索
+---
+
+因为网络共享，看视频或下载的时候会占用大量带宽，导致网络卡顿，影响他人的使用。速度太快还会被网管断开连接(下载Xcode或更新时经常出现)。下面是搜索到的两种限制网速的方式。苹果官方提供了限制系统整体网速的Network Link Conditioner 和 OpenBSD's Packet Filter 命令行工具。
+<!--more-->
 
 
-## 使用Network Link Conditioner
+## 方法1 使用Network Link Conditioner
 
 通过Addtional Toos for Xcode中的Network Link Conditioner（网络链接调节器）实现网络速度控制。
 
@@ -20,7 +31,7 @@
 	
  ![network-link-conditioner-installation-error](./network-link-conditioner-installation-error.png)
  
-需要将用户PreferencePanes目录移动至系统配置目录。在命令行中输入如下命令：
+解决方法是将用户PreferencePanes目录下的Network Link Conditioner.prefPane移动至系统配置目录。在命令行中输入如下命令：
 	
 ```
 sudo mv ~/Library/PreferencePanes/Network\ Link\ Conditioner.prefPane /Library/PreferencePanes/
@@ -53,18 +64,17 @@ sudo mv ~/Library/PreferencePanes/Network\ Link\ Conditioner.prefPane /Library/P
 启用后系统网络限制生效。
 
 
-## 使用PF（OpenBSD's Packet Filter）工具限制
+## 方法2 使用PF（OpenBSD's Packet Filter）工具限制
 
-保存一下脚本pf-bandwidth-limit.sh
+保存以下脚本pf-bandwidth-limit.sh
 
 ```
-
 #!/bin/bash
-set -o errexit    # always exit on error
-set -o errtrace   # trap errors in functions as well
-set -o pipefail   # don't ignore exit codes when piping output
-set -o posix      # more strict failures in subshells
-#set -x          # enable debugging
+set -o errexit    
+set -o errtrace  
+set -o pipefail   
+set -o posix      
+#set -x          
 
 
 start_limit(){
@@ -117,9 +127,9 @@ main() {
 }
 
 main "$@"
-
 ```
 
+使用：
 ```
 sudo chmod a+x ./pf-bandwidth-limit.sh
 
@@ -127,6 +137,25 @@ sudo chmod a+x ./pf-bandwidth-limit.sh
 sudo ./pf-bandwidth-limit.sh start
 #停止速率限制
 sudo ./pf-bandwidth-limit.sh stop
+```
+
+启动后输出如下内容，表示限速成功:
+```
+Flushed all pipes.
+pfctl: Use of -f option, could result in flushing of rules
+present in the main ruleset added by the system at startup.
+See /etc/pf.conf for further details.
+
+pfctl: Use of -f option, could result in flushing of rules
+present in the main ruleset added by the system at startup.
+See /etc/pf.conf for further details.
+
+No ALTQ support in kernel
+ALTQ related functions disabled
+pf enabled
+Token : 8914907148313668449
+00001: 512.000 Kbit/s    0 ms   50 sl. 0 queues (1 buckets) droptail
+    mask: 0x00 0x00000000/0x0000 -> 0x00000000/0x0000
 ```
 ## 参考
 
