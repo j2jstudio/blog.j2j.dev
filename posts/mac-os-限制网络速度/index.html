@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>J2J.Dev  | Mac OS 限制网络速度</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.59.0-DEV" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/dist/css/app.d98f2eb6bcd1eaedb7edf166bd16af26.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+    
+    <meta property="og:title" content="Mac OS 限制网络速度" />
+<meta property="og:description" content="因为网络共享，看视频或下载的时候会占用大量带宽，导致网络卡顿，影响他人的使用。速度太快还会被网管断开连接(下载Xcode或更新时经常出现)。下面是搜索到的两种限制网速的方式。苹果官方提供了限制系统整体网速的Network Link Conditioner 和 OpenBSD&rsquo;s Packet Filter 命令行工具。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://BLOG.J2J.DEV/posts/mac-os-%E9%99%90%E5%88%B6%E7%BD%91%E7%BB%9C%E9%80%9F%E5%BA%A6/" />
+<meta property="article:published_time" content="2019-10-16T18:50:35+08:00" />
+<meta property="article:modified_time" content="2019-10-16T18:50:35+08:00" />
+<meta itemprop="name" content="Mac OS 限制网络速度">
+<meta itemprop="description" content="因为网络共享，看视频或下载的时候会占用大量带宽，导致网络卡顿，影响他人的使用。速度太快还会被网管断开连接(下载Xcode或更新时经常出现)。下面是搜索到的两种限制网速的方式。苹果官方提供了限制系统整体网速的Network Link Conditioner 和 OpenBSD&rsquo;s Packet Filter 命令行工具。">
+
+
+<meta itemprop="datePublished" content="2019-10-16T18:50:35&#43;08:00" />
+<meta itemprop="dateModified" content="2019-10-16T18:50:35&#43;08:00" />
+<meta itemprop="wordCount" content="1054">
+
+
+
+<meta itemprop="keywords" content="macos,今天的搜索," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mac OS 限制网络速度"/>
+<meta name="twitter:description" content="因为网络共享，看视频或下载的时候会占用大量带宽，导致网络卡顿，影响他人的使用。速度太快还会被网管断开连接(下载Xcode或更新时经常出现)。下面是搜索到的两种限制网速的方式。苹果官方提供了限制系统整体网速的Network Link Conditioner 和 OpenBSD&rsquo;s Packet Filter 命令行工具。"/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="http://BLOG.J2J.DEV/" class="f3 fw2 hover-white no-underline white-90 dib">
+      J2J.Dev
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/about/" title="about page">
+              about
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        POSTS
+      </p>
+      <h1 class="f1 athelas mb1">Mac OS 限制网络速度</h1>
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2019-10-16T18:50:35&#43;08:00">October 16, 2019</time>
+      
+      
+    </header>
+
+    <section class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p>因为网络共享，看视频或下载的时候会占用大量带宽，导致网络卡顿，影响他人的使用。速度太快还会被网管断开连接(下载Xcode或更新时经常出现)。下面是搜索到的两种限制网速的方式。苹果官方提供了限制系统整体网速的Network Link Conditioner 和 OpenBSD&rsquo;s Packet Filter 命令行工具。</p>
+
+<h2 id="方法1-使用network-link-conditioner">方法1 使用Network Link Conditioner</h2>
+
+<p>通过Addtional Toos for Xcode中的Network Link Conditioner（网络链接调节器）实现网络速度控制。</p>
+
+<h3 id="安装步骤">安装步骤：</h3>
+
+<ol>
+<li>安装Xcode</li>
+
+<li><p>安装Addtional Toos for Xcode ，下载地址<a href="https://developer.apple.com/download/more/?=for%20Xcode">https://developer.apple.com/download/more/?=for%20Xcode</a>, 或者通过菜单Xcode -&gt; Open Developer Tool -&gt; More Developer Tools 打开浏览器后搜索Addtional Toos for Xcode下载
+<img src="./xcode-more-tools.png" alt="xcode-more-tools" />
+<img src="./More-Downloads-for-Apple-Developers.jpg" alt="More-Downloads-for Apple-Developers" /></p></li>
+
+<li><p>打开Additional_Tools_for_Xcode -&gt; Hardware -&gt; Network Link Conditioner.prefPane</p></li>
+</ol>
+
+<p><img src="./network-link-conditioner-dmg.png" alt="network-link-conditioner-dmg" /></p>
+
+<p>首次安装Network Link Conditioner 后，使用正常。当关闭并再次打开    System Preferences，Network Link Conditioner配置面板将消失，尝试   重新安装时后出现错误: You can&rsquo;t install thee &ldquo;Network Link    Conditioner&rdquo; preferences.</p>
+
+<p><img src="./network-link-conditioner-installation-error.png" alt="network-link-conditioner-installation-error" /></p>
+
+<p>解决方法是将用户PreferencePanes目录下的Network Link Conditioner.prefPane移动至系统配置目录。在命令行中输入如下命令：</p>
+
+<pre><code>sudo mv ~/Library/PreferencePanes/Network\ Link\ Conditioner.prefPane /Library/PreferencePanes/
+</code></pre>
+
+<p>再次打开System Preferences，Network Link Conditioner将正常展示。</p>
+
+<h3 id="使用">使用</h3>
+
+<p>启用Network Link Conditioner会根据所选配置更改整个系统的网络环境，从而限制上行链路或下载带宽，延迟和数据包丢失率。</p>
+
+<p>默认已经有了如下预设，可以直接选择使用：</p>
+
+<ul>
+<li>100% Loss</li>
+<li>3G</li>
+<li>DSL</li>
+<li>EDGE</li>
+<li>High Latency DNS</li>
+<li>LTE</li>
+<li>Very Bad Network</li>
+<li>WiFi</li>
+<li>WiFi 802.11ac</li>
+</ul>
+
+<p><img src="./network-link-conditioner-preset.png" alt="network-link-conditioner-preset" /></p>
+
+<p>也可以自行设定：</p>
+
+<p><img src="./network-link-conditioner-1m.png" alt="network-link-conditioner-1m.png" /></p>
+
+<p>启用后系统网络限制生效。</p>
+
+<h2 id="方法2-使用pf-openbsd-s-packet-filter-工具限制">方法2 使用PF（OpenBSD&rsquo;s Packet Filter）工具限制</h2>
+
+<p>保存以下脚本pf-bandwidth-limit.sh</p>
+
+<pre><code>#!/bin/bash
+set -o errexit    
+set -o errtrace  
+set -o pipefail   
+set -o posix      
+#set -x          
+
+
+start_limit(){
+
+  local size_kbytes=&quot;$1&quot;
+  # Reset dummynet to default config
+  dnctl -f flush
+
+  # Compose an addendum to the default config: creates a new anchor
+  (cat /etc/pf.conf &amp;&amp; echo 'dummynet-anchor &quot;my_anchor&quot;' &amp;&amp; echo 'anchor &quot;my_anchor&quot;') | pfctl -q -f -
+
+# Configure the new anchor
+cat &lt;&lt;EOF | pfctl -q -a my_anchor -f -
+no dummynet quick on lo0 all
+dummynet out proto tcp from any to any port 1:65535 pipe 1
+EOF
+
+  # Create the dummynet queue
+  dnctl pipe 1 config bw ${size_kbytes}Kbit/s
+
+  # Activate PF
+  pfctl -E
+
+  # to check that dnctl is properly configured: sudo dnctl list
+
+  sudo dnctl list
+
+}
+
+stop_limit(){
+  sudo dnctl flush
+  sudo pfctl -f /etc/pf.conf
+  sudo dnctl list
+}
+
+main() {
+  local size_kbytes=$((512)) # 512K
+
+  case &quot;$1&quot; in
+    start)
+      start_limit &quot;${size_kbytes}&quot;  
+    ;;
+    stop)
+      stop_limit
+     ;;
+    *)
+      echo &quot;Usage: $0 &lt;start|stop&gt;&quot;
+    ;;
+  esac
+}
+
+main &quot;$@&quot;
+</code></pre>
+
+<p>使用：</p>
+
+<pre><code>sudo chmod a+x ./pf-bandwidth-limit.sh
+
+#启动速率限制
+sudo ./pf-bandwidth-limit.sh start
+#停止速率限制
+sudo ./pf-bandwidth-limit.sh stop
+</code></pre>
+
+<p>启动后输出如下内容，表示限速成功:</p>
+
+<pre><code>Flushed all pipes.
+pfctl: Use of -f option, could result in flushing of rules
+present in the main ruleset added by the system at startup.
+See /etc/pf.conf for further details.
+
+pfctl: Use of -f option, could result in flushing of rules
+present in the main ruleset added by the system at startup.
+See /etc/pf.conf for further details.
+
+No ALTQ support in kernel
+ALTQ related functions disabled
+pf enabled
+Token : 8914907148313668449
+00001: 512.000 Kbit/s    0 ms   50 sl. 0 queues (1 buckets) droptail
+    mask: 0x00 0x00000000/0x0000 -&gt; 0x00000000/0x0000
+</code></pre>
+
+<h2 id="参考">参考</h2>
+
+<ul>
+<li><a href="https://nshipster.com/network-link-conditioner/">https://nshipster.com/network-link-conditioner/</a></li>
+<li><a href="https://mop.koeln/blog/limiting-bandwidth-on-mac-os-x-yosemite/">https://mop.koeln/blog/limiting-bandwidth-on-mac-os-x-yosemite/</a></li>
+<li><a href="https://thesmithfam.org/blog/2012/04/11/throttling-your-network-connection-on-mac-os-x/">https://thesmithfam.org/blog/2012/04/11/throttling-your-network-connection-on-mac-os-x/</a></li>
+</ul><ul class="pa0">
+  
+   <li class="list">
+     <a href="/tags/macos" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">macos</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/%E4%BB%8A%E5%A4%A9%E7%9A%84%E6%90%9C%E7%B4%A2" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">今天的搜索</a>
+   </li>
+  
+</ul>
+<div class="mt6">
+      
+      
+      </div>
+    </section>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://BLOG.J2J.DEV/" >
+    &copy; 2019 J2J.Dev
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>

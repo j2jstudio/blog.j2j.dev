@@ -3,26 +3,86 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://BLOG.J2J.DEV/about/</loc>
+    <lastmod>2019-10-17T19:11:34+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://BLOG.J2J.DEV/</loc>
-    <lastmod>2019-10-14T09:50:35+08:00</lastmod>
+    <lastmod>2019-10-16T18:50:35+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://BLOG.J2J.DEV/posts/mac-os-%E9%99%90%E5%88%B6%E7%BD%91%E7%BB%9C%E9%80%9F%E5%BA%A6/</loc>
+    <lastmod>2019-10-16T18:50:35+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://BLOG.J2J.DEV/tags/macos/</loc>
+    <lastmod>2019-10-16T18:50:35+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://BLOG.J2J.DEV/posts/</loc>
+    <lastmod>2019-10-16T18:50:35+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://BLOG.J2J.DEV/tags/</loc>
+    <lastmod>2019-10-16T18:50:35+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://BLOG.J2J.DEV/tags/%E4%BB%8A%E5%A4%A9%E7%9A%84%E6%90%9C%E7%B4%A2/</loc>
+    <lastmod>2019-10-16T18:50:35+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://BLOG.J2J.DEV/tags/%E4%BB%8A%E5%A4%A9%E7%9A%84%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2019-10-15T18:50:35+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://BLOG.J2J.DEV/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2019-10-15T18:50:35+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://BLOG.J2J.DEV/posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/</loc>
+    <lastmod>2019-10-15T18:50:35+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://BLOG.J2J.DEV/posts/my-first-post/</loc>
     <lastmod>2019-10-14T09:50:35+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://BLOG.J2J.DEV/posts/</loc>
-    <lastmod>2019-10-14T09:50:35+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://BLOG.J2J.DEV/categories/</loc>
-  </url>
-  
-  <url>
-    <loc>http://BLOG.J2J.DEV/tags/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
 </urlset>
