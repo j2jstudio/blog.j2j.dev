@@ -15,7 +15,7 @@ tags:
 
 ORM must register a database with alias default.
 
-
+<!--more-->
 ```
 orm.RegisterDataBase("default", "mysql", connStr, 20,100)
 

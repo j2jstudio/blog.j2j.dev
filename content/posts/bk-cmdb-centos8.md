@@ -15,6 +15,8 @@ draft: false
 7. 安装bk-cmdb
 8. 运行
 
+<!--more-->
+
 ## 环境准备
 
 sudo dnf update

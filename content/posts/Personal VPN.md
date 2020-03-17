@@ -1,6 +1,17 @@
+---
+title: " Personal VPN"
+date: 2019-10-24T14:28:35+08:00
+isCJKLanguage: true
+draft: true
+tags:
+  - vpn
+---
+
 # Personal VPN
 
 With the Personal VPN feature in macOS and iOS, your app can create and manage a VPN configuration that uses one of the built-in VPN protocols (IPsec or IKEv2). The user must explicitly authorize your app the first time it saves a VPN configuration.
+
+<!--more-->
 
 Note：
 

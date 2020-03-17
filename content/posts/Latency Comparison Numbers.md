@@ -1,7 +1,19 @@
+---
+title: "计算机中的时间延迟"
+date: 2019-10-30T14:28:35+08:00
+isCJKLanguage: true
+draft: false
+tags:
+  - 今天搜了啥
+  - 小知识
+---
 
-# https://gist.github.com/jboner/2841832
+https://gist.github.com/jboner/2841832
 
 Latency Comparison Numbers (~2012)
+<!--more-->
+
+```
 ----------------------------------
 L1 cache reference                           0.5 ns
 Branch mispredict                            5   ns
@@ -17,21 +29,27 @@ Read 1 MB sequentially from SSD*     1,000,000   ns    1,000 us    1 ms  ~1GB/se
 Disk seek                           10,000,000   ns   10,000 us   10 ms  20x datacenter roundtrip
 Read 1 MB sequentially from disk    20,000,000   ns   20,000 us   20 ms  80x memory, 20X SSD
 Send packet CA->Netherlands->CA    150,000,000   ns  150,000 us  150 ms
+```
 
 Notes
 -----
 1 ns = 10^-9 seconds
+
 1 us = 10^-6 seconds = 1,000 ns
+
 1 ms = 10^-3 seconds = 1,000 us = 1,000,000 ns
+
 
 Credit
 ------
 By Jeff Dean:               http://research.google.com/people/jeff/
+
 Originally by Peter Norvig: http://norvig.com/21-days.html#answers
 
 Contributions
 -------------
 'Humanized' comparison:  https://gist.github.com/hellerbarde/2843375
+
 Visual comparison chart: http://i.imgur.com/k0t1e.png
 @dominictarr
 
@@ -39,6 +57,8 @@ Visual comparison chart: http://i.imgur.com/k0t1e.png
 ##
 
 ### Latency numbers every programmer should know
+
+```
     L1 cache reference ......................... 0.5 ns
     Branch mispredict ............................ 5 ns
     L2 cache reference ........................... 7 ns
@@ -53,7 +73,7 @@ Visual comparison chart: http://i.imgur.com/k0t1e.png
     Disk seek ........................... 10,000,000 ns  =  10 ms
     Read 1 MB sequentially from disk .... 20,000,000 ns  =  20 ms
     Send packet CA->Netherlands->CA .... 150,000,000 ns  = 150 ms
-
+```
 Assuming ~1GB/sec SSD
 
 ![Visual representation of latencies](http://i.imgur.com/k0t1e.png)

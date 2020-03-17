@@ -1,4 +1,14 @@
+---
+title: "NEHotspotHelper"
+date: 2019-10-24T14:28:35+08:00
+isCJKLanguage: true
+draft: true
+tags:
+  - vpn
+---
+
 # 使用 NEHotspotHelper
+<!--more-->
 
 * 应用程序的Info.plist必须添加一个包含“网络认证”的UIBackgroundModes数组
 * 应用程序必须设置“com.apple.developer.networking.HotspotHelper'作为它的权利之一。该权利的值是一个布尔值true

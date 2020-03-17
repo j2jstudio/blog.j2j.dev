@@ -7,11 +7,11 @@ tags:
   - 今天搜了啥
 ---
 
-https://smallbusiness.chron.com/difference-between-powerpoint-pages-keynote-72976.html
+
 
 Employees and students often need to create attractive documents for presentations and text documents. Popular commercial software for creating great-looking documents includes PowerPoint, Keynote and Pages. PowerPoint is a Microsoft product, while Apple makes Keynote and Pages. While there are similarities between the three programs, there are also major differences. Choosing between the three when creating a document depends on your needs.
 
-
+<!--more-->
 ## The Basics
 
 PowerPoint, Keynote and Pages are all included as part of office suites, as well as standalone programs. PowerPoint is part of Microsoft Office while Keynote and Pages are included in Apple’s iWork suite. PowerPoint is available for Windows and Macintosh computers; Keynote and Pages are only available for Macs. All three are commercial programs. However, Microsoft does offer a free PowerPoint viewer. The free program enables you to view or run a PowerPoint presentation, but does not include editing capabilities.
@@ -34,3 +34,6 @@ Since Pages is a dedicated word processing program, its features for creating lo
 PowerPoint, Keynote and Pages all have features that enable you to import documents from other programs; However, these import and conversion features vary for each program. While you can import PDFs and numerous types of media files into PowerPoint, you cannot import Keynote or Pages native files. If you are working within Keynote you can save a file in PowerPoint format and then open it from within the Microsoft program. On the other hand, you can import a PowerPoint file into Keynote, but you cannot import Pages documents into Keynote or vice versa. You cannot import Keynote or PowerPoint files into Pages.
 
 
+## 参考
+
+* https://smallbusiness.chron.com/difference-between-powerpoint-pages-keynote-72976.html

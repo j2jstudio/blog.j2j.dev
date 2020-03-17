@@ -1,13 +1,25 @@
+---
+title: "NEHotspotConfigurationManager"
+date: 2019-10-24T14:28:35+08:00
+isCJKLanguage: true
+draft: true
+tags:
+  - vpn
+---
+
 # NEHotspotConfigurationManager
 
 ## 1. 必须添加配置  Hotspot Configuration Entitlement 
 
 
  
- A Boolean value indicating whether your app can use the hotspot manager to configure Wi-Fi networks.
+A Boolean value indicating whether your app can use the hotspot manager to configure Wi-Fi networks.
 
+```
 Key: com.apple.developer.networking.HotspotConfiguration
+```
 
+<!--more-->
 
 This key indicates whether your app may use the NEHotspotConfigurationManager and NEHotspotConfiguration classes to configure Wi-Fi networks.
 
