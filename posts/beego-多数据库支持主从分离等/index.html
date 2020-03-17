@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>J2J.Dev  | Beego 多数据库支持（主从分离等)</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.59.0-DEV" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/dist/css/app.d98f2eb6bcd1eaedb7edf166bd16af26.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+    
+    <meta property="og:title" content="Beego 多数据库支持（主从分离等)" />
+<meta property="og:description" content="原理
+
+使用 orm.RegisterDataBase 注册多个数据库，其中一个为default，且为主库.
+
+ORM must register a database with alias default." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://BLOG.J2J.DEV/posts/beego-%E5%A4%9A%E6%95%B0%E6%8D%AE%E5%BA%93%E6%94%AF%E6%8C%81%E4%B8%BB%E4%BB%8E%E5%88%86%E7%A6%BB%E7%AD%89/" />
+<meta property="article:published_time" content="2020-01-02T14:28:35+08:00" />
+<meta property="article:modified_time" content="2020-01-02T14:28:35+08:00" />
+<meta itemprop="name" content="Beego 多数据库支持（主从分离等)">
+<meta itemprop="description" content="原理
+
+使用 orm.RegisterDataBase 注册多个数据库，其中一个为default，且为主库.
+
+ORM must register a database with alias default.">
+
+
+<meta itemprop="datePublished" content="2020-01-02T14:28:35&#43;08:00" />
+<meta itemprop="dateModified" content="2020-01-02T14:28:35&#43;08:00" />
+<meta itemprop="wordCount" content="272">
+
+
+
+<meta itemprop="keywords" content="macos,今天搜了啥," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Beego 多数据库支持（主从分离等)"/>
+<meta name="twitter:description" content="原理
+
+使用 orm.RegisterDataBase 注册多个数据库，其中一个为default，且为主库.
+
+ORM must register a database with alias default."/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="http://BLOG.J2J.DEV/" class="f3 fw2 hover-white no-underline white-90 dib">
+      J2J.Dev
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/about/" title="about page">
+              about
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        POSTS
+      </p>
+      <h1 class="f1 athelas mb1">Beego 多数据库支持（主从分离等)</h1>
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2020-01-02T14:28:35&#43;08:00">January 2, 2020</time>
+      
+      
+    </header>
+
+    <section class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h2 id="原理">原理</h2>
+
+<p>使用 orm.RegisterDataBase 注册多个数据库，其中一个为default，且为主库.</p>
+
+<p>ORM must register a database with alias default.</p>
+
+<pre><code>orm.RegisterDataBase(&quot;default&quot;, &quot;mysql&quot;, connStr, 20,100)
+
+orm.RegisterDataBase(&quot;slav1&quot;, &quot;mysql&quot;, slav1connStr, 5,50)
+orm.RegisterDataBase(&quot;slav2&quot;, driver2, slav2connStr, 0)
+        
+</code></pre>
+
+<h2 id="使用">使用</h2>
+
+<pre><code>//主库
+o1 := orm.NewOrm()
+o1.Using(&quot;default&quot;)
+	
+//从库
+o2 := orm.NewOrm()
+o2.Using(&quot;slav1&quot;)
+</code></pre>
+
+<h2 id="同步创建db">同步创建db</h2>
+
+<p>在不同的数据库源（db)中创建相同的表:</p>
+
+<pre><code>orm.RunSyncdb(&quot;default&quot;, true, true)
+orm.RunSyncdb(&quot;db1&quot;, true, true)
+orm.RunSyncdb(&quot;db2&quot;, true, true)
+</code></pre>
+
+<p>在不同的数据库中创建不同的表:</p>
+
+<pre><code>// register driver.
+orm.RegisterDriver(dbDriver, orm.DRMySQL)
+//  create table 'tree' for database 'plant'.
+orm.RegisterDataBase(dbAliasPlant, dbDriver, datasourcePlant)
+orm.RegisterModel(new(Tree))
+orm.RunSyncdb(dbAliasPlant, true, false)
+
+// we must clear the mode cache before create another database table.
+orm.ResetModelCache()
+//  create table 'bird' for database 'animal'.
+orm.RegisterDataBase(datasourceAnimal, dbDriver, datasourceAnimal)
+orm.RegisterModel(new(Bird))
+orm.RunSyncdb(datasourceAnimal, true, false)
+
+// we need register model again.
+orm.ResetModelCache()
+orm.RegisterModel(new(Bird), new(Tree))
+db, _ := orm.GetDB(dbAliasPlant)
+OrmObjPlant, _ = orm.NewOrmWithDB(dbDriver, dbAliasPlant, db)
+db, _ = orm.GetDB(datasourceAnimal)
+OrmObjAnimal, _ = orm.NewOrmWithDB(dbDriver, datasourceAnimal, db)
+
+</code></pre>
+
+<h2 id="原有代码改造">原有代码改造</h2>
+
+<p>models.go old:</p>
+
+<pre><code>func NewUser(name, nickName string) (*User, error) {
+	o := orm.NewOrm()
+	...
+}
+</code></pre>
+
+<p>调整为 ：</p>
+
+<pre><code>新增后缀_DbAlias方法
+func NewnUser_DbAlias(name, nickName string, dbAlias string) (*User, error) {
+
+	o := orm.NewOrm()
+	if dbAlias != &quot;&quot; {
+		//数据源选择
+		o.Using(dbAlias)
+	}
+	... 
+}
+
+func NewUser(name, nickName string) (*User, error) {
+	return NewnUser_DbAlias(name, nickName, &quot;&quot;)
+}
+</code></pre><ul class="pa0">
+  
+   <li class="list">
+     <a href="/tags/macos" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">macos</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/%E4%BB%8A%E5%A4%A9%E6%90%9C%E4%BA%86%E5%95%A5" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">今天搜了啥</a>
+   </li>
+  
+</ul>
+<div class="mt6">
+      
+      
+      </div>
+    </section>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">Related</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/posts/keynotevspages/">Keynote 与 Pages的区别</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/posts/mac-os-%E9%99%90%E5%88%B6%E7%BD%91%E7%BB%9C%E9%80%9F%E5%BA%A6/">Mac OS 限制网络速度</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/posts/latency-comparison-numbers/">计算机中的时间延迟</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/posts/%E5%B9%BF%E5%91%8A%E5%90%8D%E8%AF%8D%E8%A7%A3%E6%9E%90/">广告名词</a>
+        </li>
+	    
+    </ul>
+</div>
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://BLOG.J2J.DEV/" >
+    &copy; 2020 J2J.Dev
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>

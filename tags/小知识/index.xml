@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>小知识 on J2J.Dev</title>
+    <link>http://BLOG.J2J.DEV/tags/%E5%B0%8F%E7%9F%A5%E8%AF%86/</link>
+    <description>Recent content in 小知识 on J2J.Dev</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 17 Mar 2020 16:58:31 +0800</lastBuildDate>
+    
+	<atom:link href="http://BLOG.J2J.DEV/tags/%E5%B0%8F%E7%9F%A5%E8%AF%86/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Instagram的含义</title>
+      <link>http://BLOG.J2J.DEV/posts/instagram%E5%9F%9F%E5%90%8D%E5%90%AB%E4%B9%89/</link>
+      <pubDate>Tue, 17 Mar 2020 16:58:31 +0800</pubDate>
+      
+      <guid>http://BLOG.J2J.DEV/posts/instagram%E5%9F%9F%E5%90%8D%E5%90%AB%E4%B9%89/</guid>
+      <description>&lt;p&gt;Instagram 的名称取自&amp;rdquo;即时&amp;rdquo;（英语：instant ）与“电报”（英语：telegram ）两个单词的结合。因为创始人灵感来自即时成像相机，且认为人与人之间的照片分享“就像用电线传递电报消息”，因而将两个单词结合成软件名称&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>计算机中的时间延迟</title>
+      <link>http://BLOG.J2J.DEV/posts/latency-comparison-numbers/</link>
+      <pubDate>Wed, 30 Oct 2019 14:28:35 +0800</pubDate>
+      
+      <guid>http://BLOG.J2J.DEV/posts/latency-comparison-numbers/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://gist.github.com/jboner/2841832&#34;&gt;https://gist.github.com/jboner/2841832&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Latency Comparison Numbers (~2012)&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>广告名词</title>
+      <link>http://BLOG.J2J.DEV/posts/%E5%B9%BF%E5%91%8A%E5%90%8D%E8%AF%8D%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Thu, 24 Oct 2019 14:28:35 +0800</pubDate>
+      
+      <guid>http://BLOG.J2J.DEV/posts/%E5%B9%BF%E5%91%8A%E5%90%8D%E8%AF%8D%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h2 id=&#34;dsp-需求方平台-demand-side-platform&#34;&gt;DSP：需求方平台 (demand-side platform)&lt;/h2&gt;
+
+&lt;p&gt;A demand-side platform (DSP) allows buyers of digital ad inventory to manage multiple ad exchanges via one interface. These buyers commonly include trading desks, agencies, or advertisers directly.&lt;/p&gt;
+
+&lt;p&gt;To enable these buyers to bid on digital inventory, the DSP has to plug into an SSP. This programmatic advertising supply chain is visualized in the graphic below.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

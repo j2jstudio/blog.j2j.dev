@@ -3,6 +3,97 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://BLOG.J2J.DEV/posts/instagram%E5%9F%9F%E5%90%8D%E5%90%AB%E4%B9%89/</loc>
+    <lastmod>2020-03-17T16:58:31+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://BLOG.J2J.DEV/</loc>
+    <lastmod>2020-03-17T16:58:31+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://BLOG.J2J.DEV/posts/</loc>
+    <lastmod>2020-03-17T16:58:31+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://BLOG.J2J.DEV/tags/</loc>
+    <lastmod>2020-03-17T16:58:31+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://BLOG.J2J.DEV/tags/%E4%BB%8A%E5%A4%A9%E6%90%9C%E4%BA%86%E5%95%A5/</loc>
+    <lastmod>2020-03-17T16:58:31+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://BLOG.J2J.DEV/tags/%E5%B0%8F%E7%9F%A5%E8%AF%86/</loc>
+    <lastmod>2020-03-17T16:58:31+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://BLOG.J2J.DEV/posts/beego-%E5%A4%9A%E6%95%B0%E6%8D%AE%E5%BA%93%E6%94%AF%E6%8C%81%E4%B8%BB%E4%BB%8E%E5%88%86%E7%A6%BB%E7%AD%89/</loc>
+    <lastmod>2020-01-02T14:28:35+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://BLOG.J2J.DEV/tags/macos/</loc>
+    <lastmod>2020-01-02T14:28:35+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://BLOG.J2J.DEV/posts/bk-cmdb-centos8/</loc>
+    <lastmod>2019-12-11T10:31:51+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://BLOG.J2J.DEV/posts/keynotevspages/</loc>
+    <lastmod>2019-11-07T19:50:35+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://BLOG.J2J.DEV/posts/latency-comparison-numbers/</loc>
+    <lastmod>2019-10-30T14:28:35+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://BLOG.J2J.DEV/posts/%E5%B9%BF%E5%91%8A%E5%90%8D%E8%AF%8D%E8%A7%A3%E6%9E%90/</loc>
+    <lastmod>2019-10-24T14:28:35+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://BLOG.J2J.DEV/posts/golang-dateformate/</loc>
+    <lastmod>2019-10-18T17:38:58+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://BLOG.J2J.DEV/about/</loc>
     <lastmod>2019-10-17T19:11:34+08:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -10,42 +101,7 @@
   </url>
   
   <url>
-    <loc>http://BLOG.J2J.DEV/</loc>
-    <lastmod>2019-10-16T18:50:35+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>http://BLOG.J2J.DEV/posts/mac-os-%E9%99%90%E5%88%B6%E7%BD%91%E7%BB%9C%E9%80%9F%E5%BA%A6/</loc>
-    <lastmod>2019-10-16T18:50:35+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://BLOG.J2J.DEV/tags/macos/</loc>
-    <lastmod>2019-10-16T18:50:35+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://BLOG.J2J.DEV/posts/</loc>
-    <lastmod>2019-10-16T18:50:35+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://BLOG.J2J.DEV/tags/</loc>
-    <lastmod>2019-10-16T18:50:35+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://BLOG.J2J.DEV/tags/%E4%BB%8A%E5%A4%A9%E7%9A%84%E6%90%9C%E7%B4%A2/</loc>
     <lastmod>2019-10-16T18:50:35+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
