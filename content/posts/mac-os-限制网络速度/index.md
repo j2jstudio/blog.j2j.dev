@@ -5,7 +5,7 @@ isCJKLanguage: true
 draft: false
 tags:
   - macos
-  - 今天的搜索
+  - 今天搜了啥
 ---
 
 因为网络共享，看视频或下载的时候会占用大量带宽，导致网络卡顿，影响他人的使用。速度太快还会被网管断开连接(下载Xcode或更新时经常出现)。下面是搜索到的两种限制网速的方式。苹果官方提供了限制系统整体网速的Network Link Conditioner 和 OpenBSD's Packet Filter 命令行工具。
