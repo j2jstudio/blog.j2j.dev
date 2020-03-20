@@ -6,10 +6,24 @@
     <description>Recent content in Posts on J2J.Dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Mar 2020 16:58:31 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 20 Mar 2020 14:17:22 +0800</lastBuildDate>
     
 	<atom:link href="http://BLOG.J2J.DEV/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>安装Electron</title>
+      <link>http://BLOG.J2J.DEV/posts/%E5%AE%89%E8%A3%85electron/</link>
+      <pubDate>Fri, 20 Mar 2020 14:17:22 +0800</pubDate>
+      
+      <guid>http://BLOG.J2J.DEV/posts/%E5%AE%89%E8%A3%85electron/</guid>
+      <description>&lt;p&gt;Electron 安装常见错误和解决方法。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;自定义镜像 ELECTRON_MIRROR=&lt;a href=&#34;https://npm.taobao.org/mirrors/electron/&#34;&gt;https://npm.taobao.org/mirrors/electron/&lt;/a&gt; npm &amp;ndash;registry=&lt;a href=&#34;https://registry.npm.taobao.org&#34;&gt;https://registry.npm.taobao.org&lt;/a&gt; install electron@5.0.13&lt;/li&gt;
+&lt;li&gt;&amp;ndash;unsafe-perm=true&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
     
     <item>
       <title>Instagram的含义</title>
