@@ -6,10 +6,25 @@
     <description>Recent content in Posts on J2J.Dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 20 Mar 2020 14:17:22 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 13 Apr 2020 16:05:59 +0800</lastBuildDate>
     
 	<atom:link href="http://BLOG.J2J.DEV/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Adobe AIR.framework” is damaged and can’t be opened</title>
+      <link>http://BLOG.J2J.DEV/posts/adobe-air.framework-is-damaged-macosx-catalina/</link>
+      <pubDate>Mon, 13 Apr 2020 16:05:59 +0800</pubDate>
+      
+      <guid>http://BLOG.J2J.DEV/posts/adobe-air.framework-is-damaged-macosx-catalina/</guid>
+      <description>&lt;p&gt;MacOS 升级 Catalina 后,打开Adobe Air出现错误：&lt;strong&gt;“Adobe AIR.framework” is damaged and can’t be opened.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;可以通过如下方式移除安全隔离属性&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd /Library/Frameworks
+sudo xattr -r -d com.apple.quarantine ./Adobe\ AIR.framework
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
     
     <item>
       <title>安装Electron</title>

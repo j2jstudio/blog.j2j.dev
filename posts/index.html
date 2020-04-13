@@ -35,7 +35,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://BLOG.J2J.DEV/posts/" />
 
-<meta property="og:updated_time" content="2020-03-20T14:17:22+08:00" />
+<meta property="og:updated_time" content="2020-04-13T16:05:59+08:00" />
 <meta itemprop="name" content="Posts">
 <meta itemprop="description" content="J2J.Dev.">
 
@@ -104,6 +104,27 @@
   <article class="pa3 pa4-ns nested-copy-line-height nested-img">
     <section class="cf ph3 ph5-l pv3 pv4-l f4 tc-l center measure-wide lh-copy mid-gray"></section>
     <section class="flex-ns flex-wrap justify-around mt5">
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="http://BLOG.J2J.DEV/posts/adobe-air.framework-is-damaged-macosx-catalina/" class="link black dim">
+        Adobe AIR.framework” is damaged and can’t be opened
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      <p>MacOS 升级 Catalina 后,打开Adobe Air出现错误：<strong>“Adobe AIR.framework” is damaged and can’t be opened.</strong></p>
+
+<p>可以通过如下方式移除安全隔离属性</p>
+
+<pre><code>cd /Library/Frameworks
+sudo xattr -r -d com.apple.quarantine ./Adobe\ AIR.framework
+</code></pre>
+    </div>
+  </div>
+</div>
+</div>
       
         <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
   <div class="bg-white mb3 pa4 gray overflow-hidden">
@@ -261,21 +282,6 @@
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
       <p>因为网络共享，看视频或下载的时候会占用大量带宽，导致网络卡顿，影响他人的使用。速度太快还会被网管断开连接(下载Xcode或更新时经常出现)。下面是搜索到的两种限制网速的方式。苹果官方提供了限制系统整体网速的Network Link Conditioner 和 OpenBSD&rsquo;s Packet Filter 命令行工具。</p>
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="http://BLOG.J2J.DEV/posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/" class="link black dim">
-        数据库连接池
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      <p>使用数据库连接池优化单数据服务器，提升其性能。以及Golang中的配置方式。</p>
     </div>
   </div>
 </div>
