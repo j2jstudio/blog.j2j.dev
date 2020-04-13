@@ -2,6 +2,9 @@
 title: "Adobe AIR.framework” is damaged and can’t be opened"
 date: 2020-04-13T16:05:59+08:00
 draft: false
+tags:
+  - 今天搜了啥
+  - MacOS
 ---
 
 MacOS 升级 Catalina 后,打开Adobe Air出现错误：**“Adobe AIR.framework” is damaged and can’t be opened.**
