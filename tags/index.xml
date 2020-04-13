@@ -6,15 +6,24 @@
     <description>Recent content in Tags on J2J.Dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 20 Mar 2020 14:17:22 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 13 Apr 2020 16:05:59 +0800</lastBuildDate>
     
 	<atom:link href="http://BLOG.J2J.DEV/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>MacOS</title>
+      <link>http://BLOG.J2J.DEV/tags/macos/</link>
+      <pubDate>Mon, 13 Apr 2020 16:05:59 +0800</pubDate>
+      
+      <guid>http://BLOG.J2J.DEV/tags/macos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>今天搜了啥</title>
       <link>http://BLOG.J2J.DEV/tags/%E4%BB%8A%E5%A4%A9%E6%90%9C%E4%BA%86%E5%95%A5/</link>
-      <pubDate>Fri, 20 Mar 2020 14:17:22 +0800</pubDate>
+      <pubDate>Mon, 13 Apr 2020 16:05:59 +0800</pubDate>
       
       <guid>http://BLOG.J2J.DEV/tags/%E4%BB%8A%E5%A4%A9%E6%90%9C%E4%BA%86%E5%95%A5/</guid>
       <description></description>
@@ -35,15 +44,6 @@
       <pubDate>Tue, 17 Mar 2020 16:58:31 +0800</pubDate>
       
       <guid>http://BLOG.J2J.DEV/tags/%E5%B0%8F%E7%9F%A5%E8%AF%86/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>macos</title>
-      <link>http://BLOG.J2J.DEV/tags/macos/</link>
-      <pubDate>Thu, 02 Jan 2020 14:28:35 +0800</pubDate>
-      
-      <guid>http://BLOG.J2J.DEV/tags/macos/</guid>
       <description></description>
     </item>
     
