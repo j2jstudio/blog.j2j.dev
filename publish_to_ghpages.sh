@@ -28,4 +28,9 @@ cd public && git add --all && git commit -m "Publishing to gh-pages (publish.sh)
 #git push --all
 
 echo "git push --all"
+
+git push --all
+
 echo "git push origin gh-pages"
+
+git push origin gh-pages
