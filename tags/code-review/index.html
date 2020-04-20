@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>J2J.Dev  | 今天的学习</title>
+    <title>J2J.Dev  | Code Review</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="generator" content="Hugo 0.59.0-DEV" />
     
@@ -25,22 +25,22 @@
 
     
     
-      <link href="/tags/%E4%BB%8A%E5%A4%A9%E7%9A%84%E5%AD%A6%E4%B9%A0/index.xml" rel="alternate" type="application/rss+xml" title="J2J.Dev" />
-      <link href="/tags/%E4%BB%8A%E5%A4%A9%E7%9A%84%E5%AD%A6%E4%B9%A0/index.xml" rel="feed" type="application/rss+xml" title="J2J.Dev" />
+      <link href="/tags/code-review/index.xml" rel="alternate" type="application/rss+xml" title="J2J.Dev" />
+      <link href="/tags/code-review/index.xml" rel="feed" type="application/rss+xml" title="J2J.Dev" />
       
     
     
-    <meta property="og:title" content="今天的学习" />
+    <meta property="og:title" content="Code Review" />
 <meta property="og:description" content="J2J.Dev." />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://BLOG.J2J.DEV/tags/%E4%BB%8A%E5%A4%A9%E7%9A%84%E5%AD%A6%E4%B9%A0/" />
+<meta property="og:url" content="http://BLOG.J2J.DEV/tags/code-review/" />
 
-<meta property="og:updated_time" content="2019-10-15T18:50:35+08:00" />
-<meta itemprop="name" content="今天的学习">
+<meta property="og:updated_time" content="2020-04-15T17:52:08+08:00" />
+<meta itemprop="name" content="Code Review">
 <meta itemprop="description" content="J2J.Dev.">
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="今天的学习"/>
+<meta name="twitter:title" content="Code Review"/>
 <meta name="twitter:description" content="J2J.Dev."/>
 
   </head>
@@ -91,7 +91,7 @@
 
       <div class="tc-l pv3 ph3 ph4-ns">
         <h1 class="f2 f-subheadline-l fw2 light-silver mb0 lh-title">
-          今天的学习
+          Code Review
         </h1>
         
       </div>
@@ -103,7 +103,7 @@
       
   <article class="cf pa3 pa4-m pa4-l">
     <div class="measure-wide-l center f4 lh-copy nested-copy-line-height nested-links nested-img mid-gray">
-      <p>Below you will find pages that utilize the taxonomy term “今天的学习”</p>
+      <p>Below you will find pages that utilize the taxonomy term “Code Review”</p>
     </div>
   </article>
   <div class="mw8 center">    
@@ -114,12 +114,71 @@
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
-      <a href="http://BLOG.J2J.DEV/posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/" class="link black dim">
-        数据库连接池
+      <a href="http://BLOG.J2J.DEV/posts/gitlab-mr-%E6%B5%81%E7%A8%8B/" class="link black dim">
+        基于Gitlab MR做代码审核 -  2演示
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-      <p>使用数据库连接池优化单数据服务器，提升其性能。以及Golang中的配置方式。</p>
+      <h1 id="gitlab-merge-requests-流程说明二-演示">Gitlab Merge Requests 流程说明二 - 演示</h1>
+
+<h2 id="迁出代码">迁出代码</h2>
+
+<pre><code>#仅克隆远程master分支 
+git clone https://gitlab.company.com/demo/prdemo.git
+
+#查看所有分支
+
+git branch -a
+
+#显示如下 
+
+* master  (仅迁出master分支)
+  remotes/origin/HEAD -&gt; origin/master
+  remotes/origin/develop
+  remotes/origin/master
+  
+# 迁出develop分支
+
+git checkout -b develop origin/develop
+git branch -a
+
+* develop (develop已经迁出，且当前处于develop分支中)
+  master (master分支已经迁出)
+  remotes/origin/HEAD -&gt; origin/master
+  remotes/origin/develop
+  remotes/origin/master
+  
+</code></pre>
+    </div>
+  </div>
+</div>
+
+        </div>
+      
+        <div class="relative w-100  mb4 bg-white">
+          <div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="http://BLOG.J2J.DEV/posts/gitlab-%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%A0%B8-%E5%90%88%E5%B9%B6/" class="link black dim">
+        基于Gitlab MR做代码审核 -  1基础配置
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      <h2 id="分支的说明">分支的说明</h2>
+
+<p>gitflow工作流，规范但是过于复杂。</p>
+
+<p><img src="https://docs.gitlab.com/ee/topics/img/gitlab_flow_gitdashflow.png" alt="https://docs.gitlab.com/ee/topics/img/gitlab_flow_gitdashflow.png" /></p>
+
+<p>我们采用简易的gitflow工作流</p>
+
+<ul>
+<li>master - 用于准备发布部署</li>
+<li>develop - 用于当前的主线开发</li>
+<li>feature - 用于特定功能的开发</li>
+<li>tag标签 - 用于版本发布 v0.9.10</li>
+</ul>
     </div>
   </div>
 </div>
