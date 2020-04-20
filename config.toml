@@ -2,6 +2,7 @@ baseURL = "http://BLOG.J2J.DEV/"
 languageCode = "en-us"
 title = "J2J.Dev"
 theme = "ananke"
+googleAnalytics = "UA-164047462-1"
 [taxonomies]
   category = "categories"
   tag = "tags"
@@ -19,7 +20,6 @@ MetaDataFormat = "yaml"
 DefaultContentLanguage = "en"
 SectionPagesMenu = "main"
 Paginate = 3 # this is set low for demonstrating with dummy content. Set to a higher number
-googleAnalytics = ""
 enableRobotsTXT = true
 
 [sitemap]
