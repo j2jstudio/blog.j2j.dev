@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>J2J.Dev  | Read Go Ethereum Source Code 2</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.59.0-DEV" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/dist/css/app.1cb140d8ba31d5b2f1114537dd04802a.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+    
+    <meta property="og:title" content="Read Go Ethereum Source Code 2" />
+<meta property="og:description" content="RLP（递归长度前缀）的目的是编码任意嵌套的二进制数据数组，RLP是以太坊中用于序列化对象的主要编码方法。 RLP的唯一目的是编码结构; 对于编码的数据的具体类型（例如字符串，浮点数）则留给高阶协议自己负责处理。（简单来说编码的二进制数据，代表的是字符串、浮点数还是其他类型。由使用该编码的高级协议定义）;RLP编码的整数必须以大端二进制形式（big endian）表示，且不包含前导零（整数值零等于空字节数组）。 反序列化正整数时如发现前缀有零的必须视为无效。 字符串长度的整数表示也必须以这种方式进行编码，其他部分的整数同样如此。 更多信息可以在Ethereum黄皮书 附录B中找到。
+
+如果有人希望使用RLP对字典进行编码，有两个建议
+
+
+按照字典顺序使用[[k1,v1],[k2,v2]&hellip;]进行编码
+或者使用更高级别的Patricia Tree编码
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://BLOG.J2J.DEV/posts/go-ethereum/read-go-ethereum-source-code-2/" />
+<meta property="article:published_time" content="2018-03-26T09:40:48+08:00" />
+<meta property="article:modified_time" content="2018-03-26T09:40:48+08:00" />
+<meta itemprop="name" content="Read Go Ethereum Source Code 2">
+<meta itemprop="description" content="RLP（递归长度前缀）的目的是编码任意嵌套的二进制数据数组，RLP是以太坊中用于序列化对象的主要编码方法。 RLP的唯一目的是编码结构; 对于编码的数据的具体类型（例如字符串，浮点数）则留给高阶协议自己负责处理。（简单来说编码的二进制数据，代表的是字符串、浮点数还是其他类型。由使用该编码的高级协议定义）;RLP编码的整数必须以大端二进制形式（big endian）表示，且不包含前导零（整数值零等于空字节数组）。 反序列化正整数时如发现前缀有零的必须视为无效。 字符串长度的整数表示也必须以这种方式进行编码，其他部分的整数同样如此。 更多信息可以在Ethereum黄皮书 附录B中找到。
+
+如果有人希望使用RLP对字典进行编码，有两个建议
+
+
+按照字典顺序使用[[k1,v1],[k2,v2]&hellip;]进行编码
+或者使用更高级别的Patricia Tree编码
+">
+
+
+<meta itemprop="datePublished" content="2018-03-26T09:40:48&#43;08:00" />
+<meta itemprop="dateModified" content="2018-03-26T09:40:48&#43;08:00" />
+<meta itemprop="wordCount" content="640">
+
+
+
+<meta itemprop="keywords" content="源码阅读,Golang,Ethereum," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Read Go Ethereum Source Code 2"/>
+<meta name="twitter:description" content="RLP（递归长度前缀）的目的是编码任意嵌套的二进制数据数组，RLP是以太坊中用于序列化对象的主要编码方法。 RLP的唯一目的是编码结构; 对于编码的数据的具体类型（例如字符串，浮点数）则留给高阶协议自己负责处理。（简单来说编码的二进制数据，代表的是字符串、浮点数还是其他类型。由使用该编码的高级协议定义）;RLP编码的整数必须以大端二进制形式（big endian）表示，且不包含前导零（整数值零等于空字节数组）。 反序列化正整数时如发现前缀有零的必须视为无效。 字符串长度的整数表示也必须以这种方式进行编码，其他部分的整数同样如此。 更多信息可以在Ethereum黄皮书 附录B中找到。
+
+如果有人希望使用RLP对字典进行编码，有两个建议
+
+
+按照字典顺序使用[[k1,v1],[k2,v2]&hellip;]进行编码
+或者使用更高级别的Patricia Tree编码
+"/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="http://BLOG.J2J.DEV/" class="f3 fw2 hover-white no-underline white-90 dib">
+      J2J.Dev
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/about/" title="about page">
+              about
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        POSTS
+      </aside>
+      
+
+
+
+
+  <div id="sharing" class="mt3">
+
+    
+    <a href="https://www.facebook.com/sharer.php?u=http://BLOG.J2J.DEV/posts/go-ethereum/read-go-ethereum-source-code-2/" class="facebook no-underline" aria-label="share on Facebook">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M28.765,50.32h6.744V33.998h4.499l0.596-5.624h-5.095  l0.007-2.816c0-1.466,0.14-2.253,2.244-2.253h2.812V17.68h-4.5c-5.405,0-7.307,2.729-7.307,7.317v3.377h-3.369v5.625h3.369V50.32z   M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+
+    </a>
+
+    
+    
+    <a href="https://twitter.com/share?url=http://BLOG.J2J.DEV/posts/go-ethereum/read-go-ethereum-source-code-2/&amp;text=Read%20Go%20Ethereum%20Source%20Code%202" class="twitter no-underline" aria-label="share on Twitter">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/></svg>
+
+    </a>
+
+    
+    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http://BLOG.J2J.DEV/posts/go-ethereum/read-go-ethereum-source-code-2/&amp;title=Read%20Go%20Ethereum%20Source%20Code%202" class="linkedin no-underline" aria-label="share on LinkedIn">
+      <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+    </a>
+  </div>
+
+      <h1 class="f1 athelas mt3 mb1">Read Go Ethereum Source Code 2</h1>
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2018-03-26T09:40:48&#43;08:00">March 26, 2018</time>
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p>RLP（递归长度前缀）的目的是编码任意嵌套的二进制数据数组，RLP是以太坊中用于序列化对象的主要编码方法。 RLP的唯一目的是编码结构; 对于编码的数据的具体类型（例如字符串，浮点数）则留给高阶协议自己负责处理。（简单来说编码的二进制数据，代表的是字符串、浮点数还是其他类型。由使用该编码的高级协议定义）;RLP编码的整数必须以大端二进制形式（big endian）表示，且不包含前导零（整数值零等于空字节数组）。 反序列化正整数时如发现前缀有零的必须视为无效。 字符串长度的整数表示也必须以这种方式进行编码，其他部分的整数同样如此。 更多信息可以在<a href="https://ethereum.github.io/yellowpaper/paper.pdf">Ethereum黄皮书</a> 附录B中找到。</p>
+
+<p>如果有人希望使用RLP对字典进行编码，有两个建议</p>
+
+<ol>
+<li>按照字典顺序使用[[k1,v1],[k2,v2]&hellip;]进行编码</li>
+<li>或者使用更高级别的<a href="https://github.com/ethereum/wiki/wiki/Patricia-Tree">Patricia Tree</a>编码</li>
+</ol>
+
+<h2 id="定义-编码">定义（编码)</h2>
+
+<p>RLP编码功能需要一个项（item)。 一个项（item)定义如下：</p>
+
+<ul>
+<li>一个字符串（即字节数组）是一个item</li>
+<li>项目列表(a list of item )也是一个项item</li>
+</ul>
+
+<p>例如，空字符串是一个item，包含单词“cat”的字符串也是item，包含任意数量字符串的列表以及更复杂的数据结构也是item，如[&ldquo;cat&rdquo;,[&ldquo;puppy&rdquo;,&ldquo;cow&rdquo;],&ldquo;horse&rdquo;,[[]],&ldquo;pig&rdquo;,[&ldquo;&rdquo;],&ldquo;sheep&rdquo;] 。 请注意，在本文其余部分的上下文中，“string”将用作“一定数量的二进制数据字节数”的同义词; 没有使用特殊的编码，也没有关于字符串内容的知识。</p>
+
+<pre><code>在Python2 和 Golang 中，string都被定义为二进制数组，数据的保存全为二进制。如需要展示为特定格式的编码字符时，需要指定编解码格式。
+</code></pre>
+
+<p>RLP编码定义如下：</p>
+
+<ul>
+<li>对于其值在[0x00, 0x7f]范围内的单个字节，该字节是其自己的RLP编码。</li>
+<li>如果一个字符串的长度为0-55字节，则RLP编码由一个值为<strong>0x80</strong>的单个字节加上
+该字符串后面的字符串长度组成。 第一个字节的范围是[0x80, 0xb7]（[0x80,0x80+55=0xb7]) 。</li>
+
+<li><p>如果一个字符串长度超过55个字节，则RLP编码由一个值为<strong>0xb7</strong>的单个字节加上以二进制形式表示的字符串长度的字节长度，接着是字符串长度，后跟字符串。 例如，长度为1024的字符串将被编码为\xb9\x04\x00后跟该字符串。 第一个字节的范围是[0xb8, 0xbf] 。(1024如何被编码查看下方代码）</p></li>
+
+<li><p>如果编码的为列表(list/array)，其长度为0-55字节（列表保存的是，所有被RLP编码的二进制数据），则RLP编码由单个字节组成，其值为0xc0加上列表的长度，然后连接项目的RLP编码。 第一个字节的范围是<a href="0xf7-0xc0 = 55">0xc0, 0xf7</a> 。</p></li>
+
+<li><p>如果列表的总长度超过55个字节，则RLP编码由一个值为0xf7的单个字节加上以二进制形式表示的有效长度的字节长度，接着是RLP编码的列表。 第一个字节的范围是[0xf8, 0xff](表示后面最多跟随8字节表示长度的内容），列表的长度最多为2**64次方 。</p></li>
+</ul>
+
+<p>python代码如下：</p>
+
+<pre><code>def rlp_encode(input):
+    if isinstance(input,str):
+        if len(input) == 1 and ord(input) &lt; 0x80: return input
+        else: return encode_length(len(input), 0x80) + input
+    elif isinstance(input,list):
+        output = ''
+        for item in input: output += rlp_encode(item)
+        return encode_length(len(output), 0xc0) + output
+
+def encode_length(L,offset):
+    if L &lt; 56:
+         return chr(L + offset)
+    elif L &lt; 256**8:
+         BL = to_binary(L)
+         return chr(len(BL) + offset + 55) + BL
+    else:
+         raise Exception(&quot;input too long&quot;)
+
+def to_binary(x):
+    if x == 0:
+        return ''
+    else: 
+        return to_binary(int(x / 256)) + chr(x % 256)
+
+</code></pre>
+
+<p>Golang 代码如下：</p>
+
+<p>在commit 5db3335dce766bd679c54ea44f6df08a7ff74762 初始提交中，rlp的编码代码在serialization.go文件中。其代码暂未支持整数编码。观察代码RLP的实现与如今的RLP规范定义的不大一致。所以我们选取后续的提交。</p>
+
+<p>在commit d7eca7bcc12e940f0aa80d45e6e802ba68143b5c 中，rlp编解码基本实现完整。以下代码来自 d7eca7bcc12e940f0aa80d45e6e802ba68143b5c rlp.go中。</p>
+
+<pre><code>可通过：
+https://github.com/ethereum/go-ethereum/blob/d7eca7bcc12e940f0aa80d45e6e802ba68143b5c/ethutil/rlp.go 在线查看
+
+或者在go-ethereum源码目录中，迁出到指定提交
+git checkout d7eca7bcc12e940f0aa80d45e6e802ba68143b5c
+
+</code></pre>
+
+<pre><code>
+
+func Encode(object interface{}) []byte {
+	var buff bytes.Buffer
+
+	if object != nil {
+		switch t := object.(type) {
+		case *Value:
+			buff.Write(Encode(t.Raw()))
+		// Code dup :-/
+		case int:
+			buff.Write(Encode(big.NewInt(int64(t))))
+		case uint:
+			buff.Write(Encode(big.NewInt(int64(t))))
+		case int8:
+			buff.Write(Encode(big.NewInt(int64(t))))
+		case int16:
+			buff.Write(Encode(big.NewInt(int64(t))))
+		case int32:
+			buff.Write(Encode(big.NewInt(int64(t))))
+		case int64:
+			buff.Write(Encode(big.NewInt(t)))
+		case uint16:
+			buff.Write(Encode(big.NewInt(int64(t))))
+		case uint32:
+			buff.Write(Encode(big.NewInt(int64(t))))
+		case uint64:
+			buff.Write(Encode(big.NewInt(int64(t))))
+		case byte:
+			buff.Write(Encode(big.NewInt(int64(t))))
+		case *big.Int:
+			buff.Write(Encode(t.Bytes()))
+		case []byte:
+			if len(t) == 1 &amp;&amp; t[0] &lt;= 0x7f {
+				buff.Write(t)
+			} else if len(t) &lt; 56 {
+				buff.WriteByte(byte(len(t) + 0x80))
+				buff.Write(t)
+			} else {
+				b := big.NewInt(int64(len(t)))
+				buff.WriteByte(byte(len(b.Bytes()) + 0xb7))
+				buff.Write(b.Bytes())
+				buff.Write(t)
+			}
+		case string:
+			buff.Write(Encode([]byte(t)))
+		case []interface{}:
+			// Inline function for writing the slice header
+			WriteSliceHeader := func(length int) {
+				if length &lt; 56 {
+					buff.WriteByte(byte(length + 0xc0))
+				} else {
+					b := big.NewInt(int64(length))
+					buff.WriteByte(byte(len(b.Bytes()) + 0xf7))
+					buff.Write(b.Bytes())
+				}
+			}
+
+			var b bytes.Buffer
+			for _, val := range t {
+				b.Write(Encode(val))
+			}
+			WriteSliceHeader(len(b.Bytes()))
+			buff.Write(b.Bytes())
+		}
+	} else {
+		// Empty list for nil
+		buff.WriteByte(0xc0)
+	}
+
+	return buff.Bytes()
+}
+
+</code></pre>
+
+<h2 id="例子">例子</h2>
+
+<ul>
+<li><p>字符串 &ldquo;dog&rdquo; 编码：</p>
+
+<pre><code>case string:
+		buff.Write(Encode([]byte(t)))
+
+case []byte:
+		if len(t) == 1 &amp;&amp; t[0] &lt;= 0x7f {
+			buff.Write(t)
+		} else if len(t) &lt; 56 {
+			buff.WriteByte(byte(len(t) + 0x80))
+			buff.Write(t)
+		} else {
+			b := big.NewInt(int64(len(t)))
+			buff.WriteByte(byte(len(b.Bytes()) + 0xb7))
+			buff.Write(b.Bytes())
+
+len(&quot;dog&quot;)==3 &lt; 56,
+前缀 = byte(3+0x80) = 0x83
+跟随字符串&quot;dog&quot; ,最终为[0x83,'d','o','g'] = [0x83,0x64,0x6f,0x67]				
+</code></pre></li>
+
+<li><p>列表  [ &ldquo;cat&rdquo;, &ldquo;dog&rdquo; ]</p>
+
+<pre><code>[ 0xc8, 0x83, 'c', 'a', 't', 0x83, 'd', 'o', 'g' ]
+</code></pre></li>
+
+<li><p>关注int整数的保存 。</p>
+
+<pre><code>case *big.Int:
+    buff.Write(Encode(t.Bytes()))   
+Bytes方法返回的正式是大端序的byte切片 （returns the absolute value of x as a big-endian byte slice.）
+</code></pre></li>
+</ul>
+
+<h2 id="rlp-解码">RLP 解码</h2>
+
+<p>根据RLP编码的规则和过程，RLP解码的输入应视为二进制数据的数组，过程如下：</p>
+
+<ol>
+<li><p>根据输入数据的第一个字节（即前缀），并解码数据类型、实际数据的长度和偏移量;</p></li>
+
+<li><p>根据数据的类型和偏移，相应解码数据;</p></li>
+</ol>
+
+<p>继续解码其余的输入;</p>
+
+<p>其中，解码数据类型和偏移的规则如下：</p>
+
+<ol>
+<li><p>如果第一个字节（即前缀）的范围是[0x00，0x7f]，则该数据是一个字符串,且内容为该字节本身;</p></li>
+
+<li><p>如果第一个字节的范围是[0x80，0xb7]，那么数据是一个字符串，长度等于第一个字节减去0x80,字符串跟在第一个字节后面;</p></li>
+
+<li><p>如果第一个字节的范围是[0xb8，0xbf]，那么数据是一个字符串，第一个字节减去0xb7等于表示长度的字节数（跟在第一字节后），取得长度字节后得到实际字符串长度，字符串紧跟其后;</p></li>
+
+<li><p>如果第一字节的范围是[0xc0，0xf7]，则数据是列表，第一字节减去0xc0后得到列表的长度;</p></li>
+
+<li><p>如果第一个字节的范围是[0xf8,0xff]，那么该数据就是一个列表，第一个字节减去0xf7等于表示长度的字节数，根据长度字节数取得列表长度。列表紧跟其后;</p></li>
+</ol>
+
+<p>Golang 代码如下：</p>
+
+<pre><code>// TODO Use a bytes.Buffer instead of a raw byte slice.
+// Cleaner code, and use draining instead of seeking the next bytes to read
+func Decode(data []byte, pos uint64) (interface{}, uint64) {
+	var slice []interface{}
+	char := int(data[pos])
+	switch {
+	case char &lt;= 0x7f:
+		return data[pos], pos + 1
+
+	case char &lt;= 0xb7:
+		b := uint64(data[pos]) - 0x80
+
+		return data[pos+1 : pos+1+b], pos + 1 + b
+
+	case char &lt;= 0xbf:
+		b := uint64(data[pos]) - 0xb7
+
+		b2 := ReadVarint(bytes.NewReader(data[pos+1 : pos+1+b]))
+
+		return data[pos+1+b : pos+1+b+b2], pos + 1 + b + b2
+
+	case char &lt;= 0xf7:
+		b := uint64(data[pos]) - 0xc0
+		prevPos := pos
+		pos++
+		for i := uint64(0); i &lt; b; {
+			var obj interface{}
+
+			// Get the next item in the data list and append it
+			obj, prevPos = Decode(data, pos)
+			slice = append(slice, obj)
+
+			// Increment i by the amount bytes read in the previous
+			// read
+			i += (prevPos - pos)
+			pos = prevPos
+		}
+		return slice, pos
+
+	case char &lt;= 0xff:
+		l := uint64(data[pos]) - 0xf7
+		b := ReadVarint(bytes.NewReader(data[pos+1 : pos+1+l]))
+
+		pos = pos + l + 1
+
+		prevPos := b
+		for i := uint64(0); i &lt; uint64(b); {
+			var obj interface{}
+
+			obj, prevPos = Decode(data, pos)
+			slice = append(slice, obj)
+
+			i += (prevPos - pos)
+			pos = prevPos
+		}
+		return slice, pos
+
+	default:
+		panic(fmt.Sprintf(&quot;byte not supported: %q&quot;, char))
+	}
+
+	return slice, 0
+}
+
+</code></pre><ul class="pa0">
+  
+   <li class="list">
+     <a href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">源码阅读</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/golang" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Golang</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/ethereum" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Ethereum</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">Related</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/posts/go-ethereum/read-go-ethereum-source-code-1/">Read Go Ethereum Source Code 1</a>
+        </li>
+	    
+    </ul>
+</div>
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://BLOG.J2J.DEV/" >
+    &copy;  J2J.Dev 2020 
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+  </div>
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-164047462-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</footer>
+
+    
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>
