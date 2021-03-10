@@ -6,7 +6,7 @@
     
     <title>J2J.Dev  | Beego 多数据库支持（主从分离等)</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.59.0-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -27,35 +27,23 @@
     
     <meta property="og:title" content="Beego 多数据库支持（主从分离等)" />
 <meta property="og:description" content="原理
-
 使用 orm.RegisterDataBase 注册多个数据库，其中一个为default，且为主库.
-
 ORM must register a database with alias default." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://BLOG.J2J.DEV/posts/beego-%E5%A4%9A%E6%95%B0%E6%8D%AE%E5%BA%93%E6%94%AF%E6%8C%81%E4%B8%BB%E4%BB%8E%E5%88%86%E7%A6%BB%E7%AD%89/" />
-<meta property="article:published_time" content="2020-01-02T14:28:35+08:00" />
-<meta property="article:modified_time" content="2020-01-02T14:28:35+08:00" />
+<meta property="og:url" content="http://BLOG.J2J.DEV/posts/beego-%E5%A4%9A%E6%95%B0%E6%8D%AE%E5%BA%93%E6%94%AF%E6%8C%81%E4%B8%BB%E4%BB%8E%E5%88%86%E7%A6%BB%E7%AD%89/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-01-02T14:28:35&#43;08:00" />
+<meta property="article:modified_time" content="2020-01-02T14:28:35&#43;08:00" />
+
 <meta itemprop="name" content="Beego 多数据库支持（主从分离等)">
 <meta itemprop="description" content="原理
-
 使用 orm.RegisterDataBase 注册多个数据库，其中一个为default，且为主库.
-
-ORM must register a database with alias default.">
-
-
-<meta itemprop="datePublished" content="2020-01-02T14:28:35&#43;08:00" />
+ORM must register a database with alias default."><meta itemprop="datePublished" content="2020-01-02T14:28:35&#43;08:00" />
 <meta itemprop="dateModified" content="2020-01-02T14:28:35&#43;08:00" />
 <meta itemprop="wordCount" content="272">
-
-
-
-<meta itemprop="keywords" content="macos,今天搜了啥," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="macos,今天搜了啥," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Beego 多数据库支持（主从分离等)"/>
 <meta name="twitter:description" content="原理
-
 使用 orm.RegisterDataBase 注册多个数据库，其中一个为default，且为主库.
-
 ORM must register a database with alias default."/>
 
   </head>
@@ -158,20 +146,14 @@ ORM must register a database with alias default."/>
       
     </header>
     <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h2 id="原理">原理</h2>
-
 <p>使用 orm.RegisterDataBase 注册多个数据库，其中一个为default，且为主库.</p>
-
 <p>ORM must register a database with alias default.</p>
-
 <pre><code>orm.RegisterDataBase(&quot;default&quot;, &quot;mysql&quot;, connStr, 20,100)
 
 orm.RegisterDataBase(&quot;slav1&quot;, &quot;mysql&quot;, slav1connStr, 5,50)
 orm.RegisterDataBase(&quot;slav2&quot;, driver2, slav2connStr, 0)
         
-</code></pre>
-
-<h2 id="使用">使用</h2>
-
+</code></pre><h2 id="使用">使用</h2>
 <pre><code>//主库
 o1 := orm.NewOrm()
 o1.Using(&quot;default&quot;)
@@ -179,19 +161,12 @@ o1.Using(&quot;default&quot;)
 //从库
 o2 := orm.NewOrm()
 o2.Using(&quot;slav1&quot;)
-</code></pre>
-
-<h2 id="同步创建db">同步创建db</h2>
-
+</code></pre><h2 id="同步创建db">同步创建db</h2>
 <p>在不同的数据库源（db)中创建相同的表:</p>
-
 <pre><code>orm.RunSyncdb(&quot;default&quot;, true, true)
 orm.RunSyncdb(&quot;db1&quot;, true, true)
 orm.RunSyncdb(&quot;db2&quot;, true, true)
-</code></pre>
-
-<p>在不同的数据库中创建不同的表:</p>
-
+</code></pre><p>在不同的数据库中创建不同的表:</p>
 <pre><code>// register driver.
 orm.RegisterDriver(dbDriver, orm.DRMySQL)
 //  create table 'tree' for database 'plant'.
@@ -214,20 +189,13 @@ OrmObjPlant, _ = orm.NewOrmWithDB(dbDriver, dbAliasPlant, db)
 db, _ = orm.GetDB(datasourceAnimal)
 OrmObjAnimal, _ = orm.NewOrmWithDB(dbDriver, datasourceAnimal, db)
 
-</code></pre>
-
-<h2 id="原有代码改造">原有代码改造</h2>
-
+</code></pre><h2 id="原有代码改造">原有代码改造</h2>
 <p>models.go old:</p>
-
 <pre><code>func NewUser(name, nickName string) (*User, error) {
 	o := orm.NewOrm()
 	...
 }
-</code></pre>
-
-<p>调整为 ：</p>
-
+</code></pre><p>调整为 ：</p>
 <pre><code>新增后缀_DbAlias方法
 func NewnUser_DbAlias(name, nickName string, dbAlias string) (*User, error) {
 
@@ -295,7 +263,7 @@ func NewUser(name, nickName string) (*User, error) {
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
   <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://BLOG.J2J.DEV/" >
-    &copy;  J2J.Dev 2020 
+    &copy;  J2J.Dev 2021 
   </a>
     <div>
 
@@ -313,6 +281,7 @@ func NewUser(name, nickName string) (*User, error) {
 
 </div>
   </div>
+ 
   
 <script type="application/javascript">
 var doNotTrack = false;

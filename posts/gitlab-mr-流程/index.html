@@ -6,7 +6,7 @@
     
     <title>J2J.Dev  | 基于Gitlab MR做代码审核 -  2演示</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.59.0-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -27,9 +27,7 @@
     
     <meta property="og:title" content="基于Gitlab MR做代码审核 -  2演示" />
 <meta property="og:description" content="Gitlab Merge Requests 流程说明二 - 演示
-
 迁出代码
-
 #仅克隆远程master分支 
 git clone https://gitlab.company.com/demo/prdemo.git
 
@@ -57,14 +55,13 @@ git branch -a
   
 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://BLOG.J2J.DEV/posts/gitlab-mr-%E6%B5%81%E7%A8%8B/" />
-<meta property="article:published_time" content="2020-04-15T17:52:08+08:00" />
-<meta property="article:modified_time" content="2020-04-15T17:52:08+08:00" />
+<meta property="og:url" content="http://BLOG.J2J.DEV/posts/gitlab-mr-%E6%B5%81%E7%A8%8B/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-04-15T17:52:08&#43;08:00" />
+<meta property="article:modified_time" content="2020-04-15T17:52:08&#43;08:00" />
+
 <meta itemprop="name" content="基于Gitlab MR做代码审核 -  2演示">
 <meta itemprop="description" content="Gitlab Merge Requests 流程说明二 - 演示
-
 迁出代码
-
 #仅克隆远程master分支 
 git clone https://gitlab.company.com/demo/prdemo.git
 
@@ -90,22 +87,13 @@ git branch -a
   remotes/origin/develop
   remotes/origin/master
   
-">
-
-
-<meta itemprop="datePublished" content="2020-04-15T17:52:08&#43;08:00" />
+"><meta itemprop="datePublished" content="2020-04-15T17:52:08&#43;08:00" />
 <meta itemprop="dateModified" content="2020-04-15T17:52:08&#43;08:00" />
 <meta itemprop="wordCount" content="472">
-
-
-
-<meta itemprop="keywords" content="Code Review,代码评审,项目规范," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Code Review,代码评审,项目规范," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="基于Gitlab MR做代码审核 -  2演示"/>
 <meta name="twitter:description" content="Gitlab Merge Requests 流程说明二 - 演示
-
 迁出代码
-
 #仅克隆远程master分支 
 git clone https://gitlab.company.com/demo/prdemo.git
 
@@ -232,10 +220,8 @@ git branch -a
       
       
     </header>
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h1 id="gitlab-merge-requests-流程说明二-演示">Gitlab Merge Requests 流程说明二 - 演示</h1>
-
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h1 id="gitlab-merge-requests-流程说明二---演示">Gitlab Merge Requests 流程说明二 - 演示</h1>
 <h2 id="迁出代码">迁出代码</h2>
-
 <pre><code>#仅克隆远程master分支 
 git clone https://gitlab.company.com/demo/prdemo.git
 
@@ -261,12 +247,8 @@ git branch -a
   remotes/origin/develop
   remotes/origin/master
   
-</code></pre>
-
-<h2 id="在受保护的develop分支中操作">在受保护的develop分支中操作</h2>
-
+</code></pre><h2 id="在受保护的develop分支中操作">在受保护的develop分支中操作</h2>
 <p>旧的工作流，直接在  develop上开发，并提交。在不受保护的分支中是没有问题，如果分支开启了保护，并禁止push，则push代码会被拒绝。</p>
-
 <pre><code>vi test1.md
 
 ...
@@ -297,16 +279,10 @@ To https://gitlab.company.com/demo/prdemo.git
 error: failed to push some refs to 'https://gitlab.company.com/demo/prdemo.git'
 
 
-</code></pre>
-
-<p>develop的配置如下：</p>
-
-<p><img src="https://wx3.sinaimg.cn/mw690/90594e01gy1gdulwk6wwij20os0e80u1.jpg" alt="https://wx3.sinaimg.cn/mw690/90594e01gy1gdulwk6wwij20os0e80u1.jpg" /></p>
-
+</code></pre><p>develop的配置如下：</p>
+<p><img src="https://wx3.sinaimg.cn/mw690/90594e01gy1gdulwk6wwij20os0e80u1.jpg" alt="https://wx3.sinaimg.cn/mw690/90594e01gy1gdulwk6wwij20os0e80u1.jpg"></p>
 <h2 id="新的工作流">新的工作流</h2>
-
 <h3 id="创建功能开发分支-并提交更改">创建功能开发分支 并提交更改</h3>
-
 <pre><code>
 git checkout -b  feature-v0.0.3-demo 
 
@@ -319,9 +295,7 @@ git branch
   master
 
 
-</code></pre>
-
-<pre><code>vi 1.txt
+</code></pre><pre><code>vi 1.txt
 
 ...
 
@@ -359,64 +333,37 @@ To https://gitlab.company.com/demo/prdemo.git
  * [new branch]      feature-v0.0.3-demo -&gt; feature-v0.0.3-demo
 Branch 'feature-v0.0.3-demo' set up to track remote branch 'feature-v0.0.3-demo' from 'origin'.
 
-</code></pre>
-
-<p>gitlab上查看新建的分支已经存在</p>
-
-<p><img src="https://wx3.sinaimg.cn/mw690/90594e01gy1gdumc8unt3j20r80edta3.jpg" alt="https://wx3.sinaimg.cn/mw690/90594e01gy1gdumc8unt3j20r80edta3.jpg" /></p>
-
+</code></pre><p>gitlab上查看新建的分支已经存在</p>
+<p><img src="https://wx3.sinaimg.cn/mw690/90594e01gy1gdumc8unt3j20r80edta3.jpg" alt="https://wx3.sinaimg.cn/mw690/90594e01gy1gdumc8unt3j20r80edta3.jpg"></p>
 <h3 id="创建merge-request">创建Merge Request</h3>
-
 <p>除了从提示中直接进入创建merge request页面外，新push分支后，进入gitlab会看到 Create Merge Request的按钮：</p>
-
-<p><img src="https://wx1.sinaimg.cn/mw1024/90594e01gy1gdumqfbsa4j20qw03njro.jpg" alt="https://wx1.sinaimg.cn/mw1024/90594e01gy1gdumqfbsa4j20qw03njro.jpg" /></p>
-
+<p><img src="https://wx1.sinaimg.cn/mw1024/90594e01gy1gdumqfbsa4j20qw03njro.jpg" alt="https://wx1.sinaimg.cn/mw1024/90594e01gy1gdumqfbsa4j20qw03njro.jpg"></p>
 <p>进入Create 页面：
-<img src="https://wx3.sinaimg.cn/mw1024/90594e01gy1gdumqfbp0zj20wj05h0t5.jpg" alt="https://wx3.sinaimg.cn/mw1024/90594e01gy1gdumqfbp0zj20wj05h0t5.jpg" /></p>
-
-<p>需要确认要合并到的分支（gitlab默认要合并到master，我们需要更改到develop),点击&rdquo;change branches&rdquo;:</p>
-
-<p><img src="https://wx2.sinaimg.cn/mw1024/90594e01gy1gdumqfdnskj20wn093t9t.jpg" alt="https://wx2.sinaimg.cn/mw1024/90594e01gy1gdumqfdnskj20wn093t9t.jpg" /></p>
-
+<img src="https://wx3.sinaimg.cn/mw1024/90594e01gy1gdumqfbp0zj20wj05h0t5.jpg" alt="https://wx3.sinaimg.cn/mw1024/90594e01gy1gdumqfbp0zj20wj05h0t5.jpg"></p>
+<p>需要确认要合并到的分支（gitlab默认要合并到master，我们需要更改到develop),点击&quot;change branches&quot;:</p>
+<p><img src="https://wx2.sinaimg.cn/mw1024/90594e01gy1gdumqfdnskj20wn093t9t.jpg" alt="https://wx2.sinaimg.cn/mw1024/90594e01gy1gdumqfdnskj20wn093t9t.jpg"></p>
 <p>填写Merge Request的信息：</p>
-
-<p><img src="https://wx4.sinaimg.cn/mw1024/90594e01gy1gdumqfd3v2j20zw0n0di3.jpg" alt="https://wx4.sinaimg.cn/mw1024/90594e01gy1gdumqfd3v2j20zw0n0di3.jpg" /></p>
-
+<p><img src="https://wx4.sinaimg.cn/mw1024/90594e01gy1gdumqfd3v2j20zw0n0di3.jpg" alt="https://wx4.sinaimg.cn/mw1024/90594e01gy1gdumqfd3v2j20zw0n0di3.jpg"></p>
 <p>选择默认合并选项：</p>
-
 <ol>
 <li>选中  Delete source branch when merge request is accepted. （合并后删除源分支)</li>
 <li>不选中 Squash commits when merge request is accepted.</li>
 </ol>
-
 <p>提交merge request请求：</p>
-
-<p><img src="https://wx2.sinaimg.cn/mw1024/90594e01gy1gdumqfcpe8j20md0brdgo.jpg" alt="https://wx2.sinaimg.cn/mw1024/90594e01gy1gdumqfcpe8j20md0brdgo.jpg" /></p>
-
+<p><img src="https://wx2.sinaimg.cn/mw1024/90594e01gy1gdumqfcpe8j20md0brdgo.jpg" alt="https://wx2.sinaimg.cn/mw1024/90594e01gy1gdumqfcpe8j20md0brdgo.jpg"></p>
 <p>会看到项目出现了一个 未处理的 Merge Requests .</p>
-
-<h3 id="评审-管理merge-request-合并">评审&amp;管理Merge Request 合并</h3>
-
+<h3 id="评审管理merge-request-合并">评审&amp;管理Merge Request 合并</h3>
 <p>一般merge requests列表如下：</p>
-
-<p><img src="https://docs.gitlab.com/ee/user/project/merge_requests/img/project_merge_requests_list_view.png" alt="https://docs.gitlab.com/ee/user/project/merge_requests/img/project_merge_requests_list_view.png" /></p>
-
+<p><img src="https://docs.gitlab.com/ee/user/project/merge_requests/img/project_merge_requests_list_view.png" alt="https://docs.gitlab.com/ee/user/project/merge_requests/img/project_merge_requests_list_view.png"></p>
 <p>点击进入Merge Request详情，可以查看该次MR的Commit信息，Changes信息。</p>
-
-<p><img src="https://wx2.sinaimg.cn/mw1024/90594e01gy1gdunsqhn3pj20s70n8dij.jpg" alt="https://wx2.sinaimg.cn/mw1024/90594e01gy1gdunsqhn3pj20s70n8dij.jpg" /></p>
-
+<p><img src="https://wx2.sinaimg.cn/mw1024/90594e01gy1gdunsqhn3pj20s70n8dij.jpg" alt="https://wx2.sinaimg.cn/mw1024/90594e01gy1gdunsqhn3pj20s70n8dij.jpg"></p>
 <p>并可以在代码变动中的任何位置提交评论。
-<img src="https://wx1.sinaimg.cn/mw1024/90594e01gy1gdunsqemcwj20td0emq57.jpg" alt="https://wx1.sinaimg.cn/mw1024/90594e01gy1gdunsqemcwj20td0emq57.jpg" /></p>
-
+<img src="https://wx1.sinaimg.cn/mw1024/90594e01gy1gdunsqemcwj20td0emq57.jpg" alt="https://wx1.sinaimg.cn/mw1024/90594e01gy1gdunsqemcwj20td0emq57.jpg"></p>
 <p>发现问题并修复后可点击 Merge 进行合并：
-<img src="https://wx3.sinaimg.cn/mw1024/90594e01gy1gdunsqdlz6j20es06dq3k.jpg" alt="https://wx3.sinaimg.cn/mw1024/90594e01gy1gdunsqdlz6j20es06dq3k.jpg" /></p>
-
+<img src="https://wx3.sinaimg.cn/mw1024/90594e01gy1gdunsqdlz6j20es06dq3k.jpg" alt="https://wx3.sinaimg.cn/mw1024/90594e01gy1gdunsqdlz6j20es06dq3k.jpg"></p>
 <p>进入Repository - Branches中查看，可以发现合并的记录，同时远程的源分支 &lsquo;feature-v0.0.3-demo&rsquo;已经被删除。</p>
-
-<p><img src="https://wx2.sinaimg.cn/mw1024/90594e01gy1gdunsqdt0uj20z709d75i.jpg" alt="https://wx2.sinaimg.cn/mw1024/90594e01gy1gdunsqdt0uj20z709d75i.jpg" /></p>
-
+<p><img src="https://wx2.sinaimg.cn/mw1024/90594e01gy1gdunsqdt0uj20z709d75i.jpg" alt="https://wx2.sinaimg.cn/mw1024/90594e01gy1gdunsqdt0uj20z709d75i.jpg"></p>
 <h3 id="合并后的内容拉取到本地">合并后的内容拉取到本地</h3>
-
 <pre><code>git branch
   develop
 * feature-v0.0.3-demo
@@ -448,49 +395,43 @@ Date:   Wed Apr 15 18:59:42 2020 +0800
     
     See merge request demo/prdemo!1
  
-</code></pre>
-
-<p>Merge Reqeust流程完成。</p>
-
+</code></pre><p>Merge Reqeust流程完成。</p>
 <h3 id="merge-requst评审未通过的处理">Merge Requst评审未通过的处理</h3>
-
 <p>默认采用不创建新的 ’New merge request&rsquo;方式。</p>
-
 <ol>
-<li>A 发起Merege Request</li>
-<li>B 查看MR, 进行Code Review, 发现问题并提交Comment</li>
-<li>A 收到Comment提醒，并确认问题</li>
-<li>A 在本地调整代码，并重新push</li>
-
-<li><p>此时可进行两种操作</p>
-
+<li>
+<p>A 发起Merege Request</p>
+</li>
+<li>
+<p>B 查看MR, 进行Code Review, 发现问题并提交Comment</p>
+</li>
+<li>
+<p>A 收到Comment提醒，并确认问题</p>
+</li>
+<li>
+<p>A 在本地调整代码，并重新push</p>
+</li>
+<li>
+<p>此时可进行两种操作</p>
 <ul>
 <li>5.1 创建新的Merge Request</li>
 <li>5.2 不创建新的，所有的流程仍然会在上一MR中合并展示</li>
-</ul></li>
-
-<li><p>B 继续评审无问题后可Merge代码到目标分支</p></li>
+</ul>
+</li>
+<li>
+<p>B 继续评审无问题后可Merge代码到目标分支</p>
+</li>
 </ol>
-
 <p>A在一个分支中继续push代码后，出现创建新MR的按钮
-<img src="https://wx3.sinaimg.cn/mw1024/90594e01gy1ge09uu6mv9j20xk0a13zh.jpg" alt="https://wx3.sinaimg.cn/mw1024/90594e01gy1ge09uu6mv9j20xk0a13zh.jpg" /></p>
-
+<img src="https://wx3.sinaimg.cn/mw1024/90594e01gy1ge09uu6mv9j20xk0a13zh.jpg" alt="https://wx3.sinaimg.cn/mw1024/90594e01gy1ge09uu6mv9j20xk0a13zh.jpg"></p>
 <p>如果不新建MR，则所有的信息都会在一起展示</p>
-
-<p><img src="https://wx1.sinaimg.cn/mw1024/90594e01gy1ge09uxpi87j20se0ql778.jpg" alt="https://wx1.sinaimg.cn/mw1024/90594e01gy1ge09uxpi87j20se0ql778.jpg" /></p>
-
+<p><img src="https://wx1.sinaimg.cn/mw1024/90594e01gy1ge09uxpi87j20se0ql778.jpg" alt="https://wx1.sinaimg.cn/mw1024/90594e01gy1ge09uxpi87j20se0ql778.jpg"></p>
 <p>对于Code Review的中发现的问题解决后，可以‘Resolve thread&rsquo;</p>
-
-<p><img src="https://wx2.sinaimg.cn/mw1024/90594e01gy1ge09uxpe6nj20rd07xaap.jpg" alt="https://wx2.sinaimg.cn/mw1024/90594e01gy1ge09uxpe6nj20rd07xaap.jpg" /></p>
-
+<p><img src="https://wx2.sinaimg.cn/mw1024/90594e01gy1ge09uxpe6nj20rd07xaap.jpg" alt="https://wx2.sinaimg.cn/mw1024/90594e01gy1ge09uxpe6nj20rd07xaap.jpg"></p>
 <h3 id="错误处理">错误处理</h3>
-
 <p><strong>1. merge request 落后于目的branch</strong></p>
-
 <p>需要将目的分支pull到本地，并处理完冲突&amp;合并，然后重新提交merge request</p>
-
 <p><strong>2.冲突处理</strong></p>
-
 <p>本地合并结解决冲突</p><ul class="pa0">
   
    <li class="list">
@@ -536,7 +477,7 @@ Date:   Wed Apr 15 18:59:42 2020 +0800
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
   <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://BLOG.J2J.DEV/" >
-    &copy;  J2J.Dev 2020 
+    &copy;  J2J.Dev 2021 
   </a>
     <div>
 
@@ -554,6 +495,7 @@ Date:   Wed Apr 15 18:59:42 2020 +0800
 
 </div>
   </div>
+ 
   
 <script type="application/javascript">
 var doNotTrack = false;

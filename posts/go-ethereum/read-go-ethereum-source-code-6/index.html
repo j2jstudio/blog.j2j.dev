@@ -6,7 +6,7 @@
     
     <title>J2J.Dev  | Read Go Ethereum Source Code 6</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.59.0-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -27,7 +27,6 @@
     
     <meta property="og:title" content="Read Go Ethereum Source Code 6" />
 <meta property="og:description" content="go-ethereum 网络的雏形。 代码仍然停留在
-
 commit ba385ccdf15f8379c54d65061c3d62353baffc2b (HEAD)
 Author: obscuren &lt;geffobscura@gmail.com&gt;
 Date:   Fri Jan 10 10:59:57 2014 &#43;0100
@@ -35,31 +34,23 @@ Date:   Fri Jan 10 10:59:57 2014 &#43;0100
     sudo not udo
 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://BLOG.J2J.DEV/posts/go-ethereum/read-go-ethereum-source-code-6/" />
-<meta property="article:published_time" content="2018-04-20T09:40:48+08:00" />
-<meta property="article:modified_time" content="2018-04-20T09:40:48+08:00" />
+<meta property="og:url" content="http://BLOG.J2J.DEV/posts/go-ethereum/read-go-ethereum-source-code-6/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-04-20T09:40:48&#43;08:00" />
+<meta property="article:modified_time" content="2018-04-20T09:40:48&#43;08:00" />
+
 <meta itemprop="name" content="Read Go Ethereum Source Code 6">
 <meta itemprop="description" content="go-ethereum 网络的雏形。 代码仍然停留在
-
 commit ba385ccdf15f8379c54d65061c3d62353baffc2b (HEAD)
 Author: obscuren &lt;geffobscura@gmail.com&gt;
 Date:   Fri Jan 10 10:59:57 2014 &#43;0100
 
     sudo not udo
-">
-
-
-<meta itemprop="datePublished" content="2018-04-20T09:40:48&#43;08:00" />
+"><meta itemprop="datePublished" content="2018-04-20T09:40:48&#43;08:00" />
 <meta itemprop="dateModified" content="2018-04-20T09:40:48&#43;08:00" />
 <meta itemprop="wordCount" content="470">
-
-
-
-<meta itemprop="keywords" content="源码阅读,Golang,Ethereum," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="源码阅读,Golang,Ethereum," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Read Go Ethereum Source Code 6"/>
 <meta name="twitter:description" content="go-ethereum 网络的雏形。 代码仍然停留在
-
 commit ba385ccdf15f8379c54d65061c3d62353baffc2b (HEAD)
 Author: obscuren &lt;geffobscura@gmail.com&gt;
 Date:   Fri Jan 10 10:59:57 2014 &#43;0100
@@ -167,16 +158,12 @@ Date:   Fri Jan 10 10:59:57 2014 &#43;0100
       
     </header>
     <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p>go-ethereum 网络的雏形。 代码仍然停留在</p>
-
 <pre><code>commit ba385ccdf15f8379c54d65061c3d62353baffc2b (HEAD)
 Author: obscuren &lt;geffobscura@gmail.com&gt;
 Date:   Fri Jan 10 10:59:57 2014 +0100
 
     sudo not udo
-</code></pre>
-
-<h2 id="server-go">server.go</h2>
-
+</code></pre><h2 id="servergo">server.go</h2>
 <pre><code>type Server struct {
   // Channel for shutting down the server
   shutdownChan chan bool
@@ -187,12 +174,8 @@ Date:   Fri Jan 10 10:59:57 2014 +0100
   // Peers (NYI)
   peers       *list.List
 }
-</code></pre>
-
-<p>Server 结构定义了go-ethereum启动后网络的基本功能。</p>
-
+</code></pre><p>Server 结构定义了go-ethereum启动后网络的基本功能。</p>
 <h3 id="启动本地网络绑定">启动本地网络绑定</h3>
-
 <pre><code>func (s *Server) Start() {
   // For now this function just blocks the main thread
   ln, err := net.Listen(&quot;tcp&quot;, &quot;:12345&quot;)
@@ -212,16 +195,10 @@ Date:   Fri Jan 10 10:59:57 2014 +0100
     }
   }()
 }
-</code></pre>
-
-<p>该方法调用 net 模块，在tcp 12345 端口进行绑定，并等待其他网络连接。 当网络连接到达后，将该连接封装到 Peer 结构内，并保存到列表内。</p>
-
+</code></pre><p>该方法调用 net 模块，在tcp 12345 端口进行绑定，并等待其他网络连接。 当网络连接到达后，将该连接封装到 Peer 结构内，并保存到列表内。</p>
 <pre><code>添加连接节点
 func (s *Server) AddPeer(conn net.Conn)
-</code></pre>
-
-<h3 id="关闭网络连接">关闭网络连接</h3>
-
+</code></pre><h3 id="关闭网络连接">关闭网络连接</h3>
 <pre><code>func (s *Server) Stop() {
   // Close the database
   defer s.db.Close()
@@ -235,27 +212,15 @@ func (s *Server) AddPeer(conn net.Conn)
 
   s.shutdownChan &lt;- true
 }
-</code></pre>
-
-<p>逐一停止列表内的节点，并关闭本地数据库。</p>
-
+</code></pre><p>逐一停止列表内的节点，并关闭本地数据库。</p>
 <h3 id="广播">广播</h3>
-
 <pre><code>func (s *Server) Broadcast(msgType string, data []byte)
-</code></pre>
-
-<p>向所有连接发送消息。</p>
-
+</code></pre><p>向所有连接发送消息。</p>
 <h3 id="主动连接到其他节点">主动连接到其他节点</h3>
-
 <pre><code>func (s *Server) ConnectToPeer(addr string) error
 
-</code></pre>
-
-<h2 id="peer-go">peer.go</h2>
-
+</code></pre><h2 id="peergo">peer.go</h2>
 <p>peer.go 封装了 Peer 结构。 主要实现具体网络节点连接之间的消息发送/收取操作。</p>
-
 <pre><code>type Peer struct {
   // Server interface
   server      *Server
@@ -266,24 +231,16 @@ func (s *Server) AddPeer(conn net.Conn)
   // Quit channel
   quit        chan bool
 }
-</code></pre>
-
-<h3 id="启动">启动</h3>
-
+</code></pre><h3 id="启动">启动</h3>
 <p>Peer 创建后就会启动。</p>
-
 <pre><code>func (p *Peer) Start() {
   // Run the outbound handler in a new goroutine
   go p.HandleOutbound()
   // Run the inbound handler in a new goroutine
   go p.HandleInbound()
 }
-</code></pre>
-
-<p>同时启动协程 分别处理发送（p.HandleOutbound）和 接收（p.HandleInbound）。 两协程循环处理，直至收到退出信号。</p>
-
+</code></pre><p>同时启动协程 分别处理发送（p.HandleOutbound）和 接收（p.HandleInbound）。 两协程循环处理，直至收到退出信号。</p>
 <h3 id="发送消息">发送消息</h3>
-
 <pre><code>func (p *Peer) WriteMessage(msg OutMsg) {
   // Encode the type and the (RLP encoded) data for sending over the wire
   encoded := Encode([]interface{}{ msg.msgType, msg.data })
@@ -294,12 +251,8 @@ func (s *Server) AddPeer(conn net.Conn)
     p.Stop()
   }
 }
-</code></pre>
-
-<p>首先将需要发送的消息，进行RLP编码，然后调用net 库向连接写入数据。</p>
-
+</code></pre><p>首先将需要发送的消息，进行RLP编码，然后调用net 库向连接写入数据。</p>
 <h3 id="接收消息">接收消息</h3>
-
 <pre><code>func ReadMessage(conn net.Conn) (*InMsg, error) {
   buff := make([]byte, 4069)
 
@@ -323,29 +276,18 @@ func (s *Server) AddPeer(conn net.Conn)
   return &amp;InMsg{msgType: t, data: decoder.Get(1).AsBytes()}, nil
 }
 
-</code></pre>
-
-<p>消息到达后，读取，并RLP解码。并交由其他功能模块处理。</p>
-
+</code></pre><p>消息到达后，读取，并RLP解码。并交由其他功能模块处理。</p>
 <h2 id="测试运行">测试运行</h2>
-
 <p>cd go-ethereum</p>
-
 <p>go build</p>
-
 <p>./go-ethereum</p>
-
 <p>输出：</p>
-
 <pre><code>
 2018/04/28 16:09:27 Starting Ethereum
 2018/04/28 16:09:27 Connected to peer :: [::1]:12345
 2018/04/28 16:09:27 Peer connected :: [::1]:57114
 
-</code></pre>
-
-<p>在 ethereum.go main()入口函数中，如不传入任何参数。 Server则主要做如下工作：</p>
-
+</code></pre><p>在 ethereum.go main()入口函数中，如不传入任何参数。 Server则主要做如下工作：</p>
 <pre><code>//创建Server
 server, err := NewServer()
 //注册终止信号
@@ -417,7 +359,7 @@ err = server.ConnectToPeer(&quot;localhost:12345&quot;)
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
   <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://BLOG.J2J.DEV/" >
-    &copy;  J2J.Dev 2020 
+    &copy;  J2J.Dev 2021 
   </a>
     <div>
 
@@ -435,6 +377,7 @@ err = server.ConnectToPeer(&quot;localhost:12345&quot;)
 
 </div>
   </div>
+ 
   
 <script type="application/javascript">
 var doNotTrack = false;

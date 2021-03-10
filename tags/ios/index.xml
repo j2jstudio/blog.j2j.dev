@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>iOS on J2J.Dev</title>
+    <link>http://BLOG.J2J.DEV/tags/ios/</link>
+    <description>Recent content in iOS on J2J.Dev</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 10 Mar 2021 14:12:24 +0800</lastBuildDate><atom:link href="http://BLOG.J2J.DEV/tags/ios/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Fultter Xcode Build</title>
+      <link>http://BLOG.J2J.DEV/posts/flutter/flutter-xcode-build/</link>
+      <pubDate>Wed, 10 Mar 2021 14:12:24 +0800</pubDate>
+      
+      <guid>http://BLOG.J2J.DEV/posts/flutter/flutter-xcode-build/</guid>
+      <description>&lt;p&gt;Flutter 创建项目后，Xcode编译项目时的几个问题解决。&lt;/p&gt;
+&lt;h2 id=&#34;环境&#34;&gt;环境&lt;/h2&gt;
+&lt;p&gt;flutter doctor&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[✓] Flutter (Channel stable, 2.0.0, on macOS 11.2.3 20D91 darwin-arm, locale en-CN)
+[✓] Android toolchain - develop for Android devices (Android SDK version 30.0.2)
+[✓] Xcode - develop for iOS and macOS
+[✓] Chrome - develop for the web
+[✓] Android Studio (version 4.1)
+[✓] VS Code (version 1.54.1)
+[✓] Connected device (2 available)
+
+• No issues found!
+
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

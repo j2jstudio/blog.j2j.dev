@@ -6,7 +6,7 @@
     
     <title>J2J.Dev  | Read Go Ethereum Source Code 3</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.59.0-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -28,24 +28,15 @@
     <meta property="og:title" content="Read Go Ethereum Source Code 3" />
 <meta property="og:description" content="从初始代码提交到commit ad048e9f445ff96b7bfd75c104ab923e1e06754b，go-ethereum的结构&amp;功能变化不大。主要变化有：
 
-
 将rlp编解码移动到 rlp.go文件中
 完善 transaction、block的rlp编解码
 
-
 到了commit a926686445929d091c2d9e019b017600168e9e47，源码中出现了较大的功能加入。
-
 Added sample server, genesis block, and database interface
-
-
 但是本次提交出现，无法编译通过。错误为：
-
 ./database.go:65: cannot use k (type []int) as type string in function argument
 
-
-
 所以迁出下一次提交 并逐一分析源码、功能。
-
 git checkout f17930eb4661721cd0e1b92765448c589441907b
 
 或在线浏览：
@@ -53,67 +44,43 @@ git checkout f17930eb4661721cd0e1b92765448c589441907b
 https://github.com/ethereum/go-ethereum/tree/f17930eb4661721cd0e1b92765448c589441907b
 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://BLOG.J2J.DEV/posts/go-ethereum/read-go-ethereum-source-code-3/" />
-<meta property="article:published_time" content="2018-03-30T09:40:48+08:00" />
-<meta property="article:modified_time" content="2018-03-30T09:40:48+08:00" />
+<meta property="og:url" content="http://BLOG.J2J.DEV/posts/go-ethereum/read-go-ethereum-source-code-3/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-03-30T09:40:48&#43;08:00" />
+<meta property="article:modified_time" content="2018-03-30T09:40:48&#43;08:00" />
+
 <meta itemprop="name" content="Read Go Ethereum Source Code 3">
 <meta itemprop="description" content="从初始代码提交到commit ad048e9f445ff96b7bfd75c104ab923e1e06754b，go-ethereum的结构&amp;功能变化不大。主要变化有：
-
 
 将rlp编解码移动到 rlp.go文件中
 完善 transaction、block的rlp编解码
 
-
 到了commit a926686445929d091c2d9e019b017600168e9e47，源码中出现了较大的功能加入。
-
 Added sample server, genesis block, and database interface
-
-
 但是本次提交出现，无法编译通过。错误为：
-
 ./database.go:65: cannot use k (type []int) as type string in function argument
 
-
-
 所以迁出下一次提交 并逐一分析源码、功能。
-
 git checkout f17930eb4661721cd0e1b92765448c589441907b
 
 或在线浏览：
 
 https://github.com/ethereum/go-ethereum/tree/f17930eb4661721cd0e1b92765448c589441907b
-">
-
-
-<meta itemprop="datePublished" content="2018-03-30T09:40:48&#43;08:00" />
+"><meta itemprop="datePublished" content="2018-03-30T09:40:48&#43;08:00" />
 <meta itemprop="dateModified" content="2018-03-30T09:40:48&#43;08:00" />
 <meta itemprop="wordCount" content="230">
-
-
-
-<meta itemprop="keywords" content="源码阅读,Golang,Ethereum," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="源码阅读,Golang,Ethereum," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Read Go Ethereum Source Code 3"/>
 <meta name="twitter:description" content="从初始代码提交到commit ad048e9f445ff96b7bfd75c104ab923e1e06754b，go-ethereum的结构&amp;功能变化不大。主要变化有：
-
 
 将rlp编解码移动到 rlp.go文件中
 完善 transaction、block的rlp编解码
 
-
 到了commit a926686445929d091c2d9e019b017600168e9e47，源码中出现了较大的功能加入。
-
 Added sample server, genesis block, and database interface
-
-
 但是本次提交出现，无法编译通过。错误为：
-
 ./database.go:65: cannot use k (type []int) as type string in function argument
 
-
-
 所以迁出下一次提交 并逐一分析源码、功能。
-
 git checkout f17930eb4661721cd0e1b92765448c589441907b
 
 或在线浏览：
@@ -221,153 +188,90 @@ https://github.com/ethereum/go-ethereum/tree/f17930eb4661721cd0e1b92765448c58944
       
     </header>
     <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p>从初始代码提交到commit ad048e9f445ff96b7bfd75c104ab923e1e06754b，go-ethereum的结构&amp;功能变化不大。主要变化有：</p>
-
 <ul>
 <li>将rlp编解码移动到 rlp.go文件中</li>
 <li>完善 transaction、block的rlp编解码</li>
 </ul>
-
 <p>到了commit a926686445929d091c2d9e019b017600168e9e47，源码中出现了较大的功能加入。</p>
-
 <pre><code>Added sample server, genesis block, and database interface
-</code></pre>
-
-<p>但是本次提交出现，无法编译通过。错误为：</p>
-
+</code></pre><p>但是本次提交出现，无法编译通过。错误为：</p>
 <pre><code>./database.go:65: cannot use k (type []int) as type string in function argument
 
-</code></pre>
-
-<p>所以迁出下一次提交 并逐一分析源码、功能。</p>
-
+</code></pre><p>所以迁出下一次提交 并逐一分析源码、功能。</p>
 <pre><code>git checkout f17930eb4661721cd0e1b92765448c589441907b
 
 或在线浏览：
 
 https://github.com/ethereum/go-ethereum/tree/f17930eb4661721cd0e1b92765448c589441907b
-</code></pre>
-
-<h2 id="新增功能代码">新增功能代码</h2>
-
+</code></pre><h2 id="新增功能代码">新增功能代码</h2>
 <p><strong>server.go</strong></p>
-
 <p>实现客户端运行的主要框架。</p>
-
 <ol>
 <li>for循环实现始终运行</li>
 <li>db 实现数据的本地操作</li>
-
-<li><p>peers ，能够获取到其他客户端的连接。存储客户端列表。</p>
-
+<li>peers ，能够获取到其他客户端的连接。存储客户端列表。</li>
+</ol>
 <pre><code>type Server struct {
-// Channel for shutting down the server
-shutdownChan chan bool
-// DB interface
-db          *LDBDatabase
-// Peers (NYI)
-peers       *list.List
+  // Channel for shutting down the server
+  shutdownChan chan bool
+  // DB interface
+  db          *LDBDatabase
+  // Peers (NYI)
+  peers       *list.List
 }
 
-</code></pre></li>
-</ol>
-
-<p><strong>database.go</strong></p>
-
+</code></pre><p><strong>database.go</strong></p>
 <p>使用google的leveldb本地存储数据，这次提交中方法未完全实现。主要的功能就是CRUD，数据的增删查改。</p>
-
 <p><strong>trie.go</strong></p>
-
 <p>根据名称应该是数据结构前缀树或字典树的实现，主要功能也未实现。</p>
-
 <p><strong>encoding.go</strong></p>
-
 <p>该文件并不是新提交的，主要功能是实现十六进制数的紧凑编码。并添加可选的是否终止的符号。</p>
-
 <pre><code>Compact encoding of hex sequence with optional terminator
-</code></pre>
-
-<p>了解一下其实现。</p>
-
+</code></pre><p>了解一下其实现。</p>
 <h2 id="compactencode-紧凑编码">CompactEncode 紧凑编码</h2>
-
-<p>传统的十六进制字符串的编码，一般是将十六进制字符串转为二进制数组。比如&rsquo;0f1248&rsquo;将会转换为[15,18,73]3字节的二进制数组。
+<p>传统的十六进制字符串的编码，一般是将十六进制字符串转为二进制数组。比如'0f1248&rsquo;将会转换为[15,18,73]3字节的二进制数组。
 但这通常会导致一个问题，如将[15,18,73]解码为十六进制字符串时，应该解码为’0f1248‘ 还是 &lsquo;f1248&rsquo;。该方法无法确定是否需要前面的0.</p>
-
 <p>第二个问题，在Ethereum的数据结构Merkle Patricia tree中，需要十六进制字符串可以带一个可选的是否终止符号（常量 16），该终止标志仅出现一次，且在字符串最后。</p>
-
 <p>为了同时解决如上两个问题，ethereum设计了CompactEncode编码。其实现的核心算法为：</p>
-
 <p>将十六进制字符串当做字节数组。 根据数组的长度，在数组前增加1字节或2字节的前缀。 然后将连续两个字节的数值合并为一个字节（即：第一个字节作为前4bit，第二个字节当做后4bit。因数组中最大值为0xf，所以不会产生越界)。</p>
-
 <h3 id="前缀的个数">前缀的个数</h3>
-
 <p>如果数组为基数，则添加1字节前缀。如果为偶数，则添加2字节(第2字节为0）。</p>
-
 <h3 id="前缀的内容">前缀的内容</h3>
-
 <p>前缀主要用来表示两个内容：</p>
-
 <ul>
 <li>该字符串是否终止</li>
 <li>该字符串长度是否为奇数</li>
 </ul>
-
 <p>该实现基于位操作：1byte =8bit（0000 0000）。最后一个bit表示是否奇数（0为偶数、1为奇数）。倒数第二个自己表示是否终止。</p>
-
 <pre><code>oddlen := len(hexSlice) % 2
 flags := 2 * terminator + oddlen
-</code></pre>
-
-<h3 id="编码实现">编码实现</h3>
-
+</code></pre><h3 id="编码实现">编码实现</h3>
 <p>将连续两个字节的数值合并为一个字节（即：第一个字节作为前4bit，第二个字节当做后4bit)</p>
-
 <pre><code>var buff bytes.Buffer
   for i := 0; i &lt; len(hexSlice); i+=2 {
     buff.WriteByte(byte(16 * hexSlice[i] + hexSlice[i+1]))
   }
 
   return buff.String()
-</code></pre>
-
-<h3 id="实例">实例</h3>
-
+</code></pre><h3 id="实例">实例</h3>
 <p><strong>如 [ 1, 2, 3, 4, 5 ]</strong></p>
-
 <p>长度为基数，无终止标志（16）。所以增加前缀一个字节。</p>
-
 <p>该字节内容为： flags = 2 * 0 + 1 = 1</p>
-
 <p>数组变为：[1,1,2,3,4,5] 。</p>
-
 <p>编码[1*16+1,2*16+3,4*16+5] = [17,35,69]=[0x11,0x23,0x45]</p>
-
 <p><strong>[ 0, 1, 2, 3, 4, 5 ]</strong></p>
-
 <p>长度偶数，无终止标志。 需要增加两个字节，</p>
-
 <p>则： flags= 2 * 0 + 0 = 0</p>
-
 <p>数组变为：[0,0 , 0, 1, 2, 3, 4, 5 ]</p>
-
 <p>编码：[0*16+0, 0*16+1,2*16+3,4*16+5] = [0,1,35,69] = [0x00,0x01,0x23,0x45]</p>
-
 <p><strong>[ 0, 15, 1, 12, 11, 8, 16 ]</strong></p>
-
 <p>编码为： &lsquo;\x20\x0f\x1c\xb8&rsquo;</p>
-
 <p><strong>[ 15, 1, 12, 11, 8, 16 ]</strong></p>
-
 <p>编码为： &lsquo;\x3f\x1c\xb8&rsquo;</p>
-
 <h2 id="解码则为编码的反过程">解码则为编码的反过程</h2>
-
 <p>略过</p>
-
 <h2 id="总结">总结</h2>
-
 <p>本次主要分析了 CompactEncode 的实现。 database、trie、server因无具体实现。则等待稍后分析。</p>
-
 <p><a href="http://www.cnspirit.com/2018/03/go-ethereum-3.html">原文连接 http://www.cnspirit.com/2018/03/go-ethereum-3.html</a></p><ul class="pa0">
   
    <li class="list">
@@ -417,7 +321,7 @@ flags := 2 * terminator + oddlen
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
   <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://BLOG.J2J.DEV/" >
-    &copy;  J2J.Dev 2020 
+    &copy;  J2J.Dev 2021 
   </a>
     <div>
 
@@ -435,6 +339,7 @@ flags := 2 * terminator + oddlen
 
 </div>
   </div>
+ 
   
 <script type="application/javascript">
 var doNotTrack = false;

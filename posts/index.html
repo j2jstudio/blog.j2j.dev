@@ -6,7 +6,7 @@
     
     <title>J2J.Dev </title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.59.0-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -35,11 +35,8 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://BLOG.J2J.DEV/posts/" />
 
-<meta property="og:updated_time" content="2020-04-15T17:52:08+08:00" />
 <meta itemprop="name" content="Posts">
-<meta itemprop="description" content="J2J.Dev.">
-
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="description" content="J2J.Dev."><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Posts"/>
 <meta name="twitter:description" content="J2J.Dev."/>
 
@@ -109,15 +106,41 @@
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
+      <a href="http://BLOG.J2J.DEV/posts/flutter/flutter-xcode-build/" class="link black dim">
+        Fultter Xcode Build
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      <p>Flutter 创建项目后，Xcode编译项目时的几个问题解决。</p>
+<h2 id="环境">环境</h2>
+<p>flutter doctor</p>
+<pre><code>[✓] Flutter (Channel stable, 2.0.0, on macOS 11.2.3 20D91 darwin-arm, locale en-CN)
+[✓] Android toolchain - develop for Android devices (Android SDK version 30.0.2)
+[✓] Xcode - develop for iOS and macOS
+[✓] Chrome - develop for the web
+[✓] Android Studio (version 4.1)
+[✓] VS Code (version 1.54.1)
+[✓] Connected device (2 available)
+
+• No issues found!
+
+</code></pre>
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
       <a href="http://BLOG.J2J.DEV/posts/gitlab-mr-%E6%B5%81%E7%A8%8B/" class="link black dim">
         基于Gitlab MR做代码审核 -  2演示
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-      <h1 id="gitlab-merge-requests-流程说明二-演示">Gitlab Merge Requests 流程说明二 - 演示</h1>
-
+      <h1 id="gitlab-merge-requests-流程说明二---演示">Gitlab Merge Requests 流程说明二 - 演示</h1>
 <h2 id="迁出代码">迁出代码</h2>
-
 <pre><code>#仅克隆远程master分支 
 git clone https://gitlab.company.com/demo/prdemo.git
 
@@ -159,13 +182,9 @@ git branch -a
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
       <h2 id="分支的说明">分支的说明</h2>
-
 <p>gitflow工作流，规范但是过于复杂。</p>
-
-<p><img src="https://docs.gitlab.com/ee/topics/img/gitlab_flow_gitdashflow.png" alt="https://docs.gitlab.com/ee/topics/img/gitlab_flow_gitdashflow.png" /></p>
-
+<p><img src="https://docs.gitlab.com/ee/topics/img/gitlab_flow_gitdashflow.png" alt="https://docs.gitlab.com/ee/topics/img/gitlab_flow_gitdashflow.png"></p>
 <p>我们采用简易的gitflow工作流</p>
-
 <ul>
 <li>master - 用于准备发布部署</li>
 <li>develop - 用于当前的主线开发</li>
@@ -187,9 +206,7 @@ git branch -a
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
       <p>MacOS 升级 Catalina 后,打开Adobe Air出现错误：<strong>“Adobe AIR.framework” is damaged and can’t be opened.</strong></p>
-
 <p>可以通过如下方式移除安全隔离属性</p>
-
 <pre><code>cd /Library/Frameworks
 sudo xattr -r -d com.apple.quarantine ./Adobe\ AIR.framework
 </code></pre>
@@ -208,9 +225,8 @@ sudo xattr -r -d com.apple.quarantine ./Adobe\ AIR.framework
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
       <p>Electron 安装常见错误和解决方法。</p>
-
 <ol>
-<li>自定义镜像 ELECTRON_MIRROR=<a href="https://npm.taobao.org/mirrors/electron/">https://npm.taobao.org/mirrors/electron/</a> npm &ndash;registry=<a href="https://registry.npm.taobao.org">https://registry.npm.taobao.org</a> install electron@5.0.13</li>
+<li>自定义镜像 ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ npm &ndash;registry=https://registry.npm.taobao.org install <a href="mailto:electron@5.0.13">electron@5.0.13</a></li>
 <li>&ndash;unsafe-perm=true</li>
 </ol>
     </div>
@@ -227,7 +243,7 @@ sudo xattr -r -d com.apple.quarantine ./Adobe\ AIR.framework
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-      <p>Instagram 的名称取自&rdquo;即时&rdquo;（英语：instant ）与“电报”（英语：telegram ）两个单词的结合。因为创始人灵感来自即时成像相机，且认为人与人之间的照片分享“就像用电线传递电报消息”，因而将两个单词结合成软件名称</p>
+      <p>Instagram 的名称取自&quot;即时&quot;（英语：instant ）与“电报”（英语：telegram ）两个单词的结合。因为创始人灵感来自即时成像相机，且认为人与人之间的照片分享“就像用电线传递电报消息”，因而将两个单词结合成软件名称</p>
     </div>
   </div>
 </div>
@@ -243,9 +259,7 @@ sudo xattr -r -d com.apple.quarantine ./Adobe\ AIR.framework
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
       <h2 id="原理">原理</h2>
-
 <p>使用 orm.RegisterDataBase 注册多个数据库，其中一个为default，且为主库.</p>
-
 <p>ORM must register a database with alias default.</p>
     </div>
   </div>
@@ -262,7 +276,6 @@ sudo xattr -r -d com.apple.quarantine ./Adobe\ AIR.framework
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
       <h2 id="步骤说明">步骤说明</h2>
-
 <ol>
 <li>Golang环境安装配置</li>
 <li>Nodejs环境安装配置</li>
@@ -303,87 +316,35 @@ sudo xattr -r -d com.apple.quarantine ./Adobe\ AIR.framework
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
       <p><a href="https://gist.github.com/jboner/2841832">https://gist.github.com/jboner/2841832</a></p>
-
 <p>Latency Comparison Numbers (~2012)</p>
     </div>
   </div>
 </div>
 </div>
       
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="http://BLOG.J2J.DEV/posts/%E5%B9%BF%E5%91%8A%E5%90%8D%E8%AF%8D%E8%A7%A3%E6%9E%90/" class="link black dim">
-        广告名词
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      <h2 id="dsp-需求方平台-demand-side-platform">DSP：需求方平台 (demand-side platform)</h2>
-
-<p>A demand-side platform (DSP) allows buyers of digital ad inventory to manage multiple ad exchanges via one interface. These buyers commonly include trading desks, agencies, or advertisers directly.</p>
-
-<p>To enable these buyers to bid on digital inventory, the DSP has to plug into an SSP. This programmatic advertising supply chain is visualized in the graphic below.</p>
-    </div>
-  </div>
-</div>
-</div>
-      
     </section>
-
 <ul class="pagination">
-    
-    <li class="page-item">
-        <a href="/posts/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
-    </li>
-    
-    <li class="page-item disabled">
+  <li class="page-item">
+    <a href="/posts/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+  </li>
+  <li class="page-item disabled">
     <a  class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-    </li>
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    <li class="page-item active"><a class="page-link" href="/posts/">1</a></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    <li class="page-item"><a class="page-link" href="/posts/page/2/">2</a></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    <li class="page-item"><a class="page-link" href="/posts/page/3/">3</a></li>
-    
-    
-    <li class="page-item">
+  </li>
+  <li class="page-item active">
+    <a class="page-link" href="/posts/">1</a>
+  </li>
+  <li class="page-item">
+    <a class="page-link" href="/posts/page/2/">2</a>
+  </li>
+  <li class="page-item">
+    <a class="page-link" href="/posts/page/3/">3</a>
+  </li>
+  <li class="page-item">
     <a href="/posts/page/2/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-    </li>
-    
-    <li class="page-item">
-        <a href="/posts/page/3/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
-    </li>
-    
+  </li>
+  <li class="page-item">
+    <a href="/posts/page/3/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+  </li>
 </ul>
 
 </article>
@@ -392,7 +353,7 @@ sudo xattr -r -d com.apple.quarantine ./Adobe\ AIR.framework
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
   <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://BLOG.J2J.DEV/" >
-    &copy;  J2J.Dev 2020 
+    &copy;  J2J.Dev 2021 
   </a>
     <div>
 
@@ -410,6 +371,7 @@ sudo xattr -r -d com.apple.quarantine ./Adobe\ AIR.framework
 
 </div>
   </div>
+ 
   
 <script type="application/javascript">
 var doNotTrack = false;

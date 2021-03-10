@@ -5,10 +5,6 @@
     <link>http://BLOG.J2J.DEV/categories/</link>
     <description>Recent content in Categories on J2J.Dev</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    
-	<atom:link href="http://BLOG.J2J.DEV/categories/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en-us</language><atom:link href="http://BLOG.J2J.DEV/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

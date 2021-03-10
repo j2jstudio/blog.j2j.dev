@@ -6,7 +6,7 @@
     
     <title>J2J.Dev  | 数据库连接池</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.59.0-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -28,21 +28,15 @@
     <meta property="og:title" content="数据库连接池" />
 <meta property="og:description" content="使用数据库连接池优化单数据服务器，提升其性能。以及Golang中的配置方式。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://BLOG.J2J.DEV/posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/" />
-<meta property="article:published_time" content="2019-10-15T18:50:35+08:00" />
-<meta property="article:modified_time" content="2019-10-15T18:50:35+08:00" />
+<meta property="og:url" content="http://BLOG.J2J.DEV/posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-10-15T18:50:35&#43;08:00" />
+<meta property="article:modified_time" content="2019-10-15T18:50:35&#43;08:00" />
+
 <meta itemprop="name" content="数据库连接池">
-<meta itemprop="description" content="使用数据库连接池优化单数据服务器，提升其性能。以及Golang中的配置方式。">
-
-
-<meta itemprop="datePublished" content="2019-10-15T18:50:35&#43;08:00" />
+<meta itemprop="description" content="使用数据库连接池优化单数据服务器，提升其性能。以及Golang中的配置方式。"><meta itemprop="datePublished" content="2019-10-15T18:50:35&#43;08:00" />
 <meta itemprop="dateModified" content="2019-10-15T18:50:35&#43;08:00" />
-<meta itemprop="wordCount" content="2071">
-
-
-
-<meta itemprop="keywords" content="数据库,今天的学习," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="wordCount" content="2067">
+<meta itemprop="keywords" content="数据库,今天的学习," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="数据库连接池"/>
 <meta name="twitter:description" content="使用数据库连接池优化单数据服务器，提升其性能。以及Golang中的配置方式。"/>
 
@@ -146,41 +140,25 @@
       
     </header>
     <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p>使用数据库连接池优化单数据服务器，提升其性能。以及Golang中的配置方式。</p>
-
-<h2 id="业务场景-单数据库服务器">业务场景（单数据库服务器)</h2>
-
+<h2 id="业务场景单数据库服务器">业务场景（单数据库服务器)</h2>
 <p>一个简单的业务系统架构：前端一台 Web 服务器运行业务代码，后端一台数据库服务器存储业务数据。当用户量不大时，系统运行平稳。</p>
-
 <p><strong>系统流量增大</strong></p>
-
 <p>当系统流量增大时，系统频繁报错。日志发现：“Can not connect to MySQL server. Too many connections”。</p>
-
 <p>增加mysql的max_connections ，一番操作后错误消失。系统正常执行</p>
-
 <p><strong>系统流量继续增大</strong></p>
-
 <p>max_connections 已经调整的很大，继续调整仍然响应很慢，阻塞的数据库操作越来越多，系统响应越来越慢。</p>
-
 <p>如何解决？</p>
-
 <h2 id="为什么需要连接池">为什么需要连接池</h2>
-
 <p>数据库的调用方式是先获取数据库的连接，然后依靠这条连接从数据库中查询数据，最后关闭连接释放数据库资源。这种调用方式下，每次执行 SQL 都需要重新建立连接。</p>
-
 <p>完成一次数据库操作的基本耗时：</p>
-
 <ol>
 <li>建立连接 1-2ms （TCP三次握手)</li>
 <li>MySQL 服务端校验客户端密码的过程 4ms</li>
 <li>执行数据库操作 1ms</li>
 </ol>
-
 <p>也就是说相比于 SQL 的执行，MySQL 建立连接的过程是比较耗时的。</p>
-
 <p>解决方法就是，使用连接池将数据库连接预先建立好，这样在使用的时候就不需要频繁地创建连接了。调整之后，你发现 1s 就可以执行 1000 次的数据库查询，查询性能大大的提升了</p>
-
 <p>数据库连接池有两个最重要的配置：<strong>最小连接数和最大连接数</strong>， 它们控制着从连接池中获取连接的流程：</p>
-
 <ul>
 <li>如果当前连接数小于最小连接数，则创建新的连接处理数据库请求；</li>
 <li>如果连接池中有空闲连接则复用空闲连接；</li>
@@ -188,48 +166,30 @@
 <li>如果当前连接数已经大于等于最大连接数，则按照配置中设定的时间（C3P0 的连接池配置是 checkoutTimeout）等待旧的连接可用；</li>
 <li>如果等待超过了这个设定时间则向用户抛出错误。</li>
 </ul>
-
 <h2 id="连接池大小如何设定">连接池大小如何设定</h2>
-
 <p>下面的公式是由PostgreSQL提供的，不过我们认为可以广泛地应用于大多数数据库产品。你应该模拟预期的访问量，并从这一公式开始测试你的应用，寻找最合适的连接数值。</p>
-
 <pre><code>连接数 = ((核心数 * 2) + 有效磁盘数)
-</code></pre>
-
-<p>核心数不应包含超线程(hyper thread)，即使打开了hyperthreading也是。如果活跃数据全部被缓存了，那么有效磁盘数是0，随着缓存命中率的下降，有效磁盘数逐渐趋近于实际的磁盘数。这一公式作用于SSD时的效果如何尚未有分析。</p>
-
+</code></pre><p>核心数不应包含超线程(hyper thread)，即使打开了hyperthreading也是。如果活跃数据全部被缓存了，那么有效磁盘数是0，随着缓存命中率的下降，有效磁盘数逐渐趋近于实际的磁盘数。这一公式作用于SSD时的效果如何尚未有分析。</p>
 <p>按这个公式，你的4核i7数据库服务器的连接池大小应该为((4 * 2) + 1) = 9。取个整就算是是10吧。是不是觉得太小了？跑个性能测试试一下，我们保证它能轻松搞定3000用户以6000TPS的速率并发执行简单查询的场景。如果连接池大小超过10，你会看到响应时长开始增加，TPS开始下降。</p>
-
 <blockquote>
 <p>笔者注：
 这一公式其实不仅适用于数据库连接池的计算，大部分涉及计算和I/O的程序，线程数的设置都可以参考这一公式。我之前在对一个使用Netty编写的消&gt; 息收发服务进行压力测试时，最终测出的最佳线程数就刚好是CPU核心数的一倍。</p>
 </blockquote>
-
 <p><strong>公理</strong></p>
-
 <blockquote>
 <p>公理:
 你需要一个小连接池，和一个充满了等待连接的线程的队列</p>
 </blockquote>
-
 <p>如果你有10000个并发用户，设置一个10000的连接池基本等于失了智。1000仍然很恐怖。即是100也太多了。你需要一个10来个连接的小连接池，然后让剩下的业务线程都在队列里等待。连接池中的连接数量应该等于你的数据库能够有效同时进行的查询任务数（通常不会高于2*CPU核心数）。</p>
-
 <p>我们经常见到一些小规模的web应用，应付着大约十来个的并发用户，却使用着一个100连接数的连接池。这会对你的数据库造成极其不必要的负担。</p>
-
 <p><strong>注意</strong></p>
-
 <blockquote>
 <p>连接池优化主要用于单数据库的使用场景，当优化好连接池参数后系统响应仍然很慢。达到单台数据的瓶颈时，需要采用分库的设计。</p>
 </blockquote>
-
-<h2 id="配置go-sql-db的连接池属性获得更好的性能">配置Go sql.DB的连接池属性获得更好的性能</h2>
-
-<p>sql.DB对象是包含&rdquo;open&rdquo;和&rdquo;idle&rdquo;连接的许多数据库连接的池。 当您使用连接执行数据库任务（例如执行SQL语句或查询行）时，该连接被标记为打开。 任务完成后，连接变为空闲。</p>
-
+<h2 id="配置go-sqldb的连接池属性获得更好的性能">配置Go sql.DB的连接池属性获得更好的性能</h2>
+<p>sql.DB对象是包含&quot;open&quot;和&quot;idle&quot;连接的许多数据库连接的池。 当您使用连接执行数据库任务（例如执行SQL语句或查询行）时，该连接被标记为打开。 任务完成后，连接变为空闲。</p>
 <p>当您指示sql.DB执行数据库任务时，它将首先检查池中是否有可用的空闲连接。 如果有一个可用，那么Go将重用现有的连接并将其在任务期间标记为打开。 如果需要时池中没有空闲连接，则Go将创建一个新的附加连接并“打开”它。</p>
-
-<h3 id="setmaxopenconns-setmaxidleconns-配置最大连接数">SetMaxOpenConns/SetMaxIdleConns 配置最大连接数</h3>
-
+<h3 id="setmaxopenconnssetmaxidleconns-配置最大连接数">SetMaxOpenConns/SetMaxIdleConns 配置最大连接数</h3>
 <pre><code>// Initialise a new connection pool
 db, err := sql.Open(&quot;postgres&quot;, &quot;postgres://user:pass@localhost/db&quot;)
 if err != nil {
@@ -245,16 +205,11 @@ db.SetMaxOpenConns(5)
 // to less than or equal to 0 will mean that no idle connections are retained.
 db.SetMaxIdleConns(5)
 
-</code></pre>
-
-<p>最后要指出的是，MaxIdleConns应该始终小于或等于MaxOpenConns。 Go会强制执行此操作，并在必要时自动减少MaxIdleConns。 这篇<a href="https://stackoverflow.com/a/31952911">Stack Overflow</a>帖子很好地描述了原因：</p>
-
+</code></pre><p>最后要指出的是，MaxIdleConns应该始终小于或等于MaxOpenConns。 Go会强制执行此操作，并在必要时自动减少MaxIdleConns。 这篇<a href="https://stackoverflow.com/a/31952911">Stack Overflow</a>帖子很好地描述了原因：</p>
 <blockquote>
 <p>空闲连接数没有超过允许的最大打开连接数的任何意义，因为如果您可以立即获取所有允许的打开连接数，则其余空闲连接将始终保持空闲状态。 就像有一条四车道的桥梁，但只允许三辆车一次驶过它。</p>
 </blockquote>
-
 <h2 id="参考">参考</h2>
-
 <ul>
 <li><a href="https://www.jianshu.com/p/a8f653fc0c54">https://www.jianshu.com/p/a8f653fc0c54</a></li>
 <li><a href="https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing">https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing</a></li>
@@ -290,7 +245,7 @@ db.SetMaxIdleConns(5)
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
   <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://BLOG.J2J.DEV/" >
-    &copy;  J2J.Dev 2020 
+    &copy;  J2J.Dev 2021 
   </a>
     <div>
 
@@ -308,6 +263,7 @@ db.SetMaxIdleConns(5)
 
 </div>
   </div>
+ 
   
 <script type="application/javascript">
 var doNotTrack = false;

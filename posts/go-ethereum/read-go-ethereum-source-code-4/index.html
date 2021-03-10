@@ -6,7 +6,7 @@
     
     <title>J2J.Dev  | Read Go Ethereum Source Code 4</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.59.0-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -27,16 +27,11 @@
     
     <meta property="og:title" content="Read Go Ethereum Source Code 4" />
 <meta property="og:description" content="Trie.go (Merkle-patricia-tree )
-
 Merkle Patricia Tree(简称MPT树，实际上是一种trie前缀树)是以太坊中的一种加密认证的数据结构，可以用来存储所有的(key，value)对。
-
 以太坊区块链中的区块由标题，交易列表和叔区块列表组成。区块头中包含交易的根哈希，它用于验证交易列表。在区块头部包括了交易的hash树根，用来校验交易的列表。在p2p网络上传输的交易是一个简单的列表，它们被组装成一个叫做trie树的特殊数据结构，来计算根hash。值得注意的是，除了校验区块外，这个数据结构并不是必须的，一旦区块被验证正确，那么它在技术上是可以忽略的。但是，这意味着交易列表在本地以trie树的形式存储，发送给客户端的时候序列化成列表。客户端接收到交易列表后重新构建交易列表trie树来验证根hash。RLP(Recursive length prefix encoding,递归长度前缀编码)，用来对trie树种所有的条目进行编码。对RLP的介绍和源码实现阅读可参考阅读 go-ethereum 源码 - 2 。
-
 Merkle Patricia Tree的Wiki可在https://github.com/ethereum/wiki/wiki/Patricia-Tree查看。
-
 go-ethereum源码中对MPT数的处理时在文件 **trie.go **中。
 进入go-ethereum 源码查看trie.go .
-
 git checkout 9f133a92d0853102863b77dd7c884d1462cf73a4
 
 或通过如下方式在线浏览：
@@ -45,50 +40,34 @@ https://github.com/ethereum/go-ethereum/blob/9f133a92d0853102863b77dd7c884d1462c
 
 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://BLOG.J2J.DEV/posts/go-ethereum/read-go-ethereum-source-code-4/" />
-<meta property="article:published_time" content="2018-04-11T09:40:48+08:00" />
-<meta property="article:modified_time" content="2018-04-11T09:40:48+08:00" />
+<meta property="og:url" content="http://BLOG.J2J.DEV/posts/go-ethereum/read-go-ethereum-source-code-4/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-04-11T09:40:48&#43;08:00" />
+<meta property="article:modified_time" content="2018-04-11T09:40:48&#43;08:00" />
+
 <meta itemprop="name" content="Read Go Ethereum Source Code 4">
 <meta itemprop="description" content="Trie.go (Merkle-patricia-tree )
-
 Merkle Patricia Tree(简称MPT树，实际上是一种trie前缀树)是以太坊中的一种加密认证的数据结构，可以用来存储所有的(key，value)对。
-
 以太坊区块链中的区块由标题，交易列表和叔区块列表组成。区块头中包含交易的根哈希，它用于验证交易列表。在区块头部包括了交易的hash树根，用来校验交易的列表。在p2p网络上传输的交易是一个简单的列表，它们被组装成一个叫做trie树的特殊数据结构，来计算根hash。值得注意的是，除了校验区块外，这个数据结构并不是必须的，一旦区块被验证正确，那么它在技术上是可以忽略的。但是，这意味着交易列表在本地以trie树的形式存储，发送给客户端的时候序列化成列表。客户端接收到交易列表后重新构建交易列表trie树来验证根hash。RLP(Recursive length prefix encoding,递归长度前缀编码)，用来对trie树种所有的条目进行编码。对RLP的介绍和源码实现阅读可参考阅读 go-ethereum 源码 - 2 。
-
 Merkle Patricia Tree的Wiki可在https://github.com/ethereum/wiki/wiki/Patricia-Tree查看。
-
 go-ethereum源码中对MPT数的处理时在文件 **trie.go **中。
 进入go-ethereum 源码查看trie.go .
-
 git checkout 9f133a92d0853102863b77dd7c884d1462cf73a4
 
 或通过如下方式在线浏览：
 
 https://github.com/ethereum/go-ethereum/blob/9f133a92d0853102863b77dd7c884d1462cf73a4/trie.go
 
-">
-
-
-<meta itemprop="datePublished" content="2018-04-11T09:40:48&#43;08:00" />
+"><meta itemprop="datePublished" content="2018-04-11T09:40:48&#43;08:00" />
 <meta itemprop="dateModified" content="2018-04-11T09:40:48&#43;08:00" />
 <meta itemprop="wordCount" content="714">
-
-
-
-<meta itemprop="keywords" content="源码阅读,Golang,Ethereum," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="源码阅读,Golang,Ethereum," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Read Go Ethereum Source Code 4"/>
 <meta name="twitter:description" content="Trie.go (Merkle-patricia-tree )
-
 Merkle Patricia Tree(简称MPT树，实际上是一种trie前缀树)是以太坊中的一种加密认证的数据结构，可以用来存储所有的(key，value)对。
-
 以太坊区块链中的区块由标题，交易列表和叔区块列表组成。区块头中包含交易的根哈希，它用于验证交易列表。在区块头部包括了交易的hash树根，用来校验交易的列表。在p2p网络上传输的交易是一个简单的列表，它们被组装成一个叫做trie树的特殊数据结构，来计算根hash。值得注意的是，除了校验区块外，这个数据结构并不是必须的，一旦区块被验证正确，那么它在技术上是可以忽略的。但是，这意味着交易列表在本地以trie树的形式存储，发送给客户端的时候序列化成列表。客户端接收到交易列表后重新构建交易列表trie树来验证根hash。RLP(Recursive length prefix encoding,递归长度前缀编码)，用来对trie树种所有的条目进行编码。对RLP的介绍和源码实现阅读可参考阅读 go-ethereum 源码 - 2 。
-
 Merkle Patricia Tree的Wiki可在https://github.com/ethereum/wiki/wiki/Patricia-Tree查看。
-
 go-ethereum源码中对MPT数的处理时在文件 **trie.go **中。
 进入go-ethereum 源码查看trie.go .
-
 git checkout 9f133a92d0853102863b77dd7c884d1462cf73a4
 
 或通过如下方式在线浏览：
@@ -196,35 +175,23 @@ https://github.com/ethereum/go-ethereum/blob/9f133a92d0853102863b77dd7c884d1462c
       
       
     </header>
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h2 id="trie-go-merkle-patricia-tree">Trie.go (Merkle-patricia-tree )</h2>
-
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h2 id="triego-merkle-patricia-tree-">Trie.go (Merkle-patricia-tree )</h2>
 <p>Merkle Patricia Tree(简称MPT树，实际上是一种trie前缀树)是以太坊中的一种加密认证的数据结构，可以用来存储所有的(key，value)对。</p>
-
 <p>以太坊区块链中的区块由标题，交易列表和叔区块列表组成。区块头中包含交易的根哈希，它用于验证交易列表。在区块头部包括了交易的hash树根，用来校验交易的列表。在p2p网络上传输的交易是一个简单的列表，它们被组装成一个叫做trie树的特殊数据结构，来计算根hash。值得注意的是，除了校验区块外，这个数据结构并不是必须的，一旦区块被验证正确，那么它在技术上是可以忽略的。但是，这意味着交易列表在本地以trie树的形式存储，发送给客户端的时候序列化成列表。客户端接收到交易列表后重新构建交易列表trie树来验证根hash。RLP(Recursive length prefix encoding,递归长度前缀编码)，用来对trie树种所有的条目进行编码。对RLP的介绍和源码实现阅读可参考<a href="http://www.cnspirit.com/2018/03/go-ethereum-2.html">阅读 go-ethereum 源码 - 2</a> 。</p>
-
 <p>Merkle Patricia Tree的Wiki可在<a href="https://github.com/ethereum/wiki/wiki/Patricia-Tree">https://github.com/ethereum/wiki/wiki/Patricia-Tree</a>查看。</p>
-
 <p>go-ethereum源码中对MPT数的处理时在文件 **trie.go **中。
 进入go-ethereum 源码查看trie.go .</p>
-
 <pre><code>git checkout 9f133a92d0853102863b77dd7c884d1462cf73a4
 
 或通过如下方式在线浏览：
 
 https://github.com/ethereum/go-ethereum/blob/9f133a92d0853102863b77dd7c884d1462cf73a4/trie.go
 
-</code></pre>
-
-<p><strong>注意：</strong></p>
-
+</code></pre><p><strong>注意：</strong></p>
 <p>在MPT的wiki中制定，树的Merkle部分是一个节点的确定性加密的hash。 该hash 为 rlp编码的value值的sha3.</p>
-
 <pre><code>The &quot;Merkle&quot; part of the radix trie arises in the fact that a deterministic cryptographic hash of a node is used as the pointer to the node (for every lookup in the key/value DB key == sha3(rlp(value)), rather than some 32-bit or 64-bit memory location as might happen in a more traditional trie implemented in C. 
 
-</code></pre>
-
-<p>但在go-ethereum的早期代码中，该hash实现为sha256。所以源码中间的计算结果会不同于wiki。在后续的实现中，go-ethereum 将会改为sha3 。</p>
-
+</code></pre><p>但在go-ethereum的早期代码中，该hash实现为sha256。所以源码中间的计算结果会不同于wiki。在后续的实现中，go-ethereum 将会改为sha3 。</p>
 <pre><code>// Wrapper around the regular db &quot;Put&quot; which generates a key and value
 func (t *Trie) Put(node interface{}) []byte {
 	enc := Encode(node)     //RLP 编码
@@ -234,29 +201,18 @@ func (t *Trie) Put(node interface{}) []byte {
 
 	return sha
 }
-</code></pre>
-
-<h2 id="hp编码">HP编码</h2>
-
+</code></pre><h2 id="hp编码">HP编码</h2>
 <p>在以太坊（ethereum）中，使用了一种特殊的十六进制前缀(hex-prefix, HP)编码，所以在字母表中就有16个字符。这其中的一个字符为一个nibble。</p>
-
-<p>我们用&rsquo;\x01\x01\x02&rsquo;做为key，&rsquo;hello&rsquo;作为值存入到trie树中。trie树将将创建一个新的叶节点。并将[hash, rlp(node)]存储在数据库中。</p>
-
-<p>&rdquo; \x01\x01\x02&rdquo; hp编码为20010102 。 k编码中后6位为<strong>010102</strong>，开头两位<strong>20</strong>为HP编码前缀。第一位<strong>2</strong>是字符串的标志位,用二进制的表示为0b10.</p>
-
+<p>我们用'\x01\x01\x02&rsquo;做为key，&lsquo;hello&rsquo;作为值存入到trie树中。trie树将将创建一个新的叶节点。并将[hash, rlp(node)]存储在数据库中。</p>
+<p>&quot; \x01\x01\x02&quot; hp编码为20010102 。 k编码中后6位为<strong>010102</strong>，开头两位<strong>20</strong>为HP编码前缀。第一位<strong>2</strong>是字符串的标志位,用二进制的表示为0b10.</p>
 <ul>
 <li>二进制最后一位表示key的长度是否为偶数（0，1，0，1，0，2），设为0</li>
 <li>二进制第一位表示是否终止（终止为1）</li>
 </ul>
-
 <p>0b00 + 0b10 = 0b10 = byte(2)</p>
-
 <p>HP编码后需要为偶数，所以2后再补充一字节 0 ，最终变为[2,0,0,1,0,1,0,2]</p>
-
 <p>相关编码解码的实现在源码 encoding.go 中。</p>
-
 <p>相关例子说明：</p>
-
 <pre><code>&gt; [ 1, 2, 3, 4, 5, ...]
 '11 23 45'  //非终止,奇数。 补充1字节前缀  0b01=1
 &gt; [ 0, 1, 2, 3, 4, 5, ...]
@@ -266,12 +222,8 @@ func (t *Trie) Put(node interface{}) []byte {
 &gt; [ f, 1, c, b, 8, 10]
 '20 f1 cb 8a' //终止,偶数。 补充2字节前缀  0b10=2, 0 
 
-</code></pre>
-
-<h2 id="mpt中存储内容结构展示">MPT中存储内容结构展示</h2>
-
+</code></pre><h2 id="mpt中存储内容结构展示">MPT中存储内容结构展示</h2>
 <p>编写一个简单的展示树结构的代码：</p>
-
 <pre><code>
 func printNode(root string, n []byte, trie *Trie, intent int) {
 
@@ -343,12 +295,8 @@ func printSwitchNode(slice []string, trie *Trie, intent int) {
 	}
 }
 
-</code></pre>
-
-<p>trie.go的单元测试代码写在trie_test.go 中，我们加入一个新的测试用例。</p>
-
+</code></pre><p>trie.go的单元测试代码写在trie_test.go 中，我们加入一个新的测试用例。</p>
 <p>编写一个测试用例：</p>
-
 <pre><code>func TestTrieUpdate2(t *testing.T) {
 
 	db, err := NewMemDatabase()
@@ -365,35 +313,21 @@ func printSwitchNode(slice []string, trie *Trie, intent int) {
 
 }
 
-</code></pre>
-
-<p>执行测试：</p>
-
+</code></pre><p>执行测试：</p>
 <pre><code>go test -run TestTrieUpdate2
-</code></pre>
-
-<p>输出为：</p>
-
+</code></pre><p>输出为：</p>
 <pre><code>node hash: 40974ec0af4f0e1d466b3e0c6eb8e8c6cb99aa2a349c23b268a5cf65b6221782 
 node valu: [6 4 6 15 16] verb
-</code></pre>
-
-<p>树中再次加入：trie.Update(&ldquo;dog&rdquo;, &ldquo;puppy&rdquo;)</p>
-
+</code></pre><p>树中再次加入：trie.Update(&ldquo;dog&rdquo;, &ldquo;puppy&rdquo;)</p>
 <p>输出:</p>
-
 <pre><code>node hash: f7ea383e3a2acd742393382c3d5836cf7379b45dbfbc35cd7076001d3bdf51b7 
 node valu: [6 4 6 15] 80b3283481f857ad774e1d932cad83a9b1433de221ec468a63cae62eda2a7217
  node hash: 80b3283481f857ad774e1d932cad83a9b1433de221ec468a63cae62eda2a7217 
  node swch:[,,,,,,9aa7cda514c3d6a2b65947dd8fa85f244d037f4572bd22984057a3e345597955,,,,,,,,,,verb]
   node hash: 9aa7cda514c3d6a2b65947dd8fa85f244d037f4572bd22984057a3e345597955 
   node valu: [7 16] puppy
-</code></pre>
-
-<p>加入: trie.Update(&ldquo;doge&rdquo;, &ldquo;coin&rdquo;)</p>
-
+</code></pre><p>加入: trie.Update(&ldquo;doge&rdquo;, &ldquo;coin&rdquo;)</p>
 <p>输出:</p>
-
 <pre><code>node hash: ca34cb14ee0fb6b039e2c26189442b7dd2f2c1cd575cc896ee49e77108e9e6eb 
 node valu: [6 4 6 15] 2a937541cb3a17823d0a2f7adf9d8b355a5240ef99046e0d3485076320b41d7a
  node hash: 2a937541cb3a17823d0a2f7adf9d8b355a5240ef99046e0d3485076320b41d7a 
@@ -404,12 +338,8 @@ node valu: [6 4 6 15] 2a937541cb3a17823d0a2f7adf9d8b355a5240ef99046e0d3485076320
    node swch:[,,,,,,31ffd3d3e73ef63a36f6aaf751e53d8171605db7e13b15cf8525df259739d389,,,,,,,,,,puppy]
     node hash: 31ffd3d3e73ef63a36f6aaf751e53d8171605db7e13b15cf8525df259739d389 
     node valu: [5 16] coin
-</code></pre>
-
-<p>加入: trie.Update(&ldquo;horse&rdquo;, &ldquo;stallion&rdquo;)</p>
-
+</code></pre><p>加入: trie.Update(&ldquo;horse&rdquo;, &ldquo;stallion&rdquo;)</p>
 <p>输出:</p>
-
 <pre><code>node hash: 6529010d2a2f633bfe03e7a3a3503e5a5bccd1ca49989ac0fb195fd022c6cc93 
 node valu: [6] 81a164dfe985a4a6f330883c8c713ca48f06976779a0f9fcf43cfe2f2d8872a5
  node hash: 81a164dfe985a4a6f330883c8c713ca48f06976779a0f9fcf43cfe2f2d8872a5 
@@ -426,10 +356,7 @@ node valu: [6] 81a164dfe985a4a6f330883c8c713ca48f06976779a0f9fcf43cfe2f2d8872a5
       node valu: [5 16] coin
   node hash: 94c7c69112a354b2beba2f82c4e53f18aface66280be4ea1dd3f778a7917a373 
   node valu: [6 15 7 2 7 3 6 5 16] stallion
-</code></pre>
-
-<p>简化显示为：</p>
-
+</code></pre><p>简化显示为：</p>
 <pre><code>node hash: hash1 
 node valu: [6] hash2
  node hash: hash2 
@@ -447,9 +374,7 @@ node valu: [6] hash2
   node hash: hash4 
   node valu: [6 15 7 2 7 3 6 5 16] stallion
   
-</code></pre>
-
-<pre><code>var hashNum int64 = 0
+</code></pre><pre><code>var hashNum int64 = 0
 var hashMap = make(map[string]string)
 
 func clearSimpleHash() {
@@ -518,7 +443,7 @@ func simpleHash(hash string) string {
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
   <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://BLOG.J2J.DEV/" >
-    &copy;  J2J.Dev 2020 
+    &copy;  J2J.Dev 2021 
   </a>
     <div>
 
@@ -536,6 +461,7 @@ func simpleHash(hash string) string {
 
 </div>
   </div>
+ 
   
 <script type="application/javascript">
 var doNotTrack = false;

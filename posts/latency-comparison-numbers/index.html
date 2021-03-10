@@ -6,7 +6,7 @@
     
     <title>J2J.Dev  | 计算机中的时间延迟</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.59.0-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -27,29 +27,20 @@
     
     <meta property="og:title" content="计算机中的时间延迟" />
 <meta property="og:description" content="https://gist.github.com/jboner/2841832
-
 Latency Comparison Numbers (~2012)" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://BLOG.J2J.DEV/posts/latency-comparison-numbers/" />
-<meta property="article:published_time" content="2019-10-30T14:28:35+08:00" />
-<meta property="article:modified_time" content="2019-10-30T14:28:35+08:00" />
+<meta property="og:url" content="http://BLOG.J2J.DEV/posts/latency-comparison-numbers/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-10-30T14:28:35&#43;08:00" />
+<meta property="article:modified_time" content="2019-10-30T14:28:35&#43;08:00" />
+
 <meta itemprop="name" content="计算机中的时间延迟">
 <meta itemprop="description" content="https://gist.github.com/jboner/2841832
-
-Latency Comparison Numbers (~2012)">
-
-
-<meta itemprop="datePublished" content="2019-10-30T14:28:35&#43;08:00" />
+Latency Comparison Numbers (~2012)"><meta itemprop="datePublished" content="2019-10-30T14:28:35&#43;08:00" />
 <meta itemprop="dateModified" content="2019-10-30T14:28:35&#43;08:00" />
-<meta itemprop="wordCount" content="507">
-
-
-
-<meta itemprop="keywords" content="今天搜了啥,小知识," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="wordCount" content="506">
+<meta itemprop="keywords" content="今天搜了啥,小知识," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="计算机中的时间延迟"/>
 <meta name="twitter:description" content="https://gist.github.com/jboner/2841832
-
 Latency Comparison Numbers (~2012)"/>
 
   </head>
@@ -152,9 +143,7 @@ Latency Comparison Numbers (~2012)"/>
       
     </header>
     <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p><a href="https://gist.github.com/jboner/2841832">https://gist.github.com/jboner/2841832</a></p>
-
 <p>Latency Comparison Numbers (~2012)</p>
-
 <pre><code>----------------------------------
 L1 cache reference                           0.5 ns
 Branch mispredict                            5   ns
@@ -170,33 +159,19 @@ Read 1 MB sequentially from SSD*     1,000,000   ns    1,000 us    1 ms  ~1GB/se
 Disk seek                           10,000,000   ns   10,000 us   10 ms  20x datacenter roundtrip
 Read 1 MB sequentially from disk    20,000,000   ns   20,000 us   20 ms  80x memory, 20X SSD
 Send packet CA-&gt;Netherlands-&gt;CA    150,000,000   ns  150,000 us  150 ms
-</code></pre>
-
-<h2 id="notes">Notes</h2>
-
+</code></pre><h2 id="notes">Notes</h2>
 <p>1 ns = 10^-9 seconds</p>
-
 <p>1 us = 10^-6 seconds = 1,000 ns</p>
-
 <p>1 ms = 10^-3 seconds = 1,000 us = 1,000,000 ns</p>
-
 <h2 id="credit">Credit</h2>
-
 <p>By Jeff Dean:               <a href="http://research.google.com/people/jeff/">http://research.google.com/people/jeff/</a></p>
-
 <p>Originally by Peter Norvig: <a href="http://norvig.com/21-days.html#answers">http://norvig.com/21-days.html#answers</a></p>
-
 <h2 id="contributions">Contributions</h2>
-
 <p>&lsquo;Humanized&rsquo; comparison:  <a href="https://gist.github.com/hellerbarde/2843375">https://gist.github.com/hellerbarde/2843375</a></p>
-
 <p>Visual comparison chart: <a href="http://i.imgur.com/k0t1e.png">http://i.imgur.com/k0t1e.png</a>
 @dominictarr</p>
-
-<p>##</p>
-
+<h2 id="heading"></h2>
 <h3 id="latency-numbers-every-programmer-should-know">Latency numbers every programmer should know</h3>
-
 <pre><code>    L1 cache reference ......................... 0.5 ns
     Branch mispredict ............................ 5 ns
     L2 cache reference ........................... 7 ns
@@ -211,60 +186,39 @@ Send packet CA-&gt;Netherlands-&gt;CA    150,000,000   ns  150,000 us  150 ms
     Disk seek ........................... 10,000,000 ns  =  10 ms
     Read 1 MB sequentially from disk .... 20,000,000 ns  =  20 ms
     Send packet CA-&gt;Netherlands-&gt;CA .... 150,000,000 ns  = 150 ms
-</code></pre>
-
-<p>Assuming ~1GB/sec SSD</p>
-
-<p><img src="http://i.imgur.com/k0t1e.png" alt="Visual representation of latencies" /></p>
-
+</code></pre><p>Assuming ~1GB/sec SSD</p>
+<p><img src="http://i.imgur.com/k0t1e.png" alt="Visual representation of latencies"></p>
 <p>Visual chart provided by <a href="https://gist.github.com/ayshen">ayshen</a></p>
-
 <p>Data by <a href="http://research.google.com/people/jeff/">Jeff Dean</a></p>
-
 <p>Originally by <a href="http://norvig.com/21-days.html#answers">Peter Norvig</a></p>
-
 <p>Lets multiply all these durations by a billion:</p>
-
 <p>Magnitudes:</p>
-
 <h3 id="minute">Minute:</h3>
-
 <pre><code>L1 cache reference                  0.5 s         One heart beat (0.5 s)
 Branch mispredict                   5 s           Yawn
 L2 cache reference                  7 s           Long yawn
 Mutex lock/unlock                   25 s          Making a coffee
 </code></pre>
-
 <h3 id="hour">Hour:</h3>
-
 <pre><code>Main memory reference               100 s         Brushing your teeth
 Compress 1K bytes with Zippy        50 min        One episode of a TV show (including ad breaks)
 </code></pre>
-
 <h3 id="day">Day:</h3>
-
 <pre><code>Send 2K bytes over 1 Gbps network   5.5 hr        From lunch to end of work day
 </code></pre>
-
 <h3 id="week">Week</h3>
-
 <pre><code>SSD random read                     1.7 days      A normal weekend
 Read 1 MB sequentially from memory  2.9 days      A long weekend
 Round trip within same datacenter   5.8 days      A medium vacation
 Read 1 MB sequentially from SSD    11.6 days      Waiting for almost 2 weeks for a delivery
 </code></pre>
-
 <h3 id="year">Year</h3>
-
 <pre><code>Disk seek                           16.5 weeks    A semester in university
 Read 1 MB sequentially from disk    7.8 months    Almost producing a new human being
 The above 2 together                1 year
 </code></pre>
-
 <h3 id="decade">Decade</h3>
-
-<pre><code>Send packet CA-&gt;Netherlands-&gt;CA     4.8 years     Average time it takes to complete a bachelor's degree
-</code></pre><ul class="pa0">
+<pre><code>Send packet CA-&gt;Netherlands-&gt;CA     4.8 years     Average time it takes to complete a bachelor's degree</code></pre><ul class="pa0">
   
    <li class="list">
      <a href="/tags/%E4%BB%8A%E5%A4%A9%E6%90%9C%E4%BA%86%E5%95%A5" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">今天搜了啥</a>
@@ -309,7 +263,7 @@ The above 2 together                1 year
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
   <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://BLOG.J2J.DEV/" >
-    &copy;  J2J.Dev 2020 
+    &copy;  J2J.Dev 2021 
   </a>
     <div>
 
@@ -327,6 +281,7 @@ The above 2 together                1 year
 
 </div>
   </div>
+ 
   
 <script type="application/javascript">
 var doNotTrack = false;

@@ -6,7 +6,7 @@
     
     <title>J2J.Dev  | 编译安装蓝鲸智云配置平台(BlueKing CMDB) - CentOS8</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.59.0-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -28,7 +28,6 @@
     <meta property="og:title" content="编译安装蓝鲸智云配置平台(BlueKing CMDB) - CentOS8" />
 <meta property="og:description" content="步骤说明
 
-
 Golang环境安装配置
 Nodejs环境安装配置
 代码编译bk-cmdb
@@ -39,12 +38,12 @@ Nodejs环境安装配置
 运行
 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://BLOG.J2J.DEV/posts/bk-cmdb-centos8/" />
-<meta property="article:published_time" content="2019-12-11T10:31:51+08:00" />
-<meta property="article:modified_time" content="2019-12-11T10:31:51+08:00" />
+<meta property="og:url" content="http://BLOG.J2J.DEV/posts/bk-cmdb-centos8/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-12-11T10:31:51&#43;08:00" />
+<meta property="article:modified_time" content="2019-12-11T10:31:51&#43;08:00" />
+
 <meta itemprop="name" content="编译安装蓝鲸智云配置平台(BlueKing CMDB) - CentOS8">
 <meta itemprop="description" content="步骤说明
-
 
 Golang环境安装配置
 Nodejs环境安装配置
@@ -54,20 +53,12 @@ Nodejs环境安装配置
 部署MongoDB
 安装bk-cmdb
 运行
-">
-
-
-<meta itemprop="datePublished" content="2019-12-11T10:31:51&#43;08:00" />
+"><meta itemprop="datePublished" content="2019-12-11T10:31:51&#43;08:00" />
 <meta itemprop="dateModified" content="2019-12-11T10:31:51&#43;08:00" />
 <meta itemprop="wordCount" content="418">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="编译安装蓝鲸智云配置平台(BlueKing CMDB) - CentOS8"/>
 <meta name="twitter:description" content="步骤说明
-
 
 Golang环境安装配置
 Nodejs环境安装配置
@@ -179,7 +170,6 @@ Nodejs环境安装配置
       
     </header>
     <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h2 id="步骤说明">步骤说明</h2>
-
 <ol>
 <li>Golang环境安装配置</li>
 <li>Nodejs环境安装配置</li>
@@ -190,17 +180,12 @@ Nodejs环境安装配置
 <li>安装bk-cmdb</li>
 <li>运行</li>
 </ol>
-
 <h2 id="环境准备">环境准备</h2>
-
 <p>sudo dnf update
 sudo dnf groupinstall &lsquo;Development Tools&rsquo;</p>
-
 <p>sudo dnf install python3 python2
 sudo alternatives &ndash;set python /usr/bin/python3</p>
-
 <h2 id="golang环境安装配置">Golang环境安装配置</h2>
-
 <pre><code>wget https://dl.google.com/go/go1.13.4.linux-amd64.tar.gz
 sudo tar -C /usr/local -xf go1.13.4.linux-amd64.tar.gz
 
@@ -215,53 +200,30 @@ export GOPATH
 
 source ~/.bash_profile
 
-</code></pre>
-
-<p>测试：</p>
-
+</code></pre><p>测试：</p>
 <pre><code># go version
 go version go1.13.4 linux/amd64
-</code></pre>
-
-<h2 id="2-nodejs环境安装配置">2. Nodejs环境安装配置</h2>
-
+</code></pre><h2 id="2-nodejs环境安装配置">2. Nodejs环境安装配置</h2>
 <pre><code>yum install nodejs
-</code></pre>
-
-<pre><code># node --version
+</code></pre><pre><code># node --version
 v10.16.3
-</code></pre>
-
-<p>安装cnpm</p>
-
+</code></pre><p>安装cnpm</p>
 <pre><code>npm install cnpm -g --registry=https://registry.npm.taobao.org
-</code></pre>
-
-<pre><code>npm install cnpm -g --registry=https://registry.npm.taobao.org
+</code></pre><pre><code>npm install cnpm -g --registry=https://registry.npm.taobao.org
 /usr/bin/cnpm -&gt; /usr/lib/node_modules/cnpm/bin/cnpm
 + cnpm@6.1.0
-</code></pre>
-
-<h2 id="4-zookeeper">4 Zookeeper</h2>
-
+</code></pre><h2 id="4-zookeeper">4 Zookeeper</h2>
 <h3 id="a-安装java">a. 安装Java</h3>
-
 <pre><code>yum install java-1.8.0-openjdk
 java -version
 
-</code></pre>
-
-<p>输出如下：</p>
-
+</code></pre><p>输出如下：</p>
 <pre><code>openjdk version &quot;1.8.0_232&quot;
 OpenJDK Runtime Environment (build 1.8.0_232-b09)
 OpenJDK 64-Bit Server VM (build 25.232-b09, mixed mode)
 
 
-</code></pre>
-
-<h3 id="b-zookeeper">b. zookeeper</h3>
-
+</code></pre><h3 id="b-zookeeper">b. zookeeper</h3>
 <pre><code>安装：
 
 cd /data
@@ -292,27 +254,18 @@ Starting zookeeper ... STARTED
 
 Using config: /data/zookeeper-3.4.14/bin/../conf/zoo.cfg
 Stopping zookeeper ... STOPPED
-</code></pre>
-
-<h2 id="5-部署redis">5. 部署Redis</h2>
-
+</code></pre><h2 id="5-部署redis">5. 部署Redis</h2>
 <h2 id="6-部署mongodb">6. 部署MongoDB</h2>
-
 <p>vim /etc/yum.repos.d/mongodb.repo</p>
-
 <pre><code>[mongodb-org-4.2]
 name=MongoDB Repository
 baseurl=https://repo.mongodb.org/yum/redhat/8/mongodb-org/testing/x86_64/
 gpgcheck=1
 enabled=1
 gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc
-</code></pre>
-
-<p>dnf install mongodb-org</p>
-
+</code></pre><p>dnf install mongodb-org</p>
 <p>检测安装：
 mongod &ndash;version</p>
-
 <pre><code>db version v4.2.2-rc1
 git version: a0bbbff6ada159e19298d37946ac8dc4b497eadf
 OpenSSL version: OpenSSL 1.1.1 FIPS  11 Sep 2018
@@ -322,25 +275,15 @@ build environment:
     distmod: rhel80
     distarch: x86_64
     target_arch: x86_64
-</code></pre>
-
-<p>启动：</p>
-
+</code></pre><p>启动：</p>
 <pre><code>systemctl start mongod
 systemctl enable mongod
-</code></pre>
-
-<p>测试连接：</p>
-
+</code></pre><p>测试连接：</p>
 <p>mongo</p>
-
 <pre><code>&gt; db
 test
 &gt;
-</code></pre>
-
-<p>顺便配置cmdb数据库：</p>
-
+</code></pre><p>顺便配置cmdb数据库：</p>
 <pre><code>&gt; use cmdb
 switched to db cmdb
 &gt; db.createUser({user: &quot;cc&quot;,pwd: &quot;cc&quot;,roles: [ { role: &quot;readWrite&quot;, db: &quot;cmdb&quot; } ]})
@@ -353,21 +296,14 @@ Successfully added user: {
 		}
 	]
 }
-</code></pre>
-
-<h2 id="7-安装bk-cmdb">7. 安装bk-cmdb</h2>
-
+</code></pre><h2 id="7-安装bk-cmdb">7. 安装bk-cmdb</h2>
 <p>不启用全文检索。进入cmdb的安装目录，编译好后将tar文件移动至/data</p>
-
 <pre><code># cd /data/cmdb/
 # ls
 cmdb_adminserver  cmdb_datacollection  cmdb_operationserver    cmdb_taskserver  cmdb_webserver  init.py     start.sh  upgrade.sh
 cmdb_apiserver    cmdb_eventserver     cmdb_procserver         cmdb_tmserver    docker          ip.py       stop.sh   web
 cmdb_coreservice  cmdb_hostserver      cmdb_synchronizeserver  cmdb_toposerver  image.sh        restart.sh  tool_ctl
-</code></pre>
-
-<p>初始化配置</p>
-
+</code></pre><p>初始化配置</p>
 <pre><code>python2 init.py  \
   --discovery          127.0.0.1:2181 \
   --database           cmdb \
@@ -386,12 +322,8 @@ cmdb_coreservice  cmdb_hostserver      cmdb_synchronizeserver  cmdb_toposerver  
   --full_text_search   off \
   --log_level          3
 
-</code></pre>
-
-<p>./start.sh</p>
-
+</code></pre><p>./start.sh</p>
 <p>./init_db.sh</p>
-
 <pre><code>{
   &quot;result&quot;: true,
   &quot;bk_error_code&quot;: 0,
@@ -477,7 +409,7 @@ cmdb_coreservice  cmdb_hostserver      cmdb_synchronizeserver  cmdb_toposerver  
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
   <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://BLOG.J2J.DEV/" >
-    &copy;  J2J.Dev 2020 
+    &copy;  J2J.Dev 2021 
   </a>
     <div>
 
@@ -495,6 +427,7 @@ cmdb_coreservice  cmdb_hostserver      cmdb_synchronizeserver  cmdb_toposerver  
 
 </div>
   </div>
+ 
   
 <script type="application/javascript">
 var doNotTrack = false;
