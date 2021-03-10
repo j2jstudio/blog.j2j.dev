@@ -8,7 +8,11 @@ draft: true
 
 官网的介绍
 
-    Prometheus 是一个开源系统监控和警报工具包，最初是在SoundCloud构建的。自2012年成立以来，许多公司和组织都采用了 Prometheus，该项目拥有非常活跃的开发人员和用户社区。它现在是一个独立的开源项目，独立于任何公司进行维护。为了强调这一点，并澄清项目的治理结构，Prometheus 在2016年加入了 Cloud Native Computing Foundation，这是继Kubernetes之后的第二个托管项目。
+
+Prometheus 是一个开源系统监控和警报工具包，最初是在SoundCloud构建的。自2012年成立以来，许多公司和组织都采用了 Prometheus，该项目拥有非常活跃的开发人员和用户社区。它现在是一个独立的开源项目，独立于任何公司进行维护。为了强调这一点，并澄清项目的治理结构，Prometheus 在2016年加入了 Cloud Native Computing Foundation，这是继Kubernetes之后的第二个托管项目。
+
+
+<!--more-->
 
 主要的组件：
 

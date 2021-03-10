@@ -1,5 +1,5 @@
 ---
-title: "开发一个Telegram bot"
+title: "开发一个Telegram bot（part 1）"
 date: 2020-06-22T21:16:54+08:00
 draft: true
 ---
@@ -16,6 +16,7 @@ draft: true
 - 社交服务
 - 等等
 
+<!--more-->
 ## 1. 创建bot
 
 在telegram 客户端中发起与 **[BotFather](https://t.me/botfather "botfather")** 的聊天(BotFather 就是一个标准的telegram bot)。
