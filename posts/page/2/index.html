@@ -106,6 +106,22 @@
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
+      <a href="http://BLOG.J2J.DEV/posts/latency-comparison-numbers/" class="link black dim">
+        计算机中的时间延迟
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      <p><a href="https://gist.github.com/jboner/2841832">https://gist.github.com/jboner/2841832</a></p>
+<p>Latency Comparison Numbers (~2012)</p>
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
       <a href="http://BLOG.J2J.DEV/posts/%E5%B9%BF%E5%91%8A%E5%90%8D%E8%AF%8D%E8%A7%A3%E6%9E%90/" class="link black dim">
         广告名词
       </a>
@@ -277,37 +293,6 @@ Date:   Wed Jan 8 23:41:03 2014 +0100
 
 https://github.com/ethereum/go-ethereum/blob/9f133a92d0853102863b77dd7c884d1462cf73a4/trie.go
 
-</code></pre>
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="http://BLOG.J2J.DEV/posts/go-ethereum/read-go-ethereum-source-code-3/" class="link black dim">
-        Read Go Ethereum Source Code 3
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      <p>从初始代码提交到commit ad048e9f445ff96b7bfd75c104ab923e1e06754b，go-ethereum的结构&amp;功能变化不大。主要变化有：</p>
-<ul>
-<li>将rlp编解码移动到 rlp.go文件中</li>
-<li>完善 transaction、block的rlp编解码</li>
-</ul>
-<p>到了commit a926686445929d091c2d9e019b017600168e9e47，源码中出现了较大的功能加入。</p>
-<pre><code>Added sample server, genesis block, and database interface
-</code></pre><p>但是本次提交出现，无法编译通过。错误为：</p>
-<pre><code>./database.go:65: cannot use k (type []int) as type string in function argument
-
-</code></pre><p>所以迁出下一次提交 并逐一分析源码、功能。</p>
-<pre><code>git checkout f17930eb4661721cd0e1b92765448c589441907b
-
-或在线浏览：
-
-https://github.com/ethereum/go-ethereum/tree/f17930eb4661721cd0e1b92765448c589441907b
 </code></pre>
     </div>
   </div>
