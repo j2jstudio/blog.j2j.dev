@@ -222,9 +222,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://BLOG.J2J.DEV/google8146c883dc3cd68b/</loc>
-    <priority>0</priority>
-  </url><url>
     <loc>http://BLOG.J2J.DEV/posts/tmux/tmux/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
