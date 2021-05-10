@@ -1,7 +1,7 @@
 ---
 title: "iOS Create a Content Blocker for Safari in Xcode"
 date: 2021-04-19T13:14:36+08:00
-draft: faslse
+draft: true
 tags:
   - iOS
   - NSLog
@@ -12,6 +12,7 @@ tags:
 
 App extensions let you extend custom functionality and content beyond your app and make it available to users while they’re interacting with other apps or the system. For example, your app can appear as a widget on the Home screen, add new buttons in the Action sheet, offer photo filters within the Photos app, or automatically upgrade user’s accounts to use strong passwords or Sign in with Apple. Use extensions to place the power of your app wherever your users need it most.
 
+<!--more-->
 
 [https://developer.apple.com/app-extensions/](https://developer.apple.com/app-extensions/)
 
