@@ -4,8 +4,21 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>J2J.Dev  | Read Go Ethereum Source Code 4</title>
+    <title>Read Go Ethereum Source Code 4 | J2J.Dev</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Trie.go (Merkle-patricia-tree )
+Merkle Patricia Tree(简称MPT树，实际上是一种trie前缀树)是以太坊中的一种加密认证的数据结构，可以用来存储所有的(key，value)对。
+以太坊区块链中的区块由标题，交易列表和叔区块列表组成。区块头中包含交易的根哈希，它用于验证交易列表。在区块头部包括了交易的hash树根，用来校验交易的列表。在p2p网络上传输的交易是一个简单的列表，它们被组装成一个叫做trie树的特殊数据结构，来计算根hash。值得注意的是，除了校验区块外，这个数据结构并不是必须的，一旦区块被验证正确，那么它在技术上是可以忽略的。但是，这意味着交易列表在本地以trie树的形式存储，发送给客户端的时候序列化成列表。客户端接收到交易列表后重新构建交易列表trie树来验证根hash。RLP(Recursive length prefix encoding,递归长度前缀编码)，用来对trie树种所有的条目进行编码。对RLP的介绍和源码实现阅读可参考阅读 go-ethereum 源码 - 2 。
+Merkle Patricia Tree的Wiki可在https://github.com/ethereum/wiki/wiki/Patricia-Tree查看。
+go-ethereum源码中对MPT数的处理时在文件 **trie.go **中。
+进入go-ethereum 源码查看trie.go .
+git checkout 9f133a92d0853102863b77dd7c884d1462cf73a4
+
+或通过如下方式在线浏览：
+
+https://github.com/ethereum/go-ethereum/blob/9f133a92d0853102863b77dd7c884d1462cf73a4/trie.go
+
+">
     <meta name="generator" content="Hugo 0.81.0" />
     
     
@@ -13,14 +26,18 @@
     
 
     
-    
-      <link href="/dist/css/app.1cb140d8ba31d5b2f1114537dd04802a.css" rel="stylesheet">
-    
 
-    
+  
+  
+    <link rel="stylesheet" href="/ananke/dist/main.css_5c99d70a7725bacd4c701e995b969fea.css" >
+  
+
+
+
 
     
       
+
     
 
     
@@ -76,6 +93,7 @@ https://github.com/ethereum/go-ethereum/blob/9f133a92d0853102863b77dd7c884d1462c
 
 "/>
 
+	
   </head>
 
   <body class="ma0 avenir bg-near-white">
@@ -88,8 +106,10 @@ https://github.com/ethereum/go-ethereum/blob/9f133a92d0853102863b77dd7c884d1462c
     <div class="bg-black">
       <nav class="pv3 ph3 ph4-ns" role="navigation">
   <div class="flex-l justify-between items-center center">
-    <a href="http://BLOG.J2J.DEV/" class="f3 fw2 hover-white no-underline white-90 dib">
-      J2J.Dev
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        J2J.Dev
+      
     </a>
     <div class="flex-l items-center">
       
@@ -106,6 +126,7 @@ https://github.com/ethereum/go-ethereum/blob/9f133a92d0853102863b77dd7c884d1462c
         </ul>
       
       
+
 
 
 
@@ -167,10 +188,11 @@ https://github.com/ethereum/go-ethereum/blob/9f133a92d0853102863b77dd7c884d1462c
     </a>
   </div>
 
+
       <h1 class="f1 athelas mt3 mb1">Read Go Ethereum Source Code 4</h1>
       
       
-      <time class="f6 mv4 dib tracked" datetime="2018-04-11T09:40:48&#43;08:00">April 11, 2018</time>
+      <time class="f6 mv4 dib tracked" datetime="2018-04-11T09:40:48+08:00">April 11, 2018</time>
 
       
       
@@ -459,6 +481,7 @@ func simpleHash(hash string) string {
 
 
 
+
 </div>
   </div>
  
@@ -475,11 +498,6 @@ if (!doNotTrack) {
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
 </footer>
-
-    
-
-  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
-
 
   </body>
 </html>

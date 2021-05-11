@@ -4,8 +4,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>J2J.Dev  | Read Go Ethereum Source Code 5</title>
+    <title>Read Go Ethereum Source Code 5 | J2J.Dev</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="dagger.go (Dagger工作量证明 )
+Ethash 是 Ethereum 的PoW(工作量证明)算法。 该算法需要大量的数据集合，该集合被称为DAG. Ethash 算法由Dagger-Hashimoto 算法改进而得，Dagger Hashimoto是Ethereum 1.0 挖矿算法的推荐规范 。
+Dagger Hashimoto 基于已经存在的关键算法：Hashimoto 和 Dagger。
+在go-ethereum 提交记录 9f133a92d0853102863b77dd7c884d1462cf73a4 中，第一次提交了dagger的实现。
+commit 9f133a92d0853102863b77dd7c884d1462cf73a4 (HEAD)
+Author: obscuren &lt;geffobscura@gmail.com&gt;
+Date:   Wed Jan 8 23:41:03 2014 &#43;0100
+
+    First dagger impl
+
+">
     <meta name="generator" content="Hugo 0.81.0" />
     
     
@@ -13,14 +24,18 @@
     
 
     
-    
-      <link href="/dist/css/app.1cb140d8ba31d5b2f1114537dd04802a.css" rel="stylesheet">
-    
 
-    
+  
+  
+    <link rel="stylesheet" href="/ananke/dist/main.css_5c99d70a7725bacd4c701e995b969fea.css" >
+  
+
+
+
 
     
       
+
     
 
     
@@ -70,6 +85,7 @@ Date:   Wed Jan 8 23:41:03 2014 &#43;0100
 
 "/>
 
+	
   </head>
 
   <body class="ma0 avenir bg-near-white">
@@ -82,8 +98,10 @@ Date:   Wed Jan 8 23:41:03 2014 &#43;0100
     <div class="bg-black">
       <nav class="pv3 ph3 ph4-ns" role="navigation">
   <div class="flex-l justify-between items-center center">
-    <a href="http://BLOG.J2J.DEV/" class="f3 fw2 hover-white no-underline white-90 dib">
-      J2J.Dev
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        J2J.Dev
+      
     </a>
     <div class="flex-l items-center">
       
@@ -100,6 +118,7 @@ Date:   Wed Jan 8 23:41:03 2014 &#43;0100
         </ul>
       
       
+
 
 
 
@@ -161,10 +180,11 @@ Date:   Wed Jan 8 23:41:03 2014 &#43;0100
     </a>
   </div>
 
+
       <h1 class="f1 athelas mt3 mb1">Read Go Ethereum Source Code 5</h1>
       
       
-      <time class="f6 mv4 dib tracked" datetime="2018-04-17T09:40:48&#43;08:00">April 17, 2018</time>
+      <time class="f6 mv4 dib tracked" datetime="2018-04-17T09:40:48+08:00">April 17, 2018</time>
 
       
       
@@ -304,6 +324,7 @@ ok  	go-ethereum	1.896s
 
 
 
+
 </div>
   </div>
  
@@ -320,11 +341,6 @@ if (!doNotTrack) {
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
 </footer>
-
-    
-
-  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
-
 
   </body>
 </html>
