@@ -225,7 +225,7 @@ git log
  
 commit 673a963d89affcc2760296a10ec80e2a33be0192 (HEAD -> develop, origin/develop)
 Merge: 9d9fb48 520620d
-Author: 蒋晶 <jiangjing@imohoo.com>
+Author: jj <jiangjing@local.com>
 Date:   Wed Apr 15 18:59:42 2020 +0800
 
     Merge branch 'feature-v0.0.3-demo' into 'develop'
