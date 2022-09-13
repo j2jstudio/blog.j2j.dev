@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>数据库连接池 | J2J.Dev</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="使用数据库连接池优化单数据服务器，提升其性能。以及Golang中的配置方式。">
+    <meta name="generator" content="Hugo 0.102.3" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+
+  
+  
+    <link rel="stylesheet" href="/ananke/dist/main.css_5c99d70a7725bacd4c701e995b969fea.css" >
+  
+
+
+
+
+    
+      
+
+    
+
+    
+    
+    <meta property="og:title" content="数据库连接池" />
+<meta property="og:description" content="使用数据库连接池优化单数据服务器，提升其性能。以及Golang中的配置方式。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://BLOG.J2J.DEV/posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-10-15T18:50:35+08:00" />
+<meta property="article:modified_time" content="2019-10-15T18:50:35+08:00" />
+
+<meta itemprop="name" content="数据库连接池">
+<meta itemprop="description" content="使用数据库连接池优化单数据服务器，提升其性能。以及Golang中的配置方式。"><meta itemprop="datePublished" content="2019-10-15T18:50:35+08:00" />
+<meta itemprop="dateModified" content="2019-10-15T18:50:35+08:00" />
+<meta itemprop="wordCount" content="2067">
+<meta itemprop="keywords" content="数据库,今天的学习," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="数据库连接池"/>
+<meta name="twitter:description" content="使用数据库连接池优化单数据服务器，提升其性能。以及Golang中的配置方式。"/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        J2J.Dev
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/about/" title="about page">
+              about
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        POSTS
+      </aside>
+      
+
+
+
+
+  <div id="sharing" class="mt3">
+
+    
+    <a href="https://www.facebook.com/sharer.php?u=http://BLOG.J2J.DEV/posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/" class="facebook no-underline" aria-label="share on Facebook">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M28.765,50.32h6.744V33.998h4.499l0.596-5.624h-5.095  l0.007-2.816c0-1.466,0.14-2.253,2.244-2.253h2.812V17.68h-4.5c-5.405,0-7.307,2.729-7.307,7.317v3.377h-3.369v5.625h3.369V50.32z   M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+
+    </a>
+
+    
+    
+    <a href="https://twitter.com/share?url=http://BLOG.J2J.DEV/posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/&amp;text=%e6%95%b0%e6%8d%ae%e5%ba%93%e8%bf%9e%e6%8e%a5%e6%b1%a0" class="twitter no-underline" aria-label="share on Twitter">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/></svg>
+
+    </a>
+
+    
+    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http://BLOG.J2J.DEV/posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/&amp;title=%e6%95%b0%e6%8d%ae%e5%ba%93%e8%bf%9e%e6%8e%a5%e6%b1%a0" class="linkedin no-underline" aria-label="share on LinkedIn">
+      <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+    </a>
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">数据库连接池</h1>
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2019-10-15T18:50:35+08:00">October 15, 2019</time>
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p>使用数据库连接池优化单数据服务器，提升其性能。以及Golang中的配置方式。</p>
+<h2 id="业务场景单数据库服务器">业务场景（单数据库服务器)</h2>
+<p>一个简单的业务系统架构：前端一台 Web 服务器运行业务代码，后端一台数据库服务器存储业务数据。当用户量不大时，系统运行平稳。</p>
+<p><strong>系统流量增大</strong></p>
+<p>当系统流量增大时，系统频繁报错。日志发现：“Can not connect to MySQL server. Too many connections”。</p>
+<p>增加mysql的max_connections ，一番操作后错误消失。系统正常执行</p>
+<p><strong>系统流量继续增大</strong></p>
+<p>max_connections 已经调整的很大，继续调整仍然响应很慢，阻塞的数据库操作越来越多，系统响应越来越慢。</p>
+<p>如何解决？</p>
+<h2 id="为什么需要连接池">为什么需要连接池</h2>
+<p>数据库的调用方式是先获取数据库的连接，然后依靠这条连接从数据库中查询数据，最后关闭连接释放数据库资源。这种调用方式下，每次执行 SQL 都需要重新建立连接。</p>
+<p>完成一次数据库操作的基本耗时：</p>
+<ol>
+<li>建立连接 1-2ms （TCP三次握手)</li>
+<li>MySQL 服务端校验客户端密码的过程 4ms</li>
+<li>执行数据库操作 1ms</li>
+</ol>
+<p>也就是说相比于 SQL 的执行，MySQL 建立连接的过程是比较耗时的。</p>
+<p>解决方法就是，使用连接池将数据库连接预先建立好，这样在使用的时候就不需要频繁地创建连接了。调整之后，你发现 1s 就可以执行 1000 次的数据库查询，查询性能大大的提升了</p>
+<p>数据库连接池有两个最重要的配置：<strong>最小连接数和最大连接数</strong>， 它们控制着从连接池中获取连接的流程：</p>
+<ul>
+<li>如果当前连接数小于最小连接数，则创建新的连接处理数据库请求；</li>
+<li>如果连接池中有空闲连接则复用空闲连接；</li>
+<li>如果空闲池中没有连接并且当前连接数小于最大连接数，则创建新的连接处理请求；</li>
+<li>如果当前连接数已经大于等于最大连接数，则按照配置中设定的时间（C3P0 的连接池配置是 checkoutTimeout）等待旧的连接可用；</li>
+<li>如果等待超过了这个设定时间则向用户抛出错误。</li>
+</ul>
+<h2 id="连接池大小如何设定">连接池大小如何设定</h2>
+<p>下面的公式是由PostgreSQL提供的，不过我们认为可以广泛地应用于大多数数据库产品。你应该模拟预期的访问量，并从这一公式开始测试你的应用，寻找最合适的连接数值。</p>
+<pre tabindex="0"><code>连接数 = ((核心数 * 2) + 有效磁盘数)
+</code></pre><p>核心数不应包含超线程(hyper thread)，即使打开了hyperthreading也是。如果活跃数据全部被缓存了，那么有效磁盘数是0，随着缓存命中率的下降，有效磁盘数逐渐趋近于实际的磁盘数。这一公式作用于SSD时的效果如何尚未有分析。</p>
+<p>按这个公式，你的4核i7数据库服务器的连接池大小应该为((4 * 2) + 1) = 9。取个整就算是是10吧。是不是觉得太小了？跑个性能测试试一下，我们保证它能轻松搞定3000用户以6000TPS的速率并发执行简单查询的场景。如果连接池大小超过10，你会看到响应时长开始增加，TPS开始下降。</p>
+<blockquote>
+<p>笔者注：
+这一公式其实不仅适用于数据库连接池的计算，大部分涉及计算和I/O的程序，线程数的设置都可以参考这一公式。我之前在对一个使用Netty编写的消&gt; 息收发服务进行压力测试时，最终测出的最佳线程数就刚好是CPU核心数的一倍。</p>
+</blockquote>
+<p><strong>公理</strong></p>
+<blockquote>
+<p>公理:
+你需要一个小连接池，和一个充满了等待连接的线程的队列</p>
+</blockquote>
+<p>如果你有10000个并发用户，设置一个10000的连接池基本等于失了智。1000仍然很恐怖。即是100也太多了。你需要一个10来个连接的小连接池，然后让剩下的业务线程都在队列里等待。连接池中的连接数量应该等于你的数据库能够有效同时进行的查询任务数（通常不会高于2*CPU核心数）。</p>
+<p>我们经常见到一些小规模的web应用，应付着大约十来个的并发用户，却使用着一个100连接数的连接池。这会对你的数据库造成极其不必要的负担。</p>
+<p><strong>注意</strong></p>
+<blockquote>
+<p>连接池优化主要用于单数据库的使用场景，当优化好连接池参数后系统响应仍然很慢。达到单台数据的瓶颈时，需要采用分库的设计。</p>
+</blockquote>
+<h2 id="配置go-sqldb的连接池属性获得更好的性能">配置Go sql.DB的连接池属性获得更好的性能</h2>
+<p>sql.DB对象是包含&quot;open&quot;和&quot;idle&quot;连接的许多数据库连接的池。 当您使用连接执行数据库任务（例如执行SQL语句或查询行）时，该连接被标记为打开。 任务完成后，连接变为空闲。</p>
+<p>当您指示sql.DB执行数据库任务时，它将首先检查池中是否有可用的空闲连接。 如果有一个可用，那么Go将重用现有的连接并将其在任务期间标记为打开。 如果需要时池中没有空闲连接，则Go将创建一个新的附加连接并“打开”它。</p>
+<h3 id="setmaxopenconnssetmaxidleconns-配置最大连接数">SetMaxOpenConns/SetMaxIdleConns 配置最大连接数</h3>
+<pre tabindex="0"><code>// Initialise a new connection pool
+db, err := sql.Open(&#34;postgres&#34;, &#34;postgres://user:pass@localhost/db&#34;)
+if err != nil {
+    log.Fatal(err)
+}
+
+// Set the maximum number of concurrently open connections to 5. Setting this
+// to less than or equal to 0 will mean there is no maximum limit (which
+// is also the default setting).
+db.SetMaxOpenConns(5)
+
+// Set the maximum number of concurrently idle connections to 5. Setting this
+// to less than or equal to 0 will mean that no idle connections are retained.
+db.SetMaxIdleConns(5)
+</code></pre><p>最后要指出的是，MaxIdleConns应该始终小于或等于MaxOpenConns。 Go会强制执行此操作，并在必要时自动减少MaxIdleConns。 这篇<a href="https://stackoverflow.com/a/31952911">Stack Overflow</a>帖子很好地描述了原因：</p>
+<blockquote>
+<p>空闲连接数没有超过允许的最大打开连接数的任何意义，因为如果您可以立即获取所有允许的打开连接数，则其余空闲连接将始终保持空闲状态。 就像有一条四车道的桥梁，但只允许三辆车一次驶过它。</p>
+</blockquote>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://www.jianshu.com/p/a8f653fc0c54">https://www.jianshu.com/p/a8f653fc0c54</a></li>
+<li><a href="https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing">https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing</a></li>
+<li><a href="https://time.geekbang.org/column/article/144796">高并发系统设计40问-07 | 池化技术：如何减少频繁创建数据库连接的性能损耗？</a></li>
+<li><a href="https://www.alexedwards.net/blog/configuring-sqldb">https://www.alexedwards.net/blog/configuring-sqldb</a></li>
+</ul><ul class="pa0">
+  
+   <li class="list">
+     <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">数据库</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/%E4%BB%8A%E5%A4%A9%E7%9A%84%E5%AD%A6%E4%B9%A0" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">今天的学习</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://BLOG.J2J.DEV/" >
+    &copy;  J2J.Dev 2022 
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+  </div>
+ 
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-164047462-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Read Go Ethereum Source Code 1 | J2J.Dev</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="如何理解系统的设计？最好的方法当然是：
+
+Read The Fucking Source Code
+
+Go Ethereum 是什么
+以太坊从项目早起，就有不同操作系统下的多客户端实现。这些客户端可以互相验证以太坊的协议正确性。go-ethereum 是以太坊协议的go语言实现的客户端。
+截止2016年9月，go-ethereum(go语言实现) 和 Parity(Rust语言实现) 是领先的实现方案。
+以太坊的协议标准在其黄皮书中定义。
+go-ethereum 由 Jeffrey Wilcke 领导开发，项目启动与2013年，开发语言为Go。go-ethereum在2015年7月30日成功发布，标志着创世区块和以太坊平台的发布。
+Jeff Wilcke 为以太坊的创始人之一，并是以太坊的三位董事之一。">
+    <meta name="generator" content="Hugo 0.102.3" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+
+  
+  
+    <link rel="stylesheet" href="/ananke/dist/main.css_5c99d70a7725bacd4c701e995b969fea.css" >
+  
+
+
+
+
+    
+      
+
+    
+
+    
+    
+    <meta property="og:title" content="Read Go Ethereum Source Code 1" />
+<meta property="og:description" content="如何理解系统的设计？最好的方法当然是：
+
+Read The Fucking Source Code
+
+Go Ethereum 是什么
+以太坊从项目早起，就有不同操作系统下的多客户端实现。这些客户端可以互相验证以太坊的协议正确性。go-ethereum 是以太坊协议的go语言实现的客户端。
+截止2016年9月，go-ethereum(go语言实现) 和 Parity(Rust语言实现) 是领先的实现方案。
+以太坊的协议标准在其黄皮书中定义。
+go-ethereum 由 Jeffrey Wilcke 领导开发，项目启动与2013年，开发语言为Go。go-ethereum在2015年7月30日成功发布，标志着创世区块和以太坊平台的发布。
+Jeff Wilcke 为以太坊的创始人之一，并是以太坊的三位董事之一。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://BLOG.J2J.DEV/posts/go-ethereum/read-go-ethereum-source-code-1/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-03-26T09:33:48+08:00" />
+<meta property="article:modified_time" content="2018-03-26T09:33:48+08:00" />
+
+<meta itemprop="name" content="Read Go Ethereum Source Code 1">
+<meta itemprop="description" content="如何理解系统的设计？最好的方法当然是：
+
+Read The Fucking Source Code
+
+Go Ethereum 是什么
+以太坊从项目早起，就有不同操作系统下的多客户端实现。这些客户端可以互相验证以太坊的协议正确性。go-ethereum 是以太坊协议的go语言实现的客户端。
+截止2016年9月，go-ethereum(go语言实现) 和 Parity(Rust语言实现) 是领先的实现方案。
+以太坊的协议标准在其黄皮书中定义。
+go-ethereum 由 Jeffrey Wilcke 领导开发，项目启动与2013年，开发语言为Go。go-ethereum在2015年7月30日成功发布，标志着创世区块和以太坊平台的发布。
+Jeff Wilcke 为以太坊的创始人之一，并是以太坊的三位董事之一。"><meta itemprop="datePublished" content="2018-03-26T09:33:48+08:00" />
+<meta itemprop="dateModified" content="2018-03-26T09:33:48+08:00" />
+<meta itemprop="wordCount" content="676">
+<meta itemprop="keywords" content="源码阅读,Golang,Ethereum," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Read Go Ethereum Source Code 1"/>
+<meta name="twitter:description" content="如何理解系统的设计？最好的方法当然是：
+
+Read The Fucking Source Code
+
+Go Ethereum 是什么
+以太坊从项目早起，就有不同操作系统下的多客户端实现。这些客户端可以互相验证以太坊的协议正确性。go-ethereum 是以太坊协议的go语言实现的客户端。
+截止2016年9月，go-ethereum(go语言实现) 和 Parity(Rust语言实现) 是领先的实现方案。
+以太坊的协议标准在其黄皮书中定义。
+go-ethereum 由 Jeffrey Wilcke 领导开发，项目启动与2013年，开发语言为Go。go-ethereum在2015年7月30日成功发布，标志着创世区块和以太坊平台的发布。
+Jeff Wilcke 为以太坊的创始人之一，并是以太坊的三位董事之一。"/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        J2J.Dev
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/about/" title="about page">
+              about
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        POSTS
+      </aside>
+      
+
+
+
+
+  <div id="sharing" class="mt3">
+
+    
+    <a href="https://www.facebook.com/sharer.php?u=http://BLOG.J2J.DEV/posts/go-ethereum/read-go-ethereum-source-code-1/" class="facebook no-underline" aria-label="share on Facebook">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M28.765,50.32h6.744V33.998h4.499l0.596-5.624h-5.095  l0.007-2.816c0-1.466,0.14-2.253,2.244-2.253h2.812V17.68h-4.5c-5.405,0-7.307,2.729-7.307,7.317v3.377h-3.369v5.625h3.369V50.32z   M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+
+    </a>
+
+    
+    
+    <a href="https://twitter.com/share?url=http://BLOG.J2J.DEV/posts/go-ethereum/read-go-ethereum-source-code-1/&amp;text=Read%20Go%20Ethereum%20Source%20Code%201" class="twitter no-underline" aria-label="share on Twitter">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/></svg>
+
+    </a>
+
+    
+    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http://BLOG.J2J.DEV/posts/go-ethereum/read-go-ethereum-source-code-1/&amp;title=Read%20Go%20Ethereum%20Source%20Code%201" class="linkedin no-underline" aria-label="share on LinkedIn">
+      <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+    </a>
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">Read Go Ethereum Source Code 1</h1>
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2018-03-26T09:33:48+08:00">March 26, 2018</time>
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p>如何理解系统的设计？最好的方法当然是：</p>
+<blockquote>
+<p>Read The Fucking Source Code</p>
+</blockquote>
+<h2 id="go-ethereum-是什么">Go Ethereum 是什么</h2>
+<p>以太坊从项目早起，就有不同操作系统下的多客户端实现。这些客户端可以互相验证以太坊的协议正确性。go-ethereum 是以太坊协议的go语言实现的客户端。</p>
+<p>截止2016年9月，<a href="http://www.ethdocs.org/en/latest/ethereum-clients/go-ethereum/index.html#go-ethereum">go-ethereum</a>(go语言实现) 和 <a href="http://www.ethdocs.org/en/latest/ethereum-clients/parity/index.html#parity">Parity</a>(Rust语言实现) 是领先的实现方案。</p>
+<p>以太坊的协议标准在其<a href="https://github.com/ethereum/yellowpaper">黄皮书</a>中定义。</p>
+<p>go-ethereum 由 <a href="https://github.com/obscuren">Jeffrey Wilcke</a> 领导开发，项目启动与2013年，开发语言为Go。go-ethereum在2015年7月30日成功发布，标志着创世区块和以太坊平台的发布。</p>
+<p>Jeff Wilcke 为以太坊的创始人之一，并是以太坊的三位董事之一。</p>
+<h2 id="源码下载">源码下载</h2>
+<p>从github网站下载源码：</p>
+<pre tabindex="0"><code>git clone https://github.com/ethereum/go-ethereum.git
+</code></pre><p>查看提交记录：</p>
+<pre tabindex="0"><code>cd go-ethereum/
+
+git log --reverse
+
+commit 5db3335dce766bd679c54ea44f6df08a7ff74762
+Author: obscuren &lt;obscuren@obscura.com&gt;
+Date:   Thu Dec 26 12:45:52 2013 +0100
+
+    Initial commit
+
+commit f77424d3fe89d6ece9bc5d24f784c648306d611a
+Author: obscuren &lt;obscuren@obscura.com&gt;
+Date:   Thu Dec 26 12:46:02 2013 +0100
+
+    Initial commit
+
+commit f201547731aca98ae24a62b816a9957927481a2f
+Author: obscuren &lt;obscuren@obscura.com&gt;
+Date:   Thu Dec 26 12:47:06 2013 +0100
+
+    added git ignore
+
+commit fe5577f59e0b5b254013263675e7a0989e7cd82a
+Author: obscuren &lt;obscuren@obscura.com&gt;
+Date:   Thu Dec 26 13:29:45 2013 +0100
+
+    Added readme
+</code></pre><p>看到初始提交记录为： 5db3335dce766bd679c54ea44f6df08a7ff74762</p>
+<p>切换源码到初始提交：</p>
+<pre tabindex="0"><code>git checkout 5db3335dce766bd679c54ea44f6df08a7ff74762
+
+Note: checking out &#39;5db3335dce766bd679c54ea44f6df08a7ff74762&#39;.
+
+You are in &#39;detached HEAD&#39; state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b &lt;new-branch-name&gt;
+
+HEAD is now at 5db3335dc... Initial commit
+</code></pre><h2 id="阅读第一次提交的源码">阅读第一次提交的源码</h2>
+<p>第一次提交时间2013/12/26 （东一区), 记录如下：</p>
+<pre tabindex="0"><code>git log 5db3335dce766bd679c54ea44f6df08a7ff74762
+commit 5db3335dce766bd679c54ea44f6df08a7ff74762
+
+Author: obscuren &lt;obscuren@obscura.com&gt;
+Date:   Thu Dec 26 12:45:52 2013 +0100
+
+    Initial commit
+</code></pre><p>文件如下</p>
+<table>
+<thead>
+<tr>
+<th>文件名</th>
+<th style="text-align:right">说明</th>
+<th style="text-align:right"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>big.go</td>
+<td style="text-align:right">大数字操作</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>transaction.go</td>
+<td style="text-align:right">交易(tx)的struct</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>block.go</td>
+<td style="text-align:right">区块链中的块（block）结构</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>block_manager.go</td>
+<td style="text-align:right">块管理</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>parsing.go</td>
+<td style="text-align:right">将代码语句编码</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>serialization.go</td>
+<td style="text-align:right">序列化，实现rlp编码</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>ethereum.go</td>
+<td style="text-align:right">程序main函数入口</td>
+<td style="text-align:right"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="编译运行">编译&amp;运行</h3>
+<pre tabindex="0"><code>cd go-ethereum     #进入目录
+go build       		#编译
+./go-ethereum 		#执行
+
+#输出如下：
+
+init Ethereum VM
+stack size = 256
+
+# processing Tx (8fee28c5311d91212d92cbf14548e9e96ab39a)
+# fee = 0.000000, ops = 12, sender = 1234567890, value = 20
+
+# processing Tx (3ab78afb9e495acc6eabd8982730dbb679db2f)
+# fee = 0.000000, ops = 2, sender = 1234567890, value = 20
+0   67 [10 6 0 0 0 0]
+0   67 [10 6 0 0 0 0]
+# finished processing Tx
+
+2   66 [10 10 0 0 0 0]
+3   67 [255 7 0 0 0 0]
+4   81 [20 255 0 0 0 0]
+... JMP 7 ...
+7   66 [30 31 0 0 0 0]
+8   67 [255 22 0 0 0 0]
+9   81 [31 255 0 0 0 0]
+... JMP 22 ...
+# finished processing Tx
+
+rlp encoded Tx &#34;\x01\x00\x010\x00\n1234567890\x00\x010\x00\x0220\x00\x010\x01\x00\x06395843\x00\x06657986\x00\t335612448\x00\x06524099\x00\b16716881\x00\x010\x00\b13114947\x00\a2039362\x00\a1507139\x00\b16719697\x00\a1048387\x00\x0565360&#34;
+</code></pre><p>执行过程中偶尔会报错误：</p>
+<pre tabindex="0"><code>fatal error: concurrent map writes
+</code></pre><p>是因为go语言版本 处理并发读写的变动有关。 暂时忽略这个问题。 或者修改 ethereum.go 的28行，设置blck []*Transaction数组中仅传一个对象。</p>
+<h3 id="biggo">big.go</h3>
+<p>以太坊中操作的数字，取值范围较大。基本类型的int、int64、float等无法存储。所以需要golang的  <a href="https://golang.org/pkg/math/big/">&ldquo;math/big&rdquo;</a> 包进行大精度数字处理。big.go中封装了两个快捷函数，实现</p>
+<ul>
+<li>字符串转big.Int  Big(num string) *big.Int</li>
+<li>int类型数字的指数操作 BigPow(a,b int) *big.Int。</li>
+</ul>
+<h3 id="transactiongo">transaction.go</h3>
+<p>定义了区块中交易的数据结构。 结构如下：</p>
+<pre tabindex="0"><code>type Transaction struct {
+ sender      string
+ recipient   uint32
+ value       uint32
+ fee         uint32
+ data        []string
+ memory      []int
+ signature   string
+
+ addr        string
+}
+</code></pre><p>源码中亦注释了结构体成员的意义、字节大小等</p>
+<pre tabindex="0"><code>/* 
+Transaction   Contract       Size
+-------------------------------------------
+sender        sender       20 bytes
+recipient     0x0          20 bytes
+value         endowment     4 bytes (uint32)
+fee           fee           4 bytes (uint32)
+d_size        o_size        4 bytes (uint32)
+data          ops           *
+signature     signature    64 bytes
+*/
+</code></pre><p>同时定义了处理交易过程中的收费内容：</p>
+<pre tabindex="0"><code>var StepFee   *big.Int = new(big.Int)
+var TxFee     *big.Int = new(big.Int)
+var MemFee    *big.Int = new(big.Int)
+var DataFee   *big.Int = new(big.Int)
+var CryptoFee *big.Int = new(big.Int)
+var ExtroFee  *big.Int = new(big.Int)
+
+var Period1Reward *big.Int = new(big.Int)
+var Period2Reward *big.Int = new(big.Int)
+var Period3Reward *big.Int = new(big.Int)
+var Period4Reward *big.Int = new(big.Int)
+</code></pre><p>以太坊中的矿工处理交易，是需要收取一定费用的。根据如上的一些定义可以粗略看出几种收费类型： 计算步骤、交易费、内存使用费、数据费等等。 可以对比比特币区块链的收费，其主要根据交易数据的大小来判断费用。</p>
+<h3 id="blockgo">block.go</h3>
+<p>定义的区块的数据结构 ，区块由交易所组成</p>
+<pre tabindex="0"><code>type Block struct {
+  transactions []*Transaction
+}
+</code></pre><h3 id="block_manangergo">block_mananger.go</h3>
+<p>区块处理的逻辑。</p>
+<pre tabindex="0"><code>type BlockManager struct {
+  vm *Vm
+}
+
+func (bm *BlockManager) ProcessBlock(block *Block) error
+func (bm *BlockManager) ProcessTransaction(tx *Transaction, lockChan chan bool)
+</code></pre><p>block的处理逻辑就是循环处理block下transaction的过程。 对transaction的处理，调用虚拟机 vm *Vm 对象来处理。</p>
+<h3 id="serializationgo">serialization.go</h3>
+<p>用于处理以太坊中的RLP编码。 下一篇专门分析RLP编码。</p>
+<h3 id="parsinggo">parsing.go</h3>
+<p>将类似于汇编语言的操作：</p>
+<pre tabindex="0"><code>&#34;SET 10 6&#34;
+&#34;LD 10 10&#34;
+</code></pre><p>指令转换为6字节的Big Int</p>
+<p>Big int equation = op + x * 256 + y * 256**2 + z * 256**3 + a * 256**4 + b * 256**5 + c * 256**6 。</p>
+<p>上面第一行代码解析后内容为：</p>
+<pre tabindex="0"><code>十六进制表示：
+0x 00 00 00 06 0A 43
+转为string后：
+395843
+
+反向的十进制表示:
+
+67 10 6 0 0 0 0
+</code></pre><h3 id="vmgo">vm.go</h3>
+<p>处理区块链交易的最核心代码。Transaction对象的data，保存的是代码经过parsing.go 转换后的string数组。</p>
+<p>&ldquo;SET 10 6&rdquo; =&gt; 395843(big.Int)=&gt;&ldquo;395843&rdquo; (string)</p>
+<p>vm处理RunTransaction的简单步骤为：</p>
+<ol>
+<li>用map模拟stack栈 vm.stack = make(map[string]string)</li>
+<li>为交易分配一段内存，map模拟。vm.memory[tx.addr] = make(map[string]string)</li>
+<li>将编码后的内容还原为语句。</li>
+<li>获得语句中的操作码、参数。并执行相关操作</li>
+</ol>
+<p>如</p>
+<pre tabindex="0"><code>67 10 6 0 0 0 0
+</code></pre><p>代码的内容如下：</p>
+<pre tabindex="0"><code>
+定义数组索引
+x := 0; y := 1; z := 2; //a := 3; b := 4; c := 5
+
+67 = 0x43 代表代码操作码
+10 6 0 0 0 0 代表参数 args = [10,6,0,0,0,0]
+</code></pre><p>操作码含义</p>
+<pre tabindex="0"><code>
+	oSET        int = 0x43
+</code></pre><p>代码的操作方式为：</p>
+<pre tabindex="0"><code>case oSET:
+// Set the (numeric) value at Iy to Rx
+vm.stack[args[ x ]] = args[ y ]
+</code></pre><p>所有语句处理完毕后，完成交易操作</p><ul class="pa0">
+  
+   <li class="list">
+     <a href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">源码阅读</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/golang" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Golang</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/ethereum" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Ethereum</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://BLOG.J2J.DEV/" >
+    &copy;  J2J.Dev 2022 
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+  </div>
+ 
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-164047462-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</footer>
+
+  </body>
+</html>
